@@ -2,8 +2,10 @@ package Eredua;
 
 public class Biguna extends Blokea {
 	
-	public Biguna() {
+	private boolean apurtuDaiteke = true;
+	public Biguna(boolean pApurtuDaiteke) {
 		super();
+		this.apurtuDaiteke = pApurtuDaiteke;
 	}
 }
  
