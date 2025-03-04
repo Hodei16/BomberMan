@@ -6,7 +6,7 @@ public class Gelaxka {
 	
 	public Gelaxka(BomberZuria pBz, Blokea pB) {
 		this.bz = pBz;
-		this.b = pB;s
+		this.b = pB;
 	}
 	
 }
