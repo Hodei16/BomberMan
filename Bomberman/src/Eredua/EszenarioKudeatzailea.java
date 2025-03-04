@@ -49,7 +49,7 @@ public class EszenarioKudeatzailea extends Observable{
 					}
 				}
 				gelaxkaMatrizea[x][y]= gelaxka;
-			}
+			} 
 		}
 		setChanged();
 		notifyObservers();
