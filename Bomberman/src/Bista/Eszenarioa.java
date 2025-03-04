@@ -33,7 +33,7 @@ public class Eszenarioa extends JFrame implements Observer {
 	private static Eszenarioa nEszenarioa = null;
 	
 	private Eszenarioa() {
-		this.gelaxkaMatrix = new Gelaxka[10][16];
+		this.gelaxkaMatrix = new Gelaxka[11][17];
 		
 		initialize();
 		
