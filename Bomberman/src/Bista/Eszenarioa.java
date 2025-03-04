@@ -12,7 +12,7 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
+import javax.swing.border.EmptyBorder;
 
 import Eredua.Biguna;
 import Eredua.Blokea;
@@ -28,6 +28,7 @@ import Eredua.Pertsonaia;
 
 public class Eszenarioa extends JFrame implements Observer {
 	
+	private JPanel contentPane;
 	private JPanel esz;
 	
 	private Gelaxka[][] gelaxkaMatrix;
@@ -57,26 +58,37 @@ public class Eszenarioa extends JFrame implements Observer {
 
 	}
 	
-	public JPanel getContentPane() {
+
+	private JPanel getEsz() {
 		if (esz == null) {
 			esz = new JPanel();
-			esz.setLayout(new BorderLayout());
-			
+			esz.setBackground(new Color(255, 255, 255));
+			esz.setLayout(new GridLayout(10, 10, 0, 0));
 		}
 		return esz;
 	}
 	
-	
-	
-	
 	@Override
 	public void update (Observable o, Object arg) {
+		setBackground(new Color(255, 255, 255));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 575, 472);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.add(getEsz(), BorderLayout.CENTER);
+		
 		EszenarioKudeatzailea eK= EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
 		Gelaxka[][] mat= eK.getGelaxkaMatrizea();
 		for(int x=0; x<17; x++) {
 			for(int y=0;y<11;y++) {
 				Gelaxka g= mat[x][y];
-				if(g.get)
+				gelaxkaMatrix[x][y]=g;
+				if(g.bomberDago()) {
+					JLabel Bomber = new JLabel("whitefront1.png");
+				}
 			}
 		}
 	}

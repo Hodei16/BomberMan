@@ -52,6 +52,8 @@ public class EszenarioKudeatzailea extends Observable{
 						gelaxka= new Gelaxka(null, big);
 					}
 				}
+
+				System.out.println("a");
 				gelaxkaMatrizea[x][y]= gelaxka;
 			} 
 		}
