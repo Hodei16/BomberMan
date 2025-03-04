@@ -2,6 +2,7 @@ package Bista;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import Eredua.Biguna;
 import Eredua.Blokea;
@@ -13,6 +14,8 @@ import Eredua.Jokalaria;
 import Eredua.Pertsonaia; 
 
 public class Eszenarioa extends JFrame implements Observer {
+	
+	private JPanel esz;
 	
 	private Gelaxka[][] gelaxkaMatrix;
 	private static Eszenarioa nEszenarioa = null;
@@ -28,7 +31,17 @@ public class Eszenarioa extends JFrame implements Observer {
 		return nEszenarioa;
 	}
 	
-	
+	public void initialize() {
+		this.setSize(getPreferredSize());
+		
+		getEsz().setIcon(new ImageIcon(this.getClass().getResource(stageBack1)));
+	}
+	private JPanel getEsz() {
+		if(esz == null) {
+			esz = new JPanel("");
+		}
+		return esz;
+	}
 	
 	
 	
