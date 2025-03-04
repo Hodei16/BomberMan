@@ -2,10 +2,9 @@ package Eredua;
 
 public class Gogorra extends Blokea  {
 	
-	private boolean apurtuDaiteke = false;
-	public Gogorra(boolean pApurtuDaiteke) {
+	private final boolean apurtuDaiteke = false;
+	public Gogorra() {
 		super();
-		this.apurtuDaiteke = pApurtuDaiteke;
 		
 	}
 }
