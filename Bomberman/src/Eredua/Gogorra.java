@@ -6,3 +6,4 @@ public class Gogorra extends Blokea  {
 		super();
 	}
 }
+ 

@@ -6,3 +6,4 @@ public class Biguna extends Blokea {
 		super();
 	}
 }
+ 
