@@ -1,5 +1,5 @@
 package Bista;
 
-public class Eszenarioa {
-	//proba lier
+public class Eszenarioa extends JFrame implements Observer{
+	
 }
