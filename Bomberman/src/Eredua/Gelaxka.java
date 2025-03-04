@@ -4,9 +4,8 @@ public class Gelaxka {
 	private BomberZuria bz;
 	private Blokea b;
 	
-	public Gelaxka(BomberZuria pBz, Blokea pB) {
-		this.bz = pBz;
-		this.b = pB;
+	public Gelaxka() {
+		
 	}
 	
 	public BomberZuria getBomberZuria() {
@@ -16,6 +15,15 @@ public class Gelaxka {
 	public Blokea getBlokea() {
 		return this.b;
 	}
+	
+	public void setBomberZuria(BomberZuria pBz) {
+		this.bz=pBz;
+	}
+	
+	public void setBlokea(Blokea pB) {
+		this.b=pB;
+	}
+	
 	public boolean bomberDago() {
 		if(this.bz == null) {
 			return false;

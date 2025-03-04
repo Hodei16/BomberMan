@@ -13,6 +13,8 @@ import java.awt.Toolkit;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.*;
+import java.awt.*;
 
 import Eredua.Biguna;
 import Eredua.Blokea;
@@ -28,21 +30,23 @@ import Eredua.Pertsonaia;
 
 public class Eszenarioa extends JFrame implements Observer {
 	
+	private static final EszenarioKudeatzailea EszenarioKudeatzeaile = null;
 	private JPanel contentPane;
 	private JPanel esz;
-	
+	private static Observable o;
 	private Gelaxka[][] gelaxkaMatrix;
 	private static Eszenarioa nEszenarioa = null;
+	private static Observable nireObservable = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
 	
-	private Eszenarioa() {
+	private Eszenarioa(Observable pEguraldiEstazioa) {
 		this.gelaxkaMatrix = new Gelaxka[11][17];
-		
+		pEguraldiEstazioa.addObserver(this);
 		initialize();
 		
 	}
 	public static Eszenarioa getEszenarioa() {
 		if (nEszenarioa==null) {
-			nEszenarioa= new Eszenarioa();
+			nEszenarioa= new Eszenarioa(nireObservable);
 		}
 		return nEszenarioa;
 	}
@@ -62,8 +66,8 @@ public class Eszenarioa extends JFrame implements Observer {
 	private JPanel getEsz() {
 		if (esz == null) {
 			esz = new JPanel();
-			esz.setBackground(new Color(255, 255, 255));
-			esz.setLayout(new GridLayout(10, 10, 0, 0));
+			esz.setOpaque(false);
+			esz.setLayout(new GridLayout(11, 17, 0, 0));
 		}
 		return esz;
 	}
@@ -74,20 +78,31 @@ public class Eszenarioa extends JFrame implements Observer {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 575, 472);
 		contentPane = new JPanel();
+		contentPane.setLayout(new BorderLayout());
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
 		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
-		contentPane.add(getEsz(), BorderLayout.CENTER);
+	
+		ImageIcon atzekoArg = new ImageIcon("C:/Users/i10he/Utilidades/Desktop/irudiak/irudiak/stageBack1.png");
+        JLabel atzekoa = new JLabel(atzekoArg);
+        atzekoa.setLayout(new BorderLayout());
+        contentPane.add(atzekoa, BorderLayout.CENTER);
+        setVisible(true);
+		atzekoa.add(getEsz(), BorderLayout.CENTER);
 		
 		EszenarioKudeatzailea eK= EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
 		Gelaxka[][] mat= eK.getGelaxkaMatrizea();
-		for(int x=0; x<17; x++) {
-			for(int y=0;y<11;y++) {
+		for(int x=0; x<11; x++) {
+			for(int y=0;y<17;y++) {
+				JLabel Bomber;
 				Gelaxka g= mat[x][y];
 				gelaxkaMatrix[x][y]=g;
 				if(g.bomberDago()) {
-					JLabel Bomber = new JLabel("whitefront1.png");
+					ImageIcon icon = new ImageIcon("C:/Users/i10he/Utilidades/Desktop/irudiak/irudiak/whitefront1.png");
+					Bomber = new JLabel(icon);
+					esz.add(Bomber);
+				}
+				else {
+					
 				}
 			}
 		}

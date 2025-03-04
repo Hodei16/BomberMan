@@ -8,7 +8,7 @@ import java.util.Observer;
 public class EszenarioKudeatzailea extends Observable{
 
 	private static EszenarioKudeatzailea nireEszenarioKudeatzailea;
-	private Gelaxka[][] gelaxkaMatrizea;
+	private Gelaxka[][] gelaxkaMatrizea= new Gelaxka[11][17];
 	
 	private EszenarioKudeatzailea() {}
 	
@@ -24,36 +24,35 @@ public class EszenarioKudeatzailea extends Observable{
 	}
 	
 	public void sortuEszenarioClassic() {
-		for(int x=0 ;x<17;x++) {
-			for(int y=0; y<11; y++) {
+		for(int x=0 ;x<11;x++) {
+			for(int y=0; y<17; y++) {
 				Gelaxka gelaxka;
+				gelaxka= new Gelaxka();
 				if(x==0 && y==0) {
 					BomberZuria b= new BomberZuria();
-					gelaxka= new Gelaxka(b, null);
+					gelaxka.setBomberZuria(b);
 				}
 				if(x==0 && y==1) {
-					gelaxka= new Gelaxka(null, null);
+					
 				}
 				if(x==1 && y==0) {
-					gelaxka= new Gelaxka(null, null);
+					
 					}
 				if(x%2==1 && y%2==1) {
 					Gogorra g= new Gogorra();
-					gelaxka= new Gelaxka(null,g);
+					gelaxka.setBlokea(g);
 				}
 				else {
 					Random r= new Random();
 					int ausazkoZenb= r.nextInt(101);
 					if(ausazkoZenb<40) {
-						gelaxka= new Gelaxka(null, null);
+						
 					}
 					else {
 						Biguna big= new Biguna();
-						gelaxka= new Gelaxka(null, big);
+						gelaxka.setBlokea(big);
 					}
 				}
-
-				System.out.println("a");
 				gelaxkaMatrizea[x][y]= gelaxka;
 			} 
 		}
