@@ -11,6 +11,4 @@ public class HasieraPantaila {
 		}
 		return nireHasieraPantaila;
 	}
-	
-	
 }
