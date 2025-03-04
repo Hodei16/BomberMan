@@ -13,6 +13,7 @@ import Eredua.Jokalaria;
 import Eredua.Pertsonaia; 
 
 public class Eszenarioa extends JFrame implements Observer {
+	
 	private Gelaxka[][] gelaxkaMatrix;
 	private static Eszenarioa nEszenarioa = null;
 	
