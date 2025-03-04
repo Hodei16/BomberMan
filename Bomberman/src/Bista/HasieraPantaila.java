@@ -5,7 +5,7 @@ public class HasieraPantaila {
 	
 	private HasieraPantaila() {}
 	
-	public static synchronised HasieraPantaila getNireHasieraPantaila() {
+	public static synchronized HasieraPantaila getNireHasieraPantaila() {
 		if(nireHasieraPantaila == null) {
 			nireHasieraPantaila = new HasieraPantaila();
 		}
