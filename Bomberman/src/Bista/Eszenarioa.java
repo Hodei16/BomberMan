@@ -18,6 +18,7 @@ import Eredua.Biguna;
 import Eredua.Blokea;
 import Eredua.BomberZuria;
 import Eredua.Bonba;
+import Eredua.EszenarioKudeatzailea;
 import Eredua.Gelaxka;
 import Eredua.Gogorra; 
 import Eredua.Jokalaria;  
@@ -70,6 +71,13 @@ public class Eszenarioa extends JFrame implements Observer {
 	
 	@Override
 	public void update (Observable o, Object arg) {
-		
+		EszenarioKudeatzailea eK= EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
+		Gelaxka[][] mat= eK.getGelaxkaMatrizea();
+		for(int x=0; x<17; x++) {
+			for(int y=0;y<11;y++) {
+				Gelaxka g= mat[x][y];
+				if(g.get)
+			}
+		}
 	}
 }

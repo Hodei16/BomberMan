@@ -1,11 +1,12 @@
 package Eredua;
 
-public class Gogorra extends Blokea  {
+public class Gogorra extends Blokea {
 	
-	private final boolean apurtuDaiteke = false;
+	private final boolean apurtuDaiteke = true;
 	public Gogorra() {
 		super();
 		
 	}
 }
+ 
  
