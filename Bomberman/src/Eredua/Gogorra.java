@@ -1,5 +1,9 @@
 package Eredua;
 
-public class Gogorra  {
+public class Gogorra extends Blokea  {
 
+	public Gogorra() {
+		super();
+	}
 }
+ 
