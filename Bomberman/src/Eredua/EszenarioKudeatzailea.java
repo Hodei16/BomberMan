@@ -20,25 +20,31 @@ public class EszenarioKudeatzailea {
 	public void sortuEszenarioClassic() {
 		for(int x=0 ;x<17;x++) {
 			for(int y=0; y<11; y++) {
+				Gelaxka gelaxka;
 				if(x==0 && y==0) {
 					BomberZuria b= new BomberZuria();
-					Gelaxka gelaxka= new Gelaxka(b);
+					gelaxka= new Gelaxka(b, null, null);
 					
 				}
-				if(x==0 && y==1) {}
-				if(x==1 && y==0) {}
+				if(x==0 && y==1) {
+					gelaxka= new Gelaxka(null, null, null);
+				}
+				if(x==1 && y==0) {
+					gelaxka= new Gelaxka(null, null, null);
+					}
 				if(x%2==1 && y%2==1) {
 					Gogorra g= new Gogorra();
-					Gelaxka gelaxka= new Gelaxka(g);
+					gelaxka= new Gelaxka(null, null, g);
 				}
 				else {
 					Random r= new Random();
 					int ausazkoZenb= r.nextInt(101);
-					if(ausazkoZenb<40) {}
+					if(ausazkoZenb<40) {
+						gelaxka= new Gelaxka(null, null, null);
+					}
 					else {
 						Biguna big= new Biguna();
-						Gelaxka gelaxka= new Gelaxka(big);
-						
+						gelaxka= new Gelaxka(null, big, null);
 					}
 				}
 				gelaxkaMatrizea[x][y]= gelaxka;
