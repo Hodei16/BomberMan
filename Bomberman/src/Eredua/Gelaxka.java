@@ -2,14 +2,11 @@ package Eredua;
 
 public class Gelaxka {
 	private BomberZuria bz;
-	private Biguna bb;
-	private Gogorra bg;
+	private Blokea b;
 	
-	public Gelaxka(BomberZuria pBz, Biguna pBb, Gogorra pBg) {
+	public Gelaxka(BomberZuria pBz, Blokea pB) {
 		this.bz = pBz;
-		this.bb = pBb;
-		this.bg = pBg;
+		this.b = pB;s
 	}
-	
 	
 }
