@@ -16,5 +16,12 @@ public class Gelaxka {
 	public Blokea getBlokea() {
 		return this.b;
 	}
+	public boolean bomberDago() {
+		if(this.bz == null) {
+			return false;
+		}else {
+			return true;
+		}
+	}
 	
 }
