@@ -2,8 +2,10 @@ package Eredua;
 
 import Bista.HasieraPantaila;
 import java.util.Random;
+import java.util.Observable;
+import java.util.Observer;
 
-public class EszenarioKudeatzailea {
+public class EszenarioKudeatzailea extends Observable{
 
 	private static EszenarioKudeatzailea nireEszenarioKudeatzailea;
 	private Gelaxka[][] gelaxkaMatrizea;
@@ -24,7 +26,6 @@ public class EszenarioKudeatzailea {
 				if(x==0 && y==0) {
 					BomberZuria b= new BomberZuria();
 					gelaxka= new Gelaxka(b, null, null);
-					
 				}
 				if(x==0 && y==1) {
 					gelaxka= new Gelaxka(null, null, null);
@@ -50,6 +51,7 @@ public class EszenarioKudeatzailea {
 				gelaxkaMatrizea[x][y]= gelaxka;
 			}
 		}
-		
+		setChanged();
+		notifyObservers();
 	}
 }
