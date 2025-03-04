@@ -3,6 +3,16 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
 
 import Eredua.Biguna;
 import Eredua.Blokea;
@@ -12,6 +22,8 @@ import Eredua.Gelaxka;
 import Eredua.Gogorra; 
 import Eredua.Jokalaria;  
 import Eredua.Pertsonaia; 
+
+
 
 public class Eszenarioa extends JFrame implements Observer {
 	
@@ -23,6 +35,8 @@ public class Eszenarioa extends JFrame implements Observer {
 	private Eszenarioa() {
 		this.gelaxkaMatrix = new Gelaxka[10][16];
 		
+		initialize();
+		
 	}
 	public static Eszenarioa getEszenarioa() {
 		if (nEszenarioa==null) {
@@ -32,16 +46,25 @@ public class Eszenarioa extends JFrame implements Observer {
 	}
 	
 	public void initialize() {
-		this.setSize(getPreferredSize());
+		setSize(150, 555);
+		this.setContentPane(getContentPane());
+		setTitle("Classic");
+		setLocationRelativeTo(null);
+		setVisible(true);
 		
-		getEsz().setIcon(new ImageIcon(this.getClass().getResource(stageBack1)));
+		
+
 	}
-	private JPanel getEsz() {
-		if(esz == null) {
-			esz = new JPanel("");
+	
+	public JPanel getContentPane() {
+		if (esz == null) {
+			esz = new JPanel();
+			esz.setLayout(new BorderLayout());
+			
 		}
 		return esz;
 	}
+	
 	
 	
 	
