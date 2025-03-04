@@ -102,7 +102,8 @@ public class Eszenarioa extends JFrame implements Observer {
 					esz.add(Bomber);
 				}
 				else {
-					
+					Bomber = new JLabel("");
+					esz.add(Bomber);
 				}
 			}
 		}
