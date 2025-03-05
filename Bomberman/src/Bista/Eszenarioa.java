@@ -24,7 +24,8 @@ import Eredua.EszenarioKudeatzailea;
 import Eredua.Gelaxka;
 import Eredua.Gogorra; 
 import Eredua.Jokalaria;  
-import Eredua.Pertsonaia; 
+import Eredua.Pertsonaia;
+import Eredua.Teklatua;
 
 
 
@@ -39,11 +40,21 @@ public class Eszenarioa extends JFrame implements Observer {
 	private static Observable nireObservable = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
 	
 	private Eszenarioa(Observable pEguraldiEstazioa) {
-		this.gelaxkaMatrix = new Gelaxka[11][17];
-		pEguraldiEstazioa.addObserver(this);
-		initialize();
-		
+	    this.gelaxkaMatrix = new Gelaxka[11][17];
+	    pEguraldiEstazioa.addObserver(this);
+	    initialize();
+
+	    
+	    
+	    
+	    //Berria
+	    Teklatua teklatua = Teklatua.getTeklatua();
+	    this.addKeyListener(teklatua);
+	    this.setFocusable(true);
+	    this.requestFocusInWindow();
+
 	}
+
 	public static Eszenarioa getEszenarioa() {
 		if (nEszenarioa==null) {
 			nEszenarioa= new Eszenarioa(nireObservable);
@@ -59,22 +70,6 @@ public class Eszenarioa extends JFrame implements Observer {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		
-		
-
-	}
-	
-
-	private JPanel getEsz() {
-		if (esz == null) {
-			esz = new JPanel();
-			esz.setOpaque(false);
-			esz.setLayout(new GridLayout(11, 17, 0, 0));
-		}
-		return esz;
-	}
-	
-	@Override
-	public void update(Observable o, Object arg) {
 		setBackground(new Color(255, 255, 255));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 575, 472);
@@ -91,8 +86,28 @@ public class Eszenarioa extends JFrame implements Observer {
         setVisible(true);
 		atzekoa.add(getEsz(), BorderLayout.CENTER);
 		
+
+	}
+	
+
+	private JPanel getEsz() {
+		if (esz == null) {
+			esz = new JPanel();
+			esz.setOpaque(false);
+			esz.setLayout(new GridLayout(11, 17, 0, 0));
+		}
+		return esz;
+	}
+	
+	@Override
+	public void update(Observable o, Object arg) {
+		
+		
 		EszenarioKudeatzailea eK= EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
 		Gelaxka[][] mat= eK.getGelaxkaMatrizea();
+		
+		esz.removeAll();
+		
 		for(int x=0; x<11; x++) {
 			for(int y=0;y<17;y++) {
 				JLabel Bomber;
@@ -109,6 +124,10 @@ public class Eszenarioa extends JFrame implements Observer {
 				}
 			}
 		}
+		esz.revalidate();
+	    esz.repaint();
+	    this.revalidate();
+	    this.repaint();
 	}
 
 }

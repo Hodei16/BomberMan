@@ -22,8 +22,8 @@ public class EszenarioKudeatzailea extends Observable{
 	public Gelaxka[][] getGelaxkaMatrizea(){
 		return gelaxkaMatrizea;
 	}
-	public void bomberManMugitu() {
-		
+	public void bomberManMugitu(char tekla) {
+		System.out.println(tekla);
 		Teklatua teklatua = Teklatua.getTeklatua();
 		int x = b.getPosX();
 		int y = b.getPosY();
@@ -31,26 +31,31 @@ public class EszenarioKudeatzailea extends Observable{
 		gelaxkaMatrizea[x][y].kenduBomberZuria();
 							
 		
-		if (teklatua.detectWASD() == "w" && x > 0) {
-			if(!gelaxkaMatrizea[x][y+1].blokeaDago()) {
-				y++;
-			}
-			
-		}else if (teklatua.detectWASD() == "a" && y > 0) {
-			if(!gelaxkaMatrizea[x-1][y].blokeaDago()) {
+		if (tekla == 'w' && x > 0) {
+			//if(!gelaxkaMatrizea[x-1][y].blokeaDago()) {
 				x--;
-			}
-		}else if (teklatua.detectWASD() == "s" && x < 11) {
-			if(!gelaxkaMatrizea[x][y-1].blokeaDago()) {
+			//}
+			
+		}else if (tekla == 'a' && y > 0) {
+			//if(!gelaxkaMatrizea[x][y-1].blokeaDago()) {
 				y--;
-			}
-		}else if (teklatua.detectWASD() == "d" && y < 16) {
-			if(!gelaxkaMatrizea[x+1][y].blokeaDago()) {
-			x++;
-			}
+			//}
+		}else if (tekla == 's' && x < 11) {
+			//if(!gelaxkaMatrizea[x+1][y].blokeaDago()) {
+				x++;
+			//}
+		}else if (tekla == 'd' && y < 16) {
+			//if(!gelaxkaMatrizea[x][y+1].blokeaDago()) {
+				y++;
+			//}
 			
 		}
 		gelaxkaMatrizea[x][y].setBomberZuria(b);
+		b.setPosX(x);
+		b.setPosY(y);
+		
+		//System.out.print(b.getPosX());
+		//System.out.println(b.getPosY());
 		
 		setChanged();
 		notifyObservers();
@@ -59,7 +64,7 @@ public class EszenarioKudeatzailea extends Observable{
 
 	    
 	}
-	BomberZuria b= new BomberZuria(0,0);
+	BomberZuria b= new BomberZuria(5,5);
 	public void sortuEszenarioClassic() {
 		for(int x=0 ;x<11;x++) {
 			for(int y=0; y<17; y++) {
