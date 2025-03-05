@@ -52,10 +52,11 @@ public class Eszenarioa extends JFrame implements Observer {
 	}
 	
 	public void initialize() {
-		setSize(150, 555);
+		setSize(800, 600);	//setSize(150, 555);
 		this.setContentPane(getContentPane());
 		setTitle("Classic");
 		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		
 		
@@ -73,7 +74,7 @@ public class Eszenarioa extends JFrame implements Observer {
 	}
 	
 	@Override
-	public void update (Observable o, Object arg) {
+	public void update(Observable o, Object arg) {
 		setBackground(new Color(255, 255, 255));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 575, 472);
@@ -109,4 +110,5 @@ public class Eszenarioa extends JFrame implements Observer {
 			}
 		}
 	}
+
 }
