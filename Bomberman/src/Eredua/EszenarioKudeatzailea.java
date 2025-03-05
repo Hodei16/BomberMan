@@ -32,20 +32,20 @@ public class EszenarioKudeatzailea extends Observable{
 							
 		
 		if (teklatua.detectWASD() == "w" && x > 0) {
-			if(!gelaxkaMatrizea[x][y].blokeaDago()) {
+			if(!gelaxkaMatrizea[x][y+1].blokeaDago()) {
 				y++;
 			}
 			
 		}else if (teklatua.detectWASD() == "a" && y > 0) {
-			if(!gelaxkaMatrizea[x][y].blokeaDago()) {
+			if(!gelaxkaMatrizea[x-1][y].blokeaDago()) {
 				x--;
 			}
 		}else if (teklatua.detectWASD() == "s" && x < 11) {
-			if(!gelaxkaMatrizea[x][y].blokeaDago()) {
+			if(!gelaxkaMatrizea[x][y-1].blokeaDago()) {
 				y--;
 			}
 		}else if (teklatua.detectWASD() == "d" && y < 16) {
-			if(!gelaxkaMatrizea[x][y].blokeaDago()) {
+			if(!gelaxkaMatrizea[x+1][y].blokeaDago()) {
 			x++;
 			}
 			
