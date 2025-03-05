@@ -24,20 +24,13 @@ public class EszenarioKudeatzailea extends Observable{
 	}
 	public void bomberManMugitu() {
 		
-		boolean aurkituta = false;
 		Teklatua teklatua = Teklatua.getTeklatua();
-		int x = -1;
-		int y = -1;
+		int x = b.getPosX();
+		int y = b.getPosY();
 		
-		for(x = 0 ;x<11 && !aurkituta;x++) {
-			for(y = 0; y<17 && !aurkituta; y++) {
-				if (gelaxkaMatrizea[x][y].bomberDago()) {
-					aurkituta = true;
-					gelaxkaMatrizea[x][y].kenduBomberZuria();
-					
-				}
-			}
-		}	
+		gelaxkaMatrizea[x][y].kenduBomberZuria();
+							
+		
 		if (teklatua.detectWASD() == "w" && x > 0) {
 			if(!gelaxkaMatrizea[x][y].blokeaDago()) {
 				y++;
@@ -66,7 +59,7 @@ public class EszenarioKudeatzailea extends Observable{
 
 	    
 	}
-	BomberZuria b= new BomberZuria();
+	BomberZuria b= new BomberZuria(0,0);
 	public void sortuEszenarioClassic() {
 		for(int x=0 ;x<11;x++) {
 			for(int y=0; y<17; y++) {
@@ -75,6 +68,8 @@ public class EszenarioKudeatzailea extends Observable{
 				if(x==0 && y==0) {
 					
 					gelaxka.setBomberZuria(b);
+					b.setPosX(x);
+					b.setPosY(y);
 				}
 				if(x==0 && y==1) {
 					
