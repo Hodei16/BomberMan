@@ -82,7 +82,8 @@ public class Eszenarioa extends JFrame implements Observer {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 	
-		ImageIcon atzekoArg = new ImageIcon("C:/Users/i10he/Utilidades/Desktop/irudiak/irudiak/stageBack1.png");
+		ImageIcon atzekoArg = new ImageIcon(getClass().getResource("stageBack1.png"));
+
         JLabel atzekoa = new JLabel(atzekoArg);
         atzekoa.setLayout(new BorderLayout());
         contentPane.add(atzekoa, BorderLayout.CENTER);
@@ -97,7 +98,7 @@ public class Eszenarioa extends JFrame implements Observer {
 				Gelaxka g= mat[x][y];
 				gelaxkaMatrix[x][y]=g;
 				if(g.bomberDago()) {
-					ImageIcon icon = new ImageIcon("C:/Users/i10he/Utilidades/Desktop/irudiak/irudiak/whitefront1.png");
+					ImageIcon icon = new ImageIcon(getClass().getResource("whitefront1.png"));
 					Bomber = new JLabel(icon);
 					esz.add(Bomber);
 				}
