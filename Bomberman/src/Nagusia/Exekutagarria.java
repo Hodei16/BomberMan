@@ -12,5 +12,16 @@ public class Exekutagarria {
 		eK.sortuEszenarioClassic();
 		
 		Teklatua teklatua = Teklatua.getTeklatua();
+		while (true) {
+			String tekla = teklatua.detectWASD();
+			if(!tekla.isEmpty()) {
+				eK.bomberManMugitu();
+				try {
+                    Thread.sleep(100); 
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+			}
+		}
 	}
 }

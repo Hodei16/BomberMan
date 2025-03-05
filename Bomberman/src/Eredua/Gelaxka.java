@@ -15,9 +15,18 @@ public class Gelaxka {
 	public Blokea getBlokea() {
 		return this.b;
 	}
+	public boolean blokeaDago() {
+		if (b != null) {
+			return true;
+		}
+		else return false;
+	}
 	
 	public void setBomberZuria(BomberZuria pBz) {
-		this.bz=pBz;
+		this.bz = pBz;
+	}
+	public void kenduBomberZuria() {
+		this.bz = null;
 	}
 	
 	public void setBlokea(Blokea pB) {

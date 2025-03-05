@@ -17,16 +17,17 @@ public class Teklatua {
 		return nireTeklatua;
 	}
 	public String detectWASD() {
-		String input = sc.nextLine().trim().toUpperCase();
-		if (input =="W") {
-            return "W";
-        } else if (input == "A") {
-        	return "W";
-        } else if (input == "S") {
-        	return "W";
-        } else if (input == "D") {
-        	return "W";
-        }
-		return "";
+	    String input = sc.nextLine().trim().toLowerCase();
+	    if (input.equals("w")) {
+	        return "w";
+	    } else if (input.equals("a")) {
+	        return "a";
+	    } else if (input.equals("s")) {
+	        return "s";
+	    } else if (input.equals("d")) {
+	        return "d";
+	    }
+	    return "";
 	}
+
 }

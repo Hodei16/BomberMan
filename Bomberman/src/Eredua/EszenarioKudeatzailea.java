@@ -22,14 +22,58 @@ public class EszenarioKudeatzailea extends Observable{
 	public Gelaxka[][] getGelaxkaMatrizea(){
 		return gelaxkaMatrizea;
 	}
-	
+	public void bomberManMugitu() {
+		
+		boolean aurkituta = false;
+		Teklatua teklatua = Teklatua.getTeklatua();
+		int x = -1;
+		int y = -1;
+		
+		for(x = 0 ;x<11 && !aurkituta;x++) {
+			for(y = 0; y<17 && !aurkituta; y++) {
+				if (gelaxkaMatrizea[x][y].bomberDago()) {
+					aurkituta = true;
+					gelaxkaMatrizea[x][y].kenduBomberZuria();
+					
+				}
+			}
+		}	
+		if (teklatua.detectWASD() == "w" && x > 0) {
+			if(!gelaxkaMatrizea[x][y].blokeaDago()) {
+				y++;
+			}
+			
+		}else if (teklatua.detectWASD() == "a" && y > 0) {
+			if(!gelaxkaMatrizea[x][y].blokeaDago()) {
+				x--;
+			}
+		}else if (teklatua.detectWASD() == "s" && x < 11) {
+			if(!gelaxkaMatrizea[x][y].blokeaDago()) {
+				y--;
+			}
+		}else if (teklatua.detectWASD() == "d" && y < 16) {
+			if(!gelaxkaMatrizea[x][y].blokeaDago()) {
+			x++;
+			}
+			
+		}
+		gelaxkaMatrizea[x][y].setBomberZuria(b);
+		
+		setChanged();
+		notifyObservers();
+			        
+   
+
+	    
+	}
+	BomberZuria b= new BomberZuria();
 	public void sortuEszenarioClassic() {
 		for(int x=0 ;x<11;x++) {
 			for(int y=0; y<17; y++) {
 				Gelaxka gelaxka;
 				gelaxka= new Gelaxka();
 				if(x==0 && y==0) {
-					BomberZuria b= new BomberZuria();
+					
 					gelaxka.setBomberZuria(b);
 				}
 				if(x==0 && y==1) {
