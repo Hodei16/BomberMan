@@ -88,7 +88,7 @@ public class Eszenarioa extends JFrame implements Observer {
         Gelaxka[][] mat = eK.getGelaxkaMatrizea();
         
         esz.removeAll();
-
+        
         for (int x = 0; x < 11; x++) {
             for (int y = 0; y < 17; y++) {
                 JLabel Bomber;
