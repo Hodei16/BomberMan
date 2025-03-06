@@ -1,9 +1,9 @@
 package Eredua;
 
-import Bista.HasieraPantaila;
-import java.util.Random;
 import java.util.Observable;
-import java.util.Observer;
+import java.util.Random;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class EszenarioKudeatzailea extends Observable{
 
@@ -22,6 +22,9 @@ public class EszenarioKudeatzailea extends Observable{
 	public Gelaxka[][] getGelaxkaMatrizea(){
 		return gelaxkaMatrizea;
 	}
+	
+	Queue <Integer> pilaX = new LinkedList<>();
+	Queue <Integer> pilaY = new LinkedList<>();
 	public void bomberManMugitu(char tekla) {
 		Teklatua teklatua = Teklatua.getTeklatua();
 		int x = b.getPosX();
@@ -48,6 +51,12 @@ public class EszenarioKudeatzailea extends Observable{
 				y++;
 			}
 			
+		}else if (tekla == 'x') {
+			Bonba bonb = new Bonba();
+			gelaxkaMatrizea[x][y].setBonba(bonb);
+			pilaX.add(x);
+			pilaY.add(y);
+			
 		}
 		gelaxkaMatrizea[x][y].setBomberZuria(b);
 		b.setPosX(x);
@@ -57,11 +66,18 @@ public class EszenarioKudeatzailea extends Observable{
 		
 		setChanged();
 		notifyObservers();
-			        
-   
-
-	    
+			           
 	}
+	
+	public void bonbaKendu() {
+		int bonbX = pilaX.remove();
+		int bonbY = pilaY.remove();
+		gelaxkaMatrizea[bonbX][bonbY].kenduBonba();
+		
+		setChanged();
+		notifyObservers();
+	}
+	
 	BomberZuria b= new BomberZuria(0,0);
 	public void sortuEszenarioClassic() {
 		for(int x=0 ;x<11;x++) {

@@ -41,6 +41,7 @@ public class Teklatua implements KeyListener{
 	    else if (keyCode == KeyEvent.VK_A) c = 'a';
 	    else if (keyCode == KeyEvent.VK_S) c = 's';
 	    else if (keyCode == KeyEvent.VK_D) c = 'd';
+	    else if (keyCode == KeyEvent.VK_X) c = 'x';
 	    
 	    eK.bomberManMugitu(c);
 	    

@@ -114,7 +114,7 @@ public class Eszenarioa extends JFrame implements Observer {
 		
 		for(int x=0; x<11; x++) {
 			for(int y=0;y<17;y++) {
-				JLabel Bomber, Zuria, Bloke;
+				JLabel Bomber, Zuria, Bloke, Bonba;
 				Gelaxka g= mat[x][y];
 				gelaxkaMatrix[x][y]=g;
 				if(g.bomberDago()) {
@@ -126,16 +126,24 @@ public class Eszenarioa extends JFrame implements Observer {
 				}else if(g.blokeaDago()) {
 					if(g.getBlokea() instanceof Gogorra) {
 						ImageIcon icon = new ImageIcon(getClass().getResource("hardClassic.png"));
-						Bloke = new JLabel(icon); 
+						Image blokeImg = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+						Bloke = new JLabel(new ImageIcon(blokeImg)); 
 						esz.add(Bloke);
 					}
 					else {
 						ImageIcon icon = new ImageIcon(getClass().getResource("softClassic1.png"));
-						Bloke = new JLabel(icon); 
+						Image blokeImg = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+						Bloke = new JLabel(new ImageIcon(blokeImg)); 
 						esz.add(Bloke);
 					}
 					
+				}else if(g.bonbaDago()) {
+					ImageIcon icon = new ImageIcon(getClass().getResource("bomb1.png"));
+					Image bonbaImg = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+					Bonba = new JLabel(new ImageIcon(bonbaImg));
+					esz.add(Bonba);
 				}
+				
 				else {
 					Zuria = new JLabel("");
 					esz.add(Zuria);

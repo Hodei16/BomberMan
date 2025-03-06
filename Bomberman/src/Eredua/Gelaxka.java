@@ -3,6 +3,7 @@ package Eredua;
 public class Gelaxka {
 	private BomberZuria bz;
 	private Blokea b;
+	private Bonba bonb;
 	
 	public Gelaxka() {
 		
@@ -21,10 +22,22 @@ public class Gelaxka {
 		}
 		else return false;
 	}
+	public void setBonba(Bonba pBonb) {
+		this.bonb = pBonb;
+	}
+	public void kenduBonba() {
+		this.bonb = null;
+	}
+	public boolean bonbaDago() {
+		if (bonb != null) {
+			return true;
+		}else return false;
+	}
 	
 	public void setBomberZuria(BomberZuria pBz) {
 		this.bz = pBz;
 	}
+	
 	public void kenduBomberZuria() {
 		this.bz = null;
 	}
