@@ -3,13 +3,13 @@ package Eredua;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Bonba {
+public class Sua {
 	EszenarioKudeatzailea eK = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
-	private static final int PERIODO = 3;
+	private static final int PERIODO = 5;
 	private Timer timer = null;
 	private int kont;
 	
-	public Bonba() {
+	public Sua() {
 		kont = PERIODO;
 		TimerTask timerTask = new TimerTask() {
 			@Override
@@ -25,7 +25,7 @@ public class Bonba {
 		kont--;
 		if(kont == 0) {
 			kont = PERIODO;
-			eK.bonbaKendu();
+			eK.kenduSua();
 			timer.cancel();
 		}
 	}

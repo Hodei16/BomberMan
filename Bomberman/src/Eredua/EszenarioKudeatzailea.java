@@ -68,16 +68,104 @@ public class EszenarioKudeatzailea extends Observable{
 		notifyObservers();
 			           
 	}
-	
+	Queue <Integer> suaX = new LinkedList<>();
+	Queue <Integer> suaY = new LinkedList<>();
 	public void bonbaKendu() {
+		
+		boolean aurkitutaGora = false;
+		boolean aurkitutaBehera = false;
+		boolean aurkitutaEsk = false;
+		boolean aurkitutaEzk = false;
 		int bonbX = pilaX.remove();
 		int bonbY = pilaY.remove();
+		int suaGora = bonbY;
+		int suaBehera = bonbY;
+		int suaEsk = bonbX;
+		int suaEzk = bonbX;
+		
 		gelaxkaMatrizea[bonbX][bonbY].kenduBonba();
 		
+		while(!aurkitutaGora && !aurkitutaBehera && !aurkitutaEsk && !aurkitutaEzk) {
+			if (suaGora < 16) {
+				suaGora++;
+			}
+			if (suaBehera > 0) {
+				suaBehera--;
+			}
+			if (suaEzk > 0) {
+				suaEzk--;
+			}
+			if (suaEsk < 11) {
+				suaEsk++;
+			}
+			
+			if(!aurkitutaGora) {
+				if(gelaxkaMatrizea[bonbX][suaGora].blokeaDago()){
+					aurkitutaGora = true;
+					if(gelaxkaMatrizea[bonbX][suaGora].getBlokea() instanceof Biguna) {
+						gelaxkaMatrizea[bonbX][suaGora].kenduBlokea();
+					}
+				}else {
+					Sua s = new Sua();
+					gelaxkaMatrizea[bonbX][suaGora].setSua(s);
+					suaX.add(suaGora);
+					suaY.add(bonbX);
+				}
+			}
+			
+			if(!aurkitutaBehera) {
+				if(gelaxkaMatrizea[bonbX][suaBehera].blokeaDago()){
+					aurkitutaBehera = true;
+					if(gelaxkaMatrizea[bonbX][suaBehera].getBlokea() instanceof Biguna) {
+						gelaxkaMatrizea[bonbX][suaBehera].kenduBlokea();
+					}
+				}else {
+					Sua s = new Sua();
+					gelaxkaMatrizea[bonbX][suaBehera].setSua(s);
+					suaX.add(bonbX);
+					suaY.add(suaBehera);
+				}
+			}
+			if(!aurkitutaEsk) {
+				if(gelaxkaMatrizea[suaEsk][bonbY].blokeaDago()){
+					aurkitutaEsk = true;
+					if(gelaxkaMatrizea[suaEsk][bonbY].getBlokea() instanceof Biguna) {
+						gelaxkaMatrizea[suaEsk][bonbY].kenduBlokea();
+					}
+				}else {
+					Sua s = new Sua();
+					gelaxkaMatrizea[suaEsk][bonbY].setSua(s);
+					suaX.add(suaEsk);
+					suaY.add(bonbY);
+				}
+			}
+			if(!aurkitutaEzk) {
+				if(gelaxkaMatrizea[suaEzk][bonbY].blokeaDago()){
+					aurkitutaEzk = true;
+					if(gelaxkaMatrizea[suaEzk][bonbY].getBlokea() instanceof Biguna) {
+						gelaxkaMatrizea[suaEzk][bonbY].kenduBlokea();
+					}
+				}else {
+					Sua s = new Sua();
+					gelaxkaMatrizea[suaEzk][bonbY].setSua(s);
+					suaX.add(suaEzk);
+					suaY.add(bonbY);
+				}
+			}
+			
+		}
 		setChanged();
 		notifyObservers();
 	}
 	
+	public void kenduSua() {
+		int x = suaX.remove();
+		int y = suaY.remove();
+		gelaxkaMatrizea[x][y].kenduSua();
+		
+		setChanged();
+		notifyObservers();
+	}
 	BomberZuria b= new BomberZuria(0,0);
 	public void sortuEszenarioClassic() {
 		for(int x=0 ;x<11;x++) {

@@ -4,6 +4,7 @@ public class Gelaxka {
 	private BomberZuria bz;
 	private Blokea b;
 	private Bonba bonb;
+	private Sua sua;
 	
 	public Gelaxka() {
 		
@@ -45,13 +46,28 @@ public class Gelaxka {
 	public void setBlokea(Blokea pB) {
 		this.b=pB;
 	}
-	
+	public void kenduBlokea() {
+		this.b = null;
+	}
 	public boolean bomberDago() {
 		if(this.bz == null) {
 			return false;
 		}else {
 			return true;
 		}
+	}
+	public Sua getSua() {
+		return this.sua;
+	}
+	public void setSua(Sua pSua) {
+		this.sua = pSua;
+	}
+	public boolean suaDago() {
+		if (this.sua != null) return true;
+		else return false;
+	}
+	public void kenduSua() {
+		this.sua = null;
 	}
 	
 }
