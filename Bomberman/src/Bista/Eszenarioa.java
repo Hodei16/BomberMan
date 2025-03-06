@@ -1,30 +1,20 @@
 package Bista;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.Observable;
 import java.util.Observer;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.EventQueue; 
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
-import javax.swing.*;
-import java.awt.*;
 
-import Eredua.Biguna;
-import Eredua.Blokea;
-import Eredua.BomberZuria;
-import Eredua.Bonba;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
 import Eredua.EszenarioKudeatzailea;
 import Eredua.Gelaxka;
-import Eredua.Gogorra; 
-import Eredua.Jokalaria;  
-import Eredua.Pertsonaia;
 import Eredua.Teklatua;
 
 
@@ -38,6 +28,7 @@ public class Eszenarioa extends JFrame implements Observer {
 	private Gelaxka[][] gelaxkaMatrix;
 	private static Eszenarioa nEszenarioa = null;
 	private static Observable nireObservable = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
+	private JLabel atzekoa;
 	
 	private Eszenarioa(Observable pEguraldiEstazioa) {
 	    this.gelaxkaMatrix = new Gelaxka[11][17];
@@ -63,31 +54,35 @@ public class Eszenarioa extends JFrame implements Observer {
 	}
 	
 	public void initialize() {
-		setSize(800, 600);	//setSize(150, 555);
-		this.setContentPane(getContentPane());
-		setTitle("Classic");
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setVisible(true);
-		
-		setBackground(new Color(255, 255, 255));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 575, 472);
-		contentPane = new JPanel();
-		contentPane.setLayout(new BorderLayout());
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-	
-		ImageIcon atzekoArg = new ImageIcon(getClass().getResource("stageBack1.png"));
-
-        JLabel atzekoa = new JLabel(atzekoArg);
-        atzekoa.setLayout(new BorderLayout());
-        contentPane.add(atzekoa, BorderLayout.CENTER);
-        setVisible(true);
-		atzekoa.add(getEsz(), BorderLayout.CENTER);
-		
-
+	    setSize(800, 600);
+	    setTitle("Classic");
+	    setLocationRelativeTo(null);
+	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    setVisible(true);
+	    
+	    contentPane = new JPanel(new BorderLayout());
+	    contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+	    setContentPane(contentPane);
+	    
+	    atzekoa = new JLabel(new ImageIcon(getClass().getResource("stageBack1.png")));
+	    atzekoa.setLayout(new BorderLayout());
+	    contentPane.add(atzekoa, BorderLayout.CENTER);
+	    
+	    esz = new JPanel();
+	    esz.setOpaque(false);
+	    esz.setLayout(new GridLayout(11, 17, 0, 0));
+	    atzekoa.add(esz, BorderLayout.CENTER);
+	    
+	    addComponentListener(new ComponentAdapter() {
+	        @Override
+	        public void componentResized(ComponentEvent e) {
+	            atzekoAldeaEguneratu();
+	        }
+	    });
+	    
+	    atzekoAldeaEguneratu();
 	}
+
 	
 
 	private JPanel getEsz() {
@@ -98,6 +93,14 @@ public class Eszenarioa extends JFrame implements Observer {
 		}
 		return esz;
 	}
+	
+	private void atzekoAldeaEguneratu() {
+        int width = getWidth();
+        int height = getHeight();
+        ImageIcon imgIkonoa = new ImageIcon(getClass().getResource("stageBack1.png"));
+        Image img = imgIkonoa.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        atzekoa.setIcon(new ImageIcon(img));
+    }
 	
 	@Override
 	public void update(Observable o, Object arg) {
@@ -115,13 +118,15 @@ public class Eszenarioa extends JFrame implements Observer {
 				gelaxkaMatrix[x][y]=g;
 				if(g.bomberDago()) {
 					ImageIcon icon = new ImageIcon(getClass().getResource("whitefront1.png"));
-					Bomber = new JLabel(icon);
-					esz.add(Bomber);
+					Image bomberImg = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+					Bomber = new JLabel(new ImageIcon(bomberImg));
+					
 				}
 				else {
 					Bomber = new JLabel("");
-					esz.add(Bomber);
+					
 				}
+				esz.add(Bomber);
 			}
 		}
 		esz.revalidate();

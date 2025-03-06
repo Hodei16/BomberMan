@@ -23,7 +23,6 @@ public class EszenarioKudeatzailea extends Observable{
 		return gelaxkaMatrizea;
 	}
 	public void bomberManMugitu(char tekla) {
-		System.out.println(tekla);
 		Teklatua teklatua = Teklatua.getTeklatua();
 		int x = b.getPosX();
 		int y = b.getPosY();
@@ -54,8 +53,7 @@ public class EszenarioKudeatzailea extends Observable{
 		b.setPosX(x);
 		b.setPosY(y);
 		
-		//System.out.print(b.getPosX());
-		//System.out.println(b.getPosY());
+	
 		
 		setChanged();
 		notifyObservers();

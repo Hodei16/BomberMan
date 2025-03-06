@@ -21,7 +21,7 @@ public class Teklatua implements KeyListener{
 	    frame.setFocusable(true);
 	    frame.requestFocus();
 	    frame.requestFocusInWindow();
-	    System.out.println("Teklatua sortu da eta fokoa dauka");
+
 	}
 	public static Teklatua getTeklatua() {
 		if(nireTeklatua == null) {

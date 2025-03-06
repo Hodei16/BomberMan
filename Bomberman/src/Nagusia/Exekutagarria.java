@@ -16,7 +16,7 @@ public class Exekutagarria {
 		Teklatua teklatua = Teklatua.getTeklatua();
         teklatua.fokoEman();
         
-        System.out.println("Teklatua hasieratuta");
+      
 	}
 	
 
