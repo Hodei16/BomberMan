@@ -62,7 +62,7 @@ public class EszenarioKudeatzailea extends Observable{
 
 	    
 	}
-	BomberZuria b= new BomberZuria(5,5);
+	BomberZuria b= new BomberZuria(0,0);
 	public void sortuEszenarioClassic() {
 		for(int x=0 ;x<11;x++) {
 			for(int y=0; y<17; y++) {
