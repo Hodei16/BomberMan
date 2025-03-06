@@ -31,22 +31,22 @@ public class EszenarioKudeatzailea extends Observable{
 							
 		
 		if (tekla == 'w' && x > 0) {
-			//if(!gelaxkaMatrizea[x-1][y].blokeaDago()) {
+			if(!gelaxkaMatrizea[x-1][y].blokeaDago()) {
 				x--;
-			//}
+			}
 			
 		}else if (tekla == 'a' && y > 0) {
-			//if(!gelaxkaMatrizea[x][y-1].blokeaDago()) {
+			if(!gelaxkaMatrizea[x][y-1].blokeaDago()) {
 				y--;
-			//}
+			}
 		}else if (tekla == 's' && x < 11) {
-			//if(!gelaxkaMatrizea[x+1][y].blokeaDago()) {
+			if(!gelaxkaMatrizea[x+1][y].blokeaDago()) {
 				x++;
-			//}
+			}
 		}else if (tekla == 'd' && y < 16) {
-			//if(!gelaxkaMatrizea[x][y+1].blokeaDago()) {
+			if(!gelaxkaMatrizea[x][y+1].blokeaDago()) {
 				y++;
-			//}
+			}
 			
 		}
 		gelaxkaMatrizea[x][y].setBomberZuria(b);
@@ -74,13 +74,13 @@ public class EszenarioKudeatzailea extends Observable{
 					b.setPosX(x);
 					b.setPosY(y);
 				}
-				if(x==0 && y==1) {
+				else if(x==0 && y==1) {
 					
 				}
-				if(x==1 && y==0) {
+				else if(x==1 && y==0) {
 					
 					}
-				if(x%2==1 && y%2==1) {
+				else if(x%2==1 && y%2==1) {
 					Gogorra g= new Gogorra();
 					gelaxka.setBlokea(g);
 				}

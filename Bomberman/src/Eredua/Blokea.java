@@ -1,9 +1,11 @@
 package Eredua;
 
-public class Blokea {
+public abstract class Blokea {
 	
 	public Blokea() {
 		
 	}
+	
+	
 }
  

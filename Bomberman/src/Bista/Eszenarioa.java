@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import Eredua.EszenarioKudeatzailea;
 import Eredua.Gelaxka;
+import Eredua.Gogorra;
 import Eredua.Teklatua;
 
 
@@ -113,20 +114,35 @@ public class Eszenarioa extends JFrame implements Observer {
 		
 		for(int x=0; x<11; x++) {
 			for(int y=0;y<17;y++) {
-				JLabel Bomber;
+				JLabel Bomber, Zuria, Bloke;
 				Gelaxka g= mat[x][y];
 				gelaxkaMatrix[x][y]=g;
 				if(g.bomberDago()) {
 					ImageIcon icon = new ImageIcon(getClass().getResource("whitefront1.png"));
 					Image bomberImg = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 					Bomber = new JLabel(new ImageIcon(bomberImg));
+					esz.add(Bomber);
+					
+				}else if(g.blokeaDago()) {
+					if(g.getBlokea() instanceof Gogorra) {
+						ImageIcon icon = new ImageIcon(getClass().getResource("hardClassic.png"));
+						Bloke = new JLabel(icon); 
+						esz.add(Bloke);
+					}
+					else {
+						ImageIcon icon = new ImageIcon(getClass().getResource("softClassic1.png"));
+						Bloke = new JLabel(icon); 
+						esz.add(Bloke);
+					}
 					
 				}
 				else {
-					Bomber = new JLabel("");
+					Zuria = new JLabel("");
+					esz.add(Zuria);
 					
 				}
-				esz.add(Bomber);
+				
+				
 			}
 		}
 		esz.revalidate();
