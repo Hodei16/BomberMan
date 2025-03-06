@@ -86,7 +86,7 @@ public class Eszenarioa extends JFrame implements Observer {
     public void update(Observable o, Object arg) {
         EszenarioKudeatzailea eK = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
         Gelaxka[][] mat = eK.getGelaxkaMatrizea();
-
+        
         esz.removeAll();
 
         for (int x = 0; x < 11; x++) {
