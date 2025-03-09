@@ -1,5 +1,7 @@
 package Bista;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ComponentAdapter;
@@ -11,14 +13,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 import Eredua.EszenarioKudeatzailea;
 import Eredua.Gelaxka;
 import Eredua.Gogorra;
 import Eredua.Teklatua;
-
-
 
 public class Eszenarioa extends JFrame implements Observer {
 	
@@ -36,9 +35,6 @@ public class Eszenarioa extends JFrame implements Observer {
 	    pEguraldiEstazioa.addObserver(this);
 	    initialize();
 
-	    
-	    
-	    
 	    //Berria
 	    Teklatua teklatua = Teklatua.getTeklatua();
 	    this.addKeyListener(teklatua);
@@ -55,58 +51,54 @@ public class Eszenarioa extends JFrame implements Observer {
 	}
 	
 	public void initialize() {
-	    setSize(800, 600);
-	    setTitle("Classic");
+	    setSize(678, 440);
+	    setTitle("BOMBERMAN");
 	    setLocationRelativeTo(null);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    setResizable(true);
 	    setVisible(true);
-	    
+
 	    contentPane = new JPanel(new BorderLayout());
-	    contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+	    contentPane.setPreferredSize(new Dimension(666, 404)); 
+	    contentPane.setSize(666, 404);
+	    contentPane.setBackground(new Color(248,171,68));
 	    setContentPane(contentPane);
-	    
-	    atzekoa = new JLabel(new ImageIcon(getClass().getResource("stageBack1.png")));
-	    atzekoa.setLayout(new BorderLayout());
+
+	    ImageIcon backgroundIcon = new ImageIcon(getClass().getResource("stageBack1.png"));
+	    Image backgroundImage = backgroundIcon.getImage().getScaledInstance(666, 404, Image.SCALE_SMOOTH);
+	    atzekoa = new JLabel(new ImageIcon(backgroundImage));
 	    contentPane.add(atzekoa, BorderLayout.CENTER);
-	    
-	    esz = new JPanel();
+
+	    esz = new JPanel(new GridLayout(11, 17, 0, 0));
 	    esz.setOpaque(false);
-	    esz.setLayout(new GridLayout(11, 17, 0, 0));
-	    atzekoa.add(esz, BorderLayout.CENTER);
-	    
+	    esz.setSize(666, 404);
+	    atzekoa.add(esz);
+
 	    addComponentListener(new ComponentAdapter() {
 	        @Override
 	        public void componentResized(ComponentEvent e) {
-	            atzekoAldeaEguneratu();
+	            erdiraMugitu();
 	        }
 	    });
-	    
-	    atzekoAldeaEguneratu();
 	}
 
-	
+    public void erdiraMugitu() {
+        int newWidth = getWidth();
+        int newHeight = getHeight();
 
-	private JPanel getEsz() {
-		if (esz == null) {
-			esz = new JPanel();
-			esz.setOpaque(false);
-			esz.setLayout(new GridLayout(11, 17, 0, 0));
-		}
-		return esz;
-	}
-	
-	private void atzekoAldeaEguneratu() {
-        int width = getWidth();
-        int height = getHeight();
-        ImageIcon imgIkonoa = new ImageIcon(getClass().getResource("stageBack1.png"));
-        Image img = imgIkonoa.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        atzekoa.setIcon(new ImageIcon(img));
+        int x = (newWidth - 666) / 2;
+        int y = (newHeight - 404) / 2;
+
+        atzekoa.setLocation(x, y);
+        atzekoa.revalidate();
+
+        esz.setLocation((atzekoa.getWidth() - esz.getWidth()) / 2, (atzekoa.getHeight() - esz.getHeight()) / 2);
+        esz.revalidate();
     }
+
 	
 	@Override
-	public void update(Observable o, Object arg) {
-		
-		
+	public void update(Observable o, Object arg) {	
 		EszenarioKudeatzailea eK= EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
 		Gelaxka[][] mat= eK.getGelaxkaMatrizea();
 		
@@ -119,21 +111,18 @@ public class Eszenarioa extends JFrame implements Observer {
 				gelaxkaMatrix[x][y]=g;
 				if(g.bomberDago()) {
 					ImageIcon icon = new ImageIcon(getClass().getResource("whitefront1.png"));
-					Image bomberImg = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-					Bomber = new JLabel(new ImageIcon(bomberImg));
+					Bomber = new JLabel(icon);
 					esz.add(Bomber);
 					
 				}else if(g.blokeaDago()) {
 					if(g.getBlokea() instanceof Gogorra) {
 						ImageIcon icon = new ImageIcon(getClass().getResource("hardClassic.png"));
-						Image blokeImg = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-						Bloke = new JLabel(new ImageIcon(blokeImg)); 
+						Bloke = new JLabel(icon); 
 						esz.add(Bloke);
 					}
 					else {
 						ImageIcon icon = new ImageIcon(getClass().getResource("softClassic1.png"));
-						Image blokeImg = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-						Bloke = new JLabel(new ImageIcon(blokeImg)); 
+						Bloke = new JLabel(icon); 
 						esz.add(Bloke);
 					}
 					
