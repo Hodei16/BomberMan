@@ -5,7 +5,7 @@ import java.util.TimerTask;
 
 public class Sua {
 	EszenarioKudeatzailea eK = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
-	private static final int PERIODO = 5;
+	private static final int PERIODO = 1;
 	private Timer timer = null;
 	private int kont;
 	

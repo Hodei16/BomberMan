@@ -84,7 +84,8 @@ public class EszenarioKudeatzailea extends Observable{
 		int suaEzk = bonbX;
 		
 		gelaxkaMatrizea[bonbX][bonbY].kenduBonba();
-		
+		Sua s = new Sua();
+		gelaxkaMatrizea[bonbX][bonbY].setSua(s);				
 		while(!aurkitutaGora && !aurkitutaBehera && !aurkitutaEsk && !aurkitutaEzk) {
 			if (suaGora < 16) {
 				suaGora++;
@@ -104,9 +105,9 @@ public class EszenarioKudeatzailea extends Observable{
 					aurkitutaGora = true;
 					if(gelaxkaMatrizea[bonbX][suaGora].getBlokea() instanceof Biguna) {
 						gelaxkaMatrizea[bonbX][suaGora].kenduBlokea();
+						gelaxkaMatrizea[bonbX][suaGora].setSua(s);
 					}
 				}else {
-					Sua s = new Sua();
 					gelaxkaMatrizea[bonbX][suaGora].setSua(s);
 					suaX.add(suaGora);
 					suaY.add(bonbX);
@@ -118,9 +119,9 @@ public class EszenarioKudeatzailea extends Observable{
 					aurkitutaBehera = true;
 					if(gelaxkaMatrizea[bonbX][suaBehera].getBlokea() instanceof Biguna) {
 						gelaxkaMatrizea[bonbX][suaBehera].kenduBlokea();
+						gelaxkaMatrizea[bonbX][suaBehera].setSua(s);
 					}
 				}else {
-					Sua s = new Sua();
 					gelaxkaMatrizea[bonbX][suaBehera].setSua(s);
 					suaX.add(bonbX);
 					suaY.add(suaBehera);
@@ -131,9 +132,9 @@ public class EszenarioKudeatzailea extends Observable{
 					aurkitutaEsk = true;
 					if(gelaxkaMatrizea[suaEsk][bonbY].getBlokea() instanceof Biguna) {
 						gelaxkaMatrizea[suaEsk][bonbY].kenduBlokea();
+						gelaxkaMatrizea[suaEsk][bonbY].setSua(s);
 					}
 				}else {
-					Sua s = new Sua();
 					gelaxkaMatrizea[suaEsk][bonbY].setSua(s);
 					suaX.add(suaEsk);
 					suaY.add(bonbY);
@@ -144,9 +145,9 @@ public class EszenarioKudeatzailea extends Observable{
 					aurkitutaEzk = true;
 					if(gelaxkaMatrizea[suaEzk][bonbY].getBlokea() instanceof Biguna) {
 						gelaxkaMatrizea[suaEzk][bonbY].kenduBlokea();
+						gelaxkaMatrizea[suaEzk][bonbY].setSua(s);
 					}
 				}else {
-					Sua s = new Sua();
 					gelaxkaMatrizea[suaEzk][bonbY].setSua(s);
 					suaX.add(suaEzk);
 					suaY.add(bonbY);
