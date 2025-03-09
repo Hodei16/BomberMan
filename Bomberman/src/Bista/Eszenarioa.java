@@ -61,7 +61,8 @@ public class Eszenarioa extends JFrame implements Observer {
 	    contentPane = new JPanel(new BorderLayout());
 	    contentPane.setPreferredSize(new Dimension(666, 404)); 
 	    contentPane.setSize(666, 404);
-	    contentPane.setBackground(new Color(248,171,68));
+	    contentPane.setBackground(Color.BLACK);
+	    // contentPane.setBackground(new Color(248,171,68)); // Ladreilu kolorea
 	    setContentPane(contentPane);
 
 	    ImageIcon backgroundIcon = new ImageIcon(getClass().getResource("stageBack1.png"));
