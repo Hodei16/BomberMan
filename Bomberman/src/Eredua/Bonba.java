@@ -25,8 +25,8 @@ public class Bonba {
 		kont--;
 		if(kont == 0) {
 			kont = PERIODO;
-			eK.bonbaKendu();
 			timer.cancel();
+			eK.bonbaKendu();
 		}
 	}
 }

@@ -5,7 +5,7 @@ import java.util.TimerTask;
 
 public class Sua {
 	EszenarioKudeatzailea eK = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
-	private static final int PERIODO = 1;
+	private static final int PERIODO = 4;
 	private Timer timer = null;
 	private int kont;
 	
@@ -25,8 +25,8 @@ public class Sua {
 		kont--;
 		if(kont == 0) {
 			kont = PERIODO;
-			eK.kenduSua();
 			timer.cancel();
+			eK.kenduSua();
 		}
 	}
 }

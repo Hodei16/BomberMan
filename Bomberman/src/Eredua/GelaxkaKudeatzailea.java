@@ -3,10 +3,10 @@ package Eredua;
 import java.util.Observable;
 
 public class GelaxkaKudeatzailea extends Observable{
-	private BomberZuria bz;
-	private Blokea b;
-	private Bonba bonb;
-	private Sua sua;
+	private BomberZuria bz=null;
+	private Blokea b=null;
+	private Bonba bonb=null;
+	private Sua sua=null;
 	
 	public GelaxkaKudeatzailea() {}
 	
@@ -25,9 +25,13 @@ public class GelaxkaKudeatzailea extends Observable{
 	}
 	public void setBonba(Bonba pBonb) {
 		this.bonb = pBonb;
+		setChanged();
+		notifyObservers(new String[] {"BonbaJarriBomber"});
 	}
 	public void kenduBonba() {
 		this.bonb = null;
+		setChanged();
+		notifyObservers(new String[] {"KenduBonba"});
 	}
 	public boolean bonbaDago() {
 		if (bonb != null) {
@@ -41,6 +45,14 @@ public class GelaxkaKudeatzailea extends Observable{
 	
 	public void kenduBomberZuria() {
 		this.bz = null;
+		if(!bonbaDago()) {
+			setChanged();
+			notifyObservers(new String[] {"KenduBomber"});
+		}
+		else {
+			setChanged();
+			notifyObservers(new String[] {"BonbaJarri"});
+		}
 	}
 	
 	public void setBlokea(Blokea pB) {
@@ -61,6 +73,8 @@ public class GelaxkaKudeatzailea extends Observable{
 	}
 	public void setSua(Sua pSua) {
 		this.sua = pSua;
+		setChanged();
+		notifyObservers(new String[] {"SuaJarri"});
 	}
 	public boolean suaDago() {
 		if (this.sua != null) return true;
@@ -68,5 +82,13 @@ public class GelaxkaKudeatzailea extends Observable{
 	}
 	public void kenduSua() {
 		this.sua = null;
+		setChanged();
+		notifyObservers(new String[] {"SuaKendu"});
+	}
+
+	public void bomberHeldu(BomberZuria bZ) {
+		setBomberZuria(bZ);
+		setChanged();
+		notifyObservers(new String[] {"BomberHeldu"});
 	}
 }

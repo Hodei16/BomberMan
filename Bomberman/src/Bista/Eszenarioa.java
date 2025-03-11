@@ -102,117 +102,14 @@ public class Eszenarioa extends JFrame implements Observer {
 	
 	@Override
 	public void update(Observable o, Object arg) {	
-		if(arg instanceof String[])
-		if(((String[])arg)[0]=="eszenarioaSortu") {
+		if(((String[])arg)[0]=="EszenarioClassic") {
 			eszenarioaSortu();
 		}
-		else if(((String[])arg)[0]=="goraMugitu") {
-			goraMugitu();
-		}
-		else if(((String[])arg)[0]=="beheraMugitu") {
-			beheraMugitu();
-		}
-		else if(((String[])arg)[0]=="ezkMugitu") {
-			ezkMugitu();
-		}
-		else if(((String[])arg)[0]=="eskMugitu") {
-			eskMugitu();
-		}
-		else if(((String[])arg)[0]=="bonbaJarri") {
-			bonbaJarri();
-		}
-		else if(((String[])arg)[0]=="bonbaKendu") {
-			//bonbaKendu();
-		}
-	}
-	
-	/*private void bonbaKendu() {
-		int posXbZ= bZ.getPosX();
-		int posYbZ= bZ.getPosY();
-		JLabel jL= jLMatrix[posXbZ][posYbZ];
-		ImageIcon icon = new ImageIcon(getClass().getResource("bomb1.png"));
-		jL.setIcon(icon);
-	}*/
-	
-	private void bonbaJarri() {
-		int posXbZ= bZ.getPosX();
-		int posYbZ= bZ.getPosY();
-		Gelaxka g= gelaxkaMatrix[posXbZ][posYbZ];
-		JLabel jL= jLMatrix[posXbZ][posYbZ];
-		ImageIcon icon = new ImageIcon(getClass().getResource("bomb1.png"));
-		jL.setIcon(icon);
-	}
-	
-	private void ezkMugitu() {
-		int posXbZ= bZ.getPosX();
-		int posYbZ= bZ.getPosY()+1;
-		Gelaxka g= gelaxkaMatrix[posXbZ][posYbZ];
-		JLabel jL= jLMatrix[posXbZ][posYbZ];
-		g.kenduBomberZuria();
-		if(!g.bonbaDago()) {
-			jL.setIcon(null);
-		}
-		Gelaxka gBerria= gelaxkaMatrix[posXbZ][posYbZ-1];
-		JLabel jLBerria= jLMatrix[posXbZ][posYbZ-1];
-		gBerria.setBomberZuria(bZ);
-		ImageIcon icon = new ImageIcon(getClass().getResource("whitefront1.png"));
-		jLBerria.setIcon(icon);
-	}
-	
-	private void eskMugitu() {
-		int posXbZ= bZ.getPosX();
-		int posYbZ= bZ.getPosY()-1;
-		Gelaxka g= gelaxkaMatrix[posXbZ][posYbZ];
-		JLabel jL= jLMatrix[posXbZ][posYbZ];
-		g.kenduBomberZuria();
-		if(!g.bonbaDago()) {
-			jL.setIcon(null);
-		}
-		Gelaxka gBerria= gelaxkaMatrix[posXbZ][posYbZ+1];
-		JLabel jLBerria= jLMatrix[posXbZ][posYbZ+1];
-		gBerria.setBomberZuria(bZ);
-		ImageIcon icon = new ImageIcon(getClass().getResource("whitefront1.png"));
-		jLBerria.setIcon(icon);
-	}
-	
-	private void goraMugitu() {
-		int posXbZ= bZ.getPosX()+1;
-		int posYbZ= bZ.getPosY();
-		Gelaxka g= gelaxkaMatrix[posXbZ][posYbZ];
-		JLabel jL= jLMatrix[posXbZ][posYbZ];
-		g.kenduBomberZuria();
-		if(!g.bonbaDago()) {
-			jL.setIcon(null);
-		}
-		Gelaxka gBerria= gelaxkaMatrix[posXbZ-1][posYbZ];
-		JLabel jLBerria= jLMatrix[posXbZ-1][posYbZ];
-		gBerria.setBomberZuria(bZ);
-		ImageIcon icon = new ImageIcon(getClass().getResource("whitefront1.png"));
-		jLBerria.setIcon(icon);
-	}
-	
-	private void beheraMugitu() {
-		int posXbZ= bZ.getPosX()-1;
-		int posYbZ= bZ.getPosY();
-		Gelaxka g= gelaxkaMatrix[posXbZ][posYbZ];
-		JLabel jL= jLMatrix[posXbZ][posYbZ];
-		g.kenduBomberZuria();
-		if(!g.bonbaDago()) {
-			jL.setIcon(null);
-		}
-		Gelaxka gBerria= gelaxkaMatrix[posXbZ+1][posYbZ];
-		JLabel jLBerria= jLMatrix[posXbZ+1][posYbZ];
-		gBerria.setBomberZuria(bZ);
-		ImageIcon icon = new ImageIcon(getClass().getResource("whitefront1.png"));
-		jLBerria.setIcon(icon);
 	}
 	
 	private void eszenarioaSortu() {
 		EszenarioKudeatzailea eK= EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
 		GelaxkaKudeatzailea[][] mat= eK.getGelaxkaMatrizea();
-		
-		esz.removeAll();
-		
 		for(int x=0; x<11; x++) {
 			for(int y=0;y<17;y++) {
 				JLabel Bomber, Zuria, Bloke;
@@ -225,6 +122,7 @@ public class Eszenarioa extends JFrame implements Observer {
 					esz.add(Bomber);
 					bZ= g.getBomberZuria();
 					jLMatrix[x][y]=Bomber;
+					gel.setIrudia(Bomber);
 				}else if(g.blokeaDago()) {
 					if(g.getBlokea() instanceof Gogorra) {
 						ImageIcon icon = new ImageIcon(getClass().getResource("hardClassic.png"));
@@ -236,12 +134,15 @@ public class Eszenarioa extends JFrame implements Observer {
 						Bloke = new JLabel(icon); 
 						esz.add(Bloke);
 						jLMatrix[x][y]=Bloke;
-					}}
+					}
+					gel.setIrudia(Bloke);
+				}
 				
 				else {
 					Zuria = new JLabel("");
 					esz.add(Zuria);
 					jLMatrix[x][y]=Zuria;
+					gel.setIrudia(Zuria);
 				}
 				
 				
