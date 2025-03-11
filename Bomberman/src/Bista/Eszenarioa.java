@@ -122,6 +122,18 @@ public class Eszenarioa extends JFrame implements Observer {
 		else if(((String[])arg)[0]=="bonbaJarri") {
 			bonbaJarri();
 		}
+		else if(((String[])arg)[0]=="bonbaKendu") {
+			bonbaKendu();
+		}
+	}
+	
+	private void bonbaKendu() {
+		int posXbZ= bZ.getPosX();
+		int posYbZ= bZ.getPosY();
+		Gelaxka g= gelaxkaMatrix[posXbZ][posYbZ];
+		JLabel jL= jLMatrix[posXbZ][posYbZ];
+		ImageIcon icon = new ImageIcon(getClass().getResource("bomb1.png"));
+		jL.setIcon(icon);
 	}
 	
 	private void bonbaJarri() {
