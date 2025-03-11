@@ -26,6 +26,7 @@ public class EszenarioKudeatzailea extends Observable{
 	Queue <Integer> filaX = new LinkedList<>();
 	Queue <Integer> filaY = new LinkedList<>();
 	public void bomberManMugitu(char tekla) {
+		String pMota=null;
 		Teklatua teklatua = Teklatua.getTeklatua();
 		int x = b.getPosX();
 		int y = b.getPosY();
@@ -36,19 +37,23 @@ public class EszenarioKudeatzailea extends Observable{
 		if (tekla == 'w' && x > 0) {
 			if(!gelaxkaMatrizea[x-1][y].blokeaDago()) {
 				x--;
+				pMota= "goraMugitu";
 			}
 			
 		}else if (tekla == 'a' && y > 0) {
 			if(!gelaxkaMatrizea[x][y-1].blokeaDago()) {
 				y--;
+				pMota= "ezkMugitu";
 			}
 		}else if (tekla == 's' && x < 11) {
 			if(!gelaxkaMatrizea[x+1][y].blokeaDago()) {
 				x++;
+				pMota= "beheraMugitu";
 			}
 		}else if (tekla == 'd' && y < 16) {
 			if(!gelaxkaMatrizea[x][y+1].blokeaDago()) {
 				y++;
+				pMota= "eskMugitu";
 			}
 			
 		}else if (tekla == 'x') {
@@ -56,7 +61,7 @@ public class EszenarioKudeatzailea extends Observable{
 			gelaxkaMatrizea[x][y].setBonba(bonb);
 			filaX.add(x);
 			filaY.add(y);
-			
+			pMota= "bonbaJarri";
 		}
 		gelaxkaMatrizea[x][y].setBomberZuria(b);
 		b.setPosX(x);
@@ -65,7 +70,7 @@ public class EszenarioKudeatzailea extends Observable{
 	
 		
 		setChanged();
-		notifyObservers();
+		notifyObservers(new String[]{pMota});
 			           
 	}
 	Queue <Integer> suaX = new LinkedList<>();
@@ -120,10 +125,10 @@ public class EszenarioKudeatzailea extends Observable{
 			suaX.add(bonbX);
 			suaY.add(bonbY-1);
 		}
-		
+		String pMota="bonbaKendu";
 		
 		setChanged();
-		notifyObservers();
+		notifyObservers(new String[]{pMota});
 		
 	}
 	
@@ -131,18 +136,18 @@ public class EszenarioKudeatzailea extends Observable{
 		int x = suaX.remove();
 		int y = suaY.remove();
 		gelaxkaMatrizea[x][y].kenduSua();
-		
+		String pMota= "kenduSua";
 		setChanged();
-		notifyObservers();
+		notifyObservers(new String[]{pMota});
 	}
 	BomberZuria b= new BomberZuria(0,0);
 	public void sortuEszenarioClassic() {
+		String pMota="eszenarioaSortu";
 		for(int x=0 ;x<11;x++) {
 			for(int y=0; y<17; y++) {
 				Gelaxka gelaxka;
 				gelaxka= new Gelaxka();
 				if(x==0 && y==0) {
-					
 					gelaxka.setBomberZuria(b);
 					b.setPosX(x);
 					b.setPosY(y);
@@ -172,6 +177,6 @@ public class EszenarioKudeatzailea extends Observable{
 			} 
 		}
 		setChanged();
-		notifyObservers();
+		notifyObservers(new String[]{pMota});
 	}
 }
