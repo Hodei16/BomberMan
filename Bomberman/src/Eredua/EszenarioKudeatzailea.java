@@ -126,7 +126,6 @@ public class EszenarioKudeatzailea extends Observable{
 			suaY.add(bonbY-1);
 		}
 		String pMota="bonbaKendu";
-		
 		setChanged();
 		notifyObservers(new String[]{pMota});
 		
