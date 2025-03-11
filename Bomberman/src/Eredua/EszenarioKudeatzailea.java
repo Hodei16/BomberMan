@@ -23,8 +23,8 @@ public class EszenarioKudeatzailea extends Observable{
 		return gelaxkaMatrizea;
 	}
 	
-	Queue <Integer> pilaX = new LinkedList<>();
-	Queue <Integer> pilaY = new LinkedList<>();
+	Queue <Integer> filaX = new LinkedList<>();
+	Queue <Integer> filaY = new LinkedList<>();
 	public void bomberManMugitu(char tekla) {
 		Teklatua teklatua = Teklatua.getTeklatua();
 		int x = b.getPosX();
@@ -54,8 +54,8 @@ public class EszenarioKudeatzailea extends Observable{
 		}else if (tekla == 'x') {
 			Bonba bonb = new Bonba();
 			gelaxkaMatrizea[x][y].setBonba(bonb);
-			pilaX.add(x);
-			pilaY.add(y);
+			filaX.add(x);
+			filaY.add(y);
 			
 		}
 		gelaxkaMatrizea[x][y].setBomberZuria(b);
@@ -71,92 +71,60 @@ public class EszenarioKudeatzailea extends Observable{
 	Queue <Integer> suaX = new LinkedList<>();
 	Queue <Integer> suaY = new LinkedList<>();
 	public void bonbaKendu() {
-		
-		boolean aurkitutaGora = false;
-		boolean aurkitutaBehera = false;
-		boolean aurkitutaEsk = false;
-		boolean aurkitutaEzk = false;
-		int bonbX = pilaX.remove();
-		int bonbY = pilaY.remove();
-		int suaGora = bonbY;
-		int suaBehera = bonbY;
-		int suaEsk = bonbX;
-		int suaEzk = bonbX;
-		
+		int bonbX = filaX.remove();
+		int bonbY = filaY.remove();
 		gelaxkaMatrizea[bonbX][bonbY].kenduBonba();
 		Sua s = new Sua();
-		gelaxkaMatrizea[bonbX][bonbY].setSua(s);				
-		while(!aurkitutaGora && !aurkitutaBehera && !aurkitutaEsk && !aurkitutaEzk) {
-			if (suaGora < 16) {
-				suaGora++;
+		gelaxkaMatrizea[bonbX][bonbY].setSua(s);
+		if (bonbX < 11 && !(gelaxkaMatrizea[bonbX+1][bonbY].getBlokea() instanceof Gogorra)) {
+			Sua sEsk = new Sua();
+			if (gelaxkaMatrizea[bonbX+1][bonbY].blokeaDago()) {
+				gelaxkaMatrizea[bonbX+1][bonbY].kenduBlokea();
 			}
-			if (suaBehera > 0) {
-				suaBehera--;
+			gelaxkaMatrizea[bonbX+1][bonbY].setSua(sEsk);
+			suaX.add(bonbX+1);
+			suaY.add(bonbY);
+		}
+		
+		if (bonbX > 0 && !(gelaxkaMatrizea[bonbX-1][bonbY].getBlokea() instanceof Gogorra)) {
+			Sua sEzk = new Sua();
+			if (gelaxkaMatrizea[bonbX-1][bonbY].blokeaDago()) {
+				gelaxkaMatrizea[bonbX-1][bonbY].kenduBlokea();
 			}
-			if (suaEzk > 0) {
-				suaEzk--;
-			}
-			if (suaEsk < 11) {
-				suaEsk++;
-			}
-			
-			if(!aurkitutaGora) {
-				if(gelaxkaMatrizea[bonbX][suaGora].blokeaDago()){
-					aurkitutaGora = true;
-					if(gelaxkaMatrizea[bonbX][suaGora].getBlokea() instanceof Biguna) {
-						gelaxkaMatrizea[bonbX][suaGora].kenduBlokea();
-						gelaxkaMatrizea[bonbX][suaGora].setSua(s);
-					}
-				}else {
-					gelaxkaMatrizea[bonbX][suaGora].setSua(s);
-					suaX.add(suaGora);
-					suaY.add(bonbX);
-				}
-			}
-			
-			if(!aurkitutaBehera) {
-				if(gelaxkaMatrizea[bonbX][suaBehera].blokeaDago()){
-					aurkitutaBehera = true;
-					if(gelaxkaMatrizea[bonbX][suaBehera].getBlokea() instanceof Biguna) {
-						gelaxkaMatrizea[bonbX][suaBehera].kenduBlokea();
-						gelaxkaMatrizea[bonbX][suaBehera].setSua(s);
-					}
-				}else {
-					gelaxkaMatrizea[bonbX][suaBehera].setSua(s);
-					suaX.add(bonbX);
-					suaY.add(suaBehera);
-				}
-			}
-			if(!aurkitutaEsk) {
-				if(gelaxkaMatrizea[suaEsk][bonbY].blokeaDago()){
-					aurkitutaEsk = true;
-					if(gelaxkaMatrizea[suaEsk][bonbY].getBlokea() instanceof Biguna) {
-						gelaxkaMatrizea[suaEsk][bonbY].kenduBlokea();
-						gelaxkaMatrizea[suaEsk][bonbY].setSua(s);
-					}
-				}else {
-					gelaxkaMatrizea[suaEsk][bonbY].setSua(s);
-					suaX.add(suaEsk);
-					suaY.add(bonbY);
-				}
-			}
-			if(!aurkitutaEzk) {
-				if(gelaxkaMatrizea[suaEzk][bonbY].blokeaDago()){
-					aurkitutaEzk = true;
-					if(gelaxkaMatrizea[suaEzk][bonbY].getBlokea() instanceof Biguna) {
-						gelaxkaMatrizea[suaEzk][bonbY].kenduBlokea();
-						gelaxkaMatrizea[suaEzk][bonbY].setSua(s);
-					}
-				}else {
-					gelaxkaMatrizea[suaEzk][bonbY].setSua(s);
-					suaX.add(suaEzk);
-					suaY.add(bonbY);
-				}
-			}
+			gelaxkaMatrizea[bonbX-1][bonbY].setSua(sEzk);	
+			suaX.add(bonbX-1);
+			suaY.add(bonbY);	
 			
 		}
+		
+		
+		
+		if (bonbY < 16 && !(gelaxkaMatrizea[bonbX][bonbY+1].getBlokea() instanceof Gogorra)) {
+			Sua sGora = new Sua();
+			if (gelaxkaMatrizea[bonbX][bonbY+1].blokeaDago() ) {
+				gelaxkaMatrizea[bonbX][bonbY+1].kenduBlokea();
+			}
+			gelaxkaMatrizea[bonbX][bonbY+1].setSua(sGora);
+			suaX.add(bonbX-1);
+			suaY.add(bonbY);	
+			
+			
+			
+		}
+		if (bonbY > 0 && !(gelaxkaMatrizea[bonbX][bonbY-1].getBlokea() instanceof Gogorra)) {
+			Sua sBehera = new Sua();
+			if (gelaxkaMatrizea[bonbX][bonbY-1].blokeaDago() ) {
+				gelaxkaMatrizea[bonbX][bonbY-1].kenduBlokea();
+			}
+			gelaxkaMatrizea[bonbX][bonbY-1].setSua(sBehera);
+			suaX.add(bonbX);
+			suaY.add(bonbY-1);
+		}
+		
+		
 		setChanged();
 		notifyObservers();
+		
 	}
 	
 	public void kenduSua() {
