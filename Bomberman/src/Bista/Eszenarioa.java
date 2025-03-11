@@ -4,8 +4,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -16,9 +19,8 @@ import javax.swing.JPanel;
 
 import Eredua.BomberZuria;
 import Eredua.EszenarioKudeatzailea;
-import Eredua.Gelaxka;
+import Eredua.GelaxkaKudeatzailea;
 import Eredua.Gogorra;
-import Eredua.Teklatua;
 
 public class Eszenarioa extends JFrame implements Observer {
 	
@@ -33,14 +35,14 @@ public class Eszenarioa extends JFrame implements Observer {
 	private JLabel[][] jLMatrix= new JLabel[11][17];
 	private BomberZuria bZ=null;
 	
-	private Eszenarioa(Observable pEguraldiEstazioa) {
+	private Eszenarioa(Observable pEK) {
 	    this.gelaxkaMatrix = new Gelaxka[11][17];
-	    pEguraldiEstazioa.addObserver(this);
+	    pEK.addObserver(this);
 	    initialize();
 
 	    //Berria
-	    Teklatua teklatua = Teklatua.getTeklatua();
-	    this.addKeyListener(teklatua);
+	    Controler controler = new Controler();
+	    this.addKeyListener(controler);
 	    this.setFocusable(true);
 	    this.requestFocusInWindow();
 
@@ -81,12 +83,12 @@ public class Eszenarioa extends JFrame implements Observer {
 	    addComponentListener(new ComponentAdapter() {
 	        @Override
 	        public void componentResized(ComponentEvent e) {
-	            erdiraMugitu();
+	            erdianJarri();
 	        }
 	    });
 	}
 
-    public void erdiraMugitu() {
+    public void erdianJarri() {
         int newWidth = getWidth();
         int newHeight = getHeight();
 
@@ -95,14 +97,11 @@ public class Eszenarioa extends JFrame implements Observer {
 
         atzekoa.setLocation(x, y);
         atzekoa.revalidate();
-
-        esz.setLocation((atzekoa.getWidth() - esz.getWidth()) / 2, (atzekoa.getHeight() - esz.getHeight()) / 2);
-        esz.revalidate();
     }
 
 	
 	@Override
-	public void update(Observable o, Object arg) {
+	public void update(Observable o, Object arg) {	
 		if(arg instanceof String[])
 		if(((String[])arg)[0]=="eszenarioaSortu") {
 			eszenarioaSortu();
@@ -123,18 +122,17 @@ public class Eszenarioa extends JFrame implements Observer {
 			bonbaJarri();
 		}
 		else if(((String[])arg)[0]=="bonbaKendu") {
-			bonbaKendu();
+			//bonbaKendu();
 		}
 	}
 	
-	private void bonbaKendu() {
+	/*private void bonbaKendu() {
 		int posXbZ= bZ.getPosX();
 		int posYbZ= bZ.getPosY();
-		Gelaxka g= gelaxkaMatrix[posXbZ][posYbZ];
 		JLabel jL= jLMatrix[posXbZ][posYbZ];
 		ImageIcon icon = new ImageIcon(getClass().getResource("bomb1.png"));
 		jL.setIcon(icon);
-	}
+	}*/
 	
 	private void bonbaJarri() {
 		int posXbZ= bZ.getPosX();
@@ -211,15 +209,16 @@ public class Eszenarioa extends JFrame implements Observer {
 	
 	private void eszenarioaSortu() {
 		EszenarioKudeatzailea eK= EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
-		Gelaxka[][] mat= eK.getGelaxkaMatrizea();
+		GelaxkaKudeatzailea[][] mat= eK.getGelaxkaMatrizea();
 		
 		esz.removeAll();
 		
 		for(int x=0; x<11; x++) {
 			for(int y=0;y<17;y++) {
-				JLabel Bomber, Zuria, Bloke, Bonba, Sua;
-				Gelaxka g= mat[x][y];
-				gelaxkaMatrix[x][y]=g;
+				JLabel Bomber, Zuria, Bloke;
+				GelaxkaKudeatzailea g= mat[x][y];
+				Gelaxka gel = new Gelaxka(g);
+				gelaxkaMatrix[x][y]=gel;
 				if(g.bomberDago()) {
 					ImageIcon icon = new ImageIcon(getClass().getResource("whitefront1.png"));
 					Bomber = new JLabel(icon);
@@ -237,19 +236,7 @@ public class Eszenarioa extends JFrame implements Observer {
 						Bloke = new JLabel(icon); 
 						esz.add(Bloke);
 						jLMatrix[x][y]=Bloke;
-					}
-					
-				}/*else if(g.bonbaDago()) {
-					ImageIcon icon = new ImageIcon(getClass().getResource("bomb1.png"));
-					Image bonbaImg = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-					Bonba = new JLabel(new ImageIcon(bonbaImg));
-					esz.add(Bonba);
-				}else if(g.suaDago()) {
-					ImageIcon icon = new ImageIcon(getClass().getResource("kaBomb3.png"));
-					Image suaImg = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-					Sua = new JLabel(new ImageIcon(suaImg));
-					esz.add(Sua);
-				}*/
+					}}
 				
 				else {
 					Zuria = new JLabel("");
@@ -266,4 +253,33 @@ public class Eszenarioa extends JFrame implements Observer {
 	    this.repaint();
 	}
 
+	private class Controler implements KeyListener {		
+		private Controler() {}
+		
+		@Override
+		public void keyPressed(KeyEvent e) {
+		    EszenarioKudeatzailea eK = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
+		    Eszenarioa es = Eszenarioa.getEszenarioa();
+		    
+		    if (eK == null) return; 
+		    
+		    int keyCode = e.getKeyCode();
+		    char c = ' ';
+		    
+		    if (keyCode == KeyEvent.VK_W) c = 'w';
+		    else if (keyCode == KeyEvent.VK_A) c = 'a';
+		    else if (keyCode == KeyEvent.VK_S) c = 's';
+		    else if (keyCode == KeyEvent.VK_D) c = 'd';
+		    else if (keyCode == KeyEvent.VK_X) c = 'x';
+		    
+		    es.erdianJarri();
+		    eK.bomberManMugitu(c);
+		}
+		
+		@Override
+		public void keyReleased(KeyEvent e) {}
+
+		@Override
+		public void keyTyped(KeyEvent e) {}
+	}
 }

@@ -2,8 +2,6 @@ package Nagusia;
 
 import Bista.Eszenarioa;
 import Eredua.EszenarioKudeatzailea;
-import Eredua.Teklatua;
-
 
 public class Exekutagarria {
 
@@ -12,11 +10,6 @@ public class Exekutagarria {
 		EszenarioKudeatzailea eK= EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
 		Eszenarioa es= Eszenarioa.getEszenarioa();
 		eK.sortuEszenarioClassic();
-		
-		Teklatua teklatua = Teklatua.getTeklatua();
-        teklatua.fokoEman();
-        
-      
 	}
 	
 
