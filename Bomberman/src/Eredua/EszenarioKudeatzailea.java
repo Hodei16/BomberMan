@@ -8,7 +8,7 @@ import java.util.LinkedList;
 public class EszenarioKudeatzailea extends Observable{
 
 	private static EszenarioKudeatzailea nireEszenarioKudeatzailea;
-	private Gelaxka[][] gelaxkaMatrizea= new Gelaxka[11][17];
+	private GelaxkaKudeatzailea[][] gelaxkaMatrizea= new GelaxkaKudeatzailea[11][17];
 	
 	private EszenarioKudeatzailea() {}
 	
@@ -19,7 +19,7 @@ public class EszenarioKudeatzailea extends Observable{
 		return nireEszenarioKudeatzailea;
 	}
 	
-	public Gelaxka[][] getGelaxkaMatrizea(){
+	public GelaxkaKudeatzailea[][] getGelaxkaMatrizea(){
 		return gelaxkaMatrizea;
 	}
 	
@@ -27,31 +27,28 @@ public class EszenarioKudeatzailea extends Observable{
 	Queue <Integer> filaY = new LinkedList<>();
 	public void bomberManMugitu(char tekla) {
 		String pMota=null;
-		Teklatua teklatua = Teklatua.getTeklatua();
 		int x = b.getPosX();
 		int y = b.getPosY();
 		
-		gelaxkaMatrizea[x][y].kenduBomberZuria();
-							
+		gelaxkaMatrizea[x][y].kenduBomberZuria();							
 		
 		if (tekla == 'w' && x > 0) {
-			if(!gelaxkaMatrizea[x-1][y].blokeaDago()) {
+			if(!gelaxkaMatrizea[x-1][y].blokeaDago() && !gelaxkaMatrizea[x-1][y].bonbaDago()) {
 				x--;
 				pMota= "goraMugitu";
 			}
-			
 		}else if (tekla == 'a' && y > 0) {
-			if(!gelaxkaMatrizea[x][y-1].blokeaDago()) {
+			if(!gelaxkaMatrizea[x][y-1].blokeaDago() && !gelaxkaMatrizea[x][y-1].bonbaDago()) {
 				y--;
 				pMota= "ezkMugitu";
 			}
 		}else if (tekla == 's' && x < 11) {
-			if(!gelaxkaMatrizea[x+1][y].blokeaDago()) {
+			if(!gelaxkaMatrizea[x+1][y].blokeaDago() && !gelaxkaMatrizea[x+1][y].bonbaDago()) {
 				x++;
 				pMota= "beheraMugitu";
 			}
 		}else if (tekla == 'd' && y < 16) {
-			if(!gelaxkaMatrizea[x][y+1].blokeaDago()) {
+			if(!gelaxkaMatrizea[x][y+1].blokeaDago() && !gelaxkaMatrizea[x][y+1].bonbaDago()) {
 				y++;
 				pMota= "eskMugitu";
 			}
@@ -144,10 +141,9 @@ public class EszenarioKudeatzailea extends Observable{
 		String pMota="eszenarioaSortu";
 		for(int x=0 ;x<11;x++) {
 			for(int y=0; y<17; y++) {
-				Gelaxka gelaxka;
-				gelaxka= new Gelaxka();
+				GelaxkaKudeatzailea gK = new GelaxkaKudeatzailea();
 				if(x==0 && y==0) {
-					gelaxka.setBomberZuria(b);
+					gK.setBomberZuria(b);
 					b.setPosX(x);
 					b.setPosY(y);
 				}
@@ -159,7 +155,7 @@ public class EszenarioKudeatzailea extends Observable{
 					}
 				else if(x%2==1 && y%2==1) {
 					Gogorra g= new Gogorra();
-					gelaxka.setBlokea(g);
+					gK.setBlokea(g);
 				}
 				else {
 					Random r= new Random();
@@ -169,10 +165,10 @@ public class EszenarioKudeatzailea extends Observable{
 					}
 					else {
 						Biguna big= new Biguna();
-						gelaxka.setBlokea(big);
+						gK.setBlokea(big);
 					}
 				}
-				gelaxkaMatrizea[x][y]= gelaxka;
+				gelaxkaMatrizea[x][y] = gK;
 			} 
 		}
 		setChanged();
