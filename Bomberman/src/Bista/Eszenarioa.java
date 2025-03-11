@@ -30,8 +30,8 @@ public class Eszenarioa extends JFrame implements Observer {
 	private static Eszenarioa nEszenarioa = null;
 	private static Observable nireObservable = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
 	private JLabel atzekoa;
-	private BomberZuria bZ = new BomberZuria(0,0);
-	private JLabel[][] jLMatrix = new JLabel[11][17];;
+	private JLabel[][] jLMatrix= new JLabel[11][17];
+	private BomberZuria bZ=null;
 	
 	private Eszenarioa(Observable pEguraldiEstazioa) {
 	    this.gelaxkaMatrix = new Gelaxka[11][17];
@@ -102,7 +102,7 @@ public class Eszenarioa extends JFrame implements Observer {
 
 	
 	@Override
-	public void update(Observable o, Object arg) {	
+	public void update(Observable o, Object arg) {
 		if(arg instanceof String[])
 		if(((String[])arg)[0]=="eszenarioaSortu") {
 			eszenarioaSortu();
@@ -212,17 +212,19 @@ public class Eszenarioa extends JFrame implements Observer {
 	private void eszenarioaSortu() {
 		EszenarioKudeatzailea eK= EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
 		Gelaxka[][] mat= eK.getGelaxkaMatrizea();
+		
 		esz.removeAll();
+		
 		for(int x=0; x<11; x++) {
 			for(int y=0;y<17;y++) {
 				JLabel Bomber, Zuria, Bloke, Bonba, Sua;
 				Gelaxka g= mat[x][y];
 				gelaxkaMatrix[x][y]=g;
 				if(g.bomberDago()) {
-					bZ= g.getBomberZuria();				
 					ImageIcon icon = new ImageIcon(getClass().getResource("whitefront1.png"));
 					Bomber = new JLabel(icon);
 					esz.add(Bomber);
+					bZ= g.getBomberZuria();
 					jLMatrix[x][y]=Bomber;
 				}else if(g.blokeaDago()) {
 					if(g.getBlokea() instanceof Gogorra) {
@@ -234,25 +236,28 @@ public class Eszenarioa extends JFrame implements Observer {
 						ImageIcon icon = new ImageIcon(getClass().getResource("softClassic1.png"));
 						Bloke = new JLabel(icon); 
 						esz.add(Bloke);
+						jLMatrix[x][y]=Bloke;
 					}
-					jLMatrix[x][y]=Bloke;
+					
 				}/*else if(g.bonbaDago()) {
 					ImageIcon icon = new ImageIcon(getClass().getResource("bomb1.png"));
 					Image bonbaImg = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 					Bonba = new JLabel(new ImageIcon(bonbaImg));
 					esz.add(Bonba);
-					jLMatrix[x][y]=Bonba;
 				}else if(g.suaDago()) {
 					ImageIcon icon = new ImageIcon(getClass().getResource("kaBomb3.png"));
 					Image suaImg = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 					Sua = new JLabel(new ImageIcon(suaImg));
 					esz.add(Sua);
 				}*/
+				
 				else {
 					Zuria = new JLabel("");
 					esz.add(Zuria);
 					jLMatrix[x][y]=Zuria;
 				}
+				
+				
 			}
 		}
 		esz.revalidate();
