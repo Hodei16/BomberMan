@@ -3,12 +3,14 @@ package Eredua;
 import java.util.Observable;
 import java.util.Random;
 import java.util.Queue;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class EszenarioKudeatzailea extends Observable{
 
 	private static EszenarioKudeatzailea nireEszenarioKudeatzailea;
 	private GelaxkaKudeatzailea[][] gelaxkaMatrizea= new GelaxkaKudeatzailea[11][17];
+	private ArrayList<Blokea> blokeLista= new ArrayList<Blokea>();
 	
 	private EszenarioKudeatzailea() {}
 	
@@ -22,9 +24,6 @@ public class EszenarioKudeatzailea extends Observable{
 	public GelaxkaKudeatzailea[][] getGelaxkaMatrizea(){
 		return gelaxkaMatrizea;
 	}
-	
-	Queue <Integer> filaX = new LinkedList<>();
-	Queue <Integer> filaY = new LinkedList<>();
 	
 	public void bomberManMugitu(char tekla) {
 		int x = b.getPosX();
@@ -59,43 +58,35 @@ public class EszenarioKudeatzailea extends Observable{
 				gBerria.bomberHeldu(b);
 			}
 			
+			
 		}else if (tekla == 'x') {
-			Bonba bonb = new Bonba();
-			gelaxkaMatrizea[x][y].setBonba(bonb);
-			filaX.add(x);
-			filaY.add(y);
+			if(b.bonbaDauka()) {
+				Bonba bonb = new Bonba(x, y);
+				gelaxkaMatrizea[x][y].setBonba(bonb);
+				b.bonbaKendu();
+			}
 		}
 		gelaxkaMatrizea[x][y].setBomberZuria(b);
 		b.setPosX(x);
 		b.setPosY(y);	           
 	}
 	
-	Queue <Integer> suaX = new LinkedList<>();
-	Queue <Integer> suaY = new LinkedList<>();
-	
-	public void bonbaKendu(){
-		int bonbX = filaX.remove();
-		int bonbY = filaY.remove();
+	public void bonbaKendu(int bonbX, int bonbY){
 		gelaxkaMatrizea[bonbX][bonbY].kenduBonba();
-		Sua s = new Sua();
+		Sua s = new Sua(bonbX, bonbY);
 		gelaxkaMatrizea[bonbX][bonbY].setSua(s);
-		suaX.add(bonbX);
-		suaY.add(bonbY);
 		if (bonbX < 10) {
 			if (gelaxkaMatrizea[bonbX+1][bonbY].blokeaDago()) {
 				Blokea b = gelaxkaMatrizea[bonbX+1][bonbY].getBlokea();
 				if(b instanceof Biguna) {
+					blokeLista.remove(b);
 					gelaxkaMatrizea[bonbX+1][bonbY].kenduBlokea();
-					suaX.add(bonbX+1);
-					suaY.add(bonbY);
-					Sua sBehera = new Sua();
+					Sua sBehera = new Sua(bonbX+1, bonbY);
 					gelaxkaMatrizea[bonbX+1][bonbY].setSua(sBehera);
 				}
 			}
 			else {
-				suaX.add(bonbX+1);
-				suaY.add(bonbY);
-				Sua sBehera = new Sua();
+				Sua sBehera = new Sua(bonbX+1, bonbY);
 				gelaxkaMatrizea[bonbX+1][bonbY].setSua(sBehera);
 			}
 		}
@@ -104,17 +95,14 @@ public class EszenarioKudeatzailea extends Observable{
 			if (gelaxkaMatrizea[bonbX-1][bonbY].blokeaDago()) {
 				Blokea b = gelaxkaMatrizea[bonbX-1][bonbY].getBlokea();
 				if(b instanceof Biguna) {
+					blokeLista.remove(b);
 					gelaxkaMatrizea[bonbX-1][bonbY].kenduBlokea();
-					suaX.add(bonbX-1);
-					suaY.add(bonbY);
-					Sua sGora = new Sua();
+					Sua sGora = new Sua(bonbX-1, bonbY);
 					gelaxkaMatrizea[bonbX-1][bonbY].setSua(sGora);
 				}
 			}
 			else {
-				suaX.add(bonbX-1);
-				suaY.add(bonbY);
-				Sua sGora = new Sua();
+				Sua sGora = new Sua(bonbX-1, bonbY);
 				gelaxkaMatrizea[bonbX-1][bonbY].setSua(sGora);
 			}
 		}
@@ -123,17 +111,14 @@ public class EszenarioKudeatzailea extends Observable{
 			if (gelaxkaMatrizea[bonbX][bonbY+1].blokeaDago()) {
 				Blokea b = gelaxkaMatrizea[bonbX][bonbY+1].getBlokea();
 				if(b instanceof Biguna) {
+					blokeLista.remove(b);
 					gelaxkaMatrizea[bonbX][bonbY+1].kenduBlokea();
-					suaX.add(bonbX);
-					suaY.add(bonbY+1);
-					Sua sEsk = new Sua();
+					Sua sEsk = new Sua(bonbX, bonbY+1);
 					gelaxkaMatrizea[bonbX][bonbY+1].setSua(sEsk);
 				}
 			}
 			else {
-				suaX.add(bonbX);
-				suaY.add(bonbY+1);
-				Sua sEsk = new Sua();
+				Sua sEsk = new Sua(bonbX, bonbY+1);
 				gelaxkaMatrizea[bonbX][bonbY+1].setSua(sEsk);
 			}
 		}
@@ -142,26 +127,24 @@ public class EszenarioKudeatzailea extends Observable{
 			if (gelaxkaMatrizea[bonbX][bonbY-1].blokeaDago()) {
 				Blokea b = gelaxkaMatrizea[bonbX][bonbY-1].getBlokea();
 				if(b instanceof Biguna) {
+					blokeLista.remove(b);
 					gelaxkaMatrizea[bonbX][bonbY-1].kenduBlokea();
-					suaX.add(bonbX);
-					suaY.add(bonbY-1);
-					Sua sEzk = new Sua();
+					Sua sEzk = new Sua(bonbX, bonbY-1);
 					gelaxkaMatrizea[bonbX][bonbY-1].setSua(sEzk);
 				}
 			}
 			else {
-				suaX.add(bonbX);
-				suaY.add(bonbY-1);
-				Sua sEzk = new Sua();
+				Sua sEzk = new Sua(bonbX, bonbY-1);
 				gelaxkaMatrizea[bonbX][bonbY-1].setSua(sEzk);
 			}
 		}
+		if(blokeLista.isEmpty()) {
+			gelaxkaMatrizea[bonbX][bonbY].irabazi();
+		}
 	}
 	
-	public void kenduSua() {
-		int x = suaX.remove();
-		int y = suaY.remove();
-		gelaxkaMatrizea[x][y].kenduSua();
+	public void kenduSua(int pPosX, int pPosY) {
+		gelaxkaMatrizea[pPosX][pPosY].kenduSua();
 	}
 	
 	BomberZuria b= new BomberZuria(0,0);
@@ -194,6 +177,7 @@ public class EszenarioKudeatzailea extends Observable{
 					else {
 						Biguna big= new Biguna();
 						gK.setBlokea(big);
+						blokeLista.add(big);
 					}
 				}
 				gelaxkaMatrizea[x][y] = gK;
@@ -201,5 +185,10 @@ public class EszenarioKudeatzailea extends Observable{
 		}
 		setChanged();
 		notifyObservers(new String[] {"EszenarioClassic"});
+	}
+	
+	public void partidaAmaitu(String pMota) {
+		setChanged();
+		notifyObservers(new String[] {pMota});
 	}
 }

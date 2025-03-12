@@ -8,8 +8,12 @@ public class Bonba {
 	private static final int PERIODO = 3;
 	private Timer timer = null;
 	private int kont;
+	private int posX;
+	private int posY; 
 	
-	public Bonba() {
+	public Bonba(int pPosX, int pPosY) {
+		this.posX = pPosX;
+		this.posY = pPosY;
 		kont = PERIODO;
 		TimerTask timerTask = new TimerTask() {
 			@Override
@@ -26,7 +30,7 @@ public class Bonba {
 		if(kont == 0) {
 			kont = PERIODO;
 			timer.cancel();
-			eK.bonbaKendu();
+			eK.bonbaKendu(posX, posY);
 		}
 	}
 }

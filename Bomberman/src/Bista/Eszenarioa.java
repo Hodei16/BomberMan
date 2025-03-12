@@ -104,6 +104,21 @@ public class Eszenarioa extends JFrame implements Observer {
 	public void update(Observable o, Object arg) {	
 		if(((String[])arg)[0]=="EszenarioClassic") {
 			eszenarioaSortu();
+			erdianJarri();
+		}
+		else if(((String[])arg)[0]=="Galduta") { 
+			esz.removeAll();
+		    ImageIcon icon = new ImageIcon(getClass().getResource("gameover.png"));
+			atzekoa.setIcon(icon);
+		    contentPane.add(atzekoa, BorderLayout.CENTER);
+		    System.out.println("Galdu duzu!!!");
+		}
+		else if(((String[])arg)[0]=="Irabazi") { 
+			esz.removeAll();
+		    ImageIcon icon = new ImageIcon(getClass().getResource("youWin.png"));
+			atzekoa.setIcon(icon);
+		    contentPane.add(atzekoa, BorderLayout.CENTER);
+		    System.out.println("Galdu duzu!!!");
 		}
 	}
 	

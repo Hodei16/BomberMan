@@ -5,11 +5,7 @@ import java.util.Observer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-
-import Eredua.Blokea;
-import Eredua.BomberZuria;
-import Eredua.Bonba;
-import Eredua.Sua;
+import Eredua.EszenarioKudeatzailea;
 
 public class Gelaxka implements Observer {
 	
@@ -46,91 +42,50 @@ public class Gelaxka implements Observer {
 		else if(((String[])arg)[0]=="SuaKendu") {
 			irudia.setIcon(null);
 		}
+		else if(((String[])arg)[0]=="Galduta") {
+			sutan();
+			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().partidaAmaitu("Galduta");
+		}
+		else if(((String[])arg)[0]=="Galdu") {
+			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().partidaAmaitu("Galduta");
+		}
+		else if(((String[])arg)[0]=="Irabazi") {
+			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().partidaAmaitu("Irabazi");
+		}
 	}
 	
 	public void setIrudia(JLabel pIrudi) {
 		this.irudia = pIrudi;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	private BomberZuria bz;
-	private Blokea b;
-	private Bonba bonb;
-	private Sua sua;
-	
-	
-	public BomberZuria getBomberZuria() {
-		return this.bz;
-	}
-	
-	public Blokea getBlokea() {
-		return this.b;
-	}
-	public boolean blokeaDago() {
-		if (b != null) {
-			return true;
-		}
-		else return false;
-	}
-	public void setBonba(Bonba pBonb) {
-		this.bonb = pBonb;
-	}
-	public void kenduBonba() {
-		this.bonb = null;
-	}
-	public boolean bonbaDago() {
-		if (bonb != null) {
-			return true;
-		}else return false;
-	}
-	
-	public void setBomberZuria(BomberZuria pBz) {
-		this.bz = pBz;
-	}
-	
-	public void kenduBomberZuria() {
-		this.bz = null;
-	}
-	
-	public void setBlokea(Blokea pB) {
-		this.b=pB;
-	}
-	public void kenduBlokea() {
-		this.b = null;
-	}
-	public boolean bomberDago() {
-		if(this.bz == null) {
-			return false;
-		}else {
-			return true;
-		}
-	}
-	public Sua getSua() {
-		return this.sua;
-	}
-	public void setSua(Sua pSua) {
-		this.sua = pSua;
-	}
-	public boolean suaDago() {
-		if (this.sua != null) return true;
-		else return false;
-	}
-	public void kenduSua() {
-		this.sua = null;
+	public void sutan() {
+		ImageIcon icon = new ImageIcon(getClass().getResource("onFire1.png"));
+		irudia.setIcon(icon);
+		try {
+            Thread.sleep(300); 
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+		ImageIcon icon2 = new ImageIcon(getClass().getResource("onFire2.png"));
+		irudia.setIcon(icon2);
+		try {
+            Thread.sleep(300); 
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+		ImageIcon icon3 = new ImageIcon(getClass().getResource("onFire3.png"));
+		irudia.setIcon(icon3);
+		try {
+            Thread.sleep(300); 
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+		ImageIcon icon4 = new ImageIcon(getClass().getResource("onFire4.png"));
+		irudia.setIcon(icon4);
+		try {
+            Thread.sleep(300); 
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 	}
 }
