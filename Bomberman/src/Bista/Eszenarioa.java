@@ -118,7 +118,7 @@ public class Eszenarioa extends JFrame implements Observer {
 		    ImageIcon icon = new ImageIcon(getClass().getResource("youWin.png"));
 			atzekoa.setIcon(icon);
 		    contentPane.add(atzekoa, BorderLayout.CENTER);
-		    System.out.println("Galdu duzu!!!");
+		    System.out.println("Irabazi duzu!!!");
 		}
 	}
 	
