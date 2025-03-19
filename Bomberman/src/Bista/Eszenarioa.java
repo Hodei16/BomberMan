@@ -67,7 +67,6 @@ public class Eszenarioa extends JFrame implements Observer {
 	    contentPane.setPreferredSize(new Dimension(666, 404)); 
 	    contentPane.setSize(666, 404);
 	    contentPane.setBackground(Color.BLACK);
-	    // contentPane.setBackground(new Color(248,171,68)); // Ladreilu kolorea
 	    setContentPane(contentPane);
 
 	    ImageIcon backgroundIcon = new ImageIcon(getClass().getResource("stageBack1.png"));
@@ -96,6 +95,8 @@ public class Eszenarioa extends JFrame implements Observer {
         int y = (newHeight - 404) / 2;
 
         atzekoa.setLocation(x, y);
+        esz.setLocation(x-7, y-19);
+        esz.revalidate();
         atzekoa.revalidate();
     }
 
