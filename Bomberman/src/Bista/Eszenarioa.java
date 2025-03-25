@@ -104,7 +104,7 @@ public class Eszenarioa extends JFrame implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {	
 		if(((String[])arg)[0]=="EszenarioClassic") {
-			eszenarioaSortu();
+			eszenarioClassicSortu();
 			erdianJarri();
 		}
 		else if(((String[])arg)[0]=="Galduta") { 
@@ -123,7 +123,7 @@ public class Eszenarioa extends JFrame implements Observer {
 		}
 	}
 	
-	private void eszenarioaSortu() {
+	private void eszenarioClassicSortu() {
 		EszenarioKudeatzailea eK= EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
 		GelaxkaKudeatzailea[][] mat= eK.getGelaxkaMatrizea();
 		for(int x=0; x<11; x++) {

@@ -17,7 +17,7 @@ public class Gelaxka implements Observer {
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		if(((String[])arg)[0]=="KenduBomber") {
+		if(((String[])arg)[0]=="KenduIrudia") {
 			irudia.setIcon(null);
 		}
 		else if(((String[])arg)[0]=="BomberHeldu") {
@@ -32,15 +32,9 @@ public class Gelaxka implements Observer {
 			ImageIcon icon = new ImageIcon(getClass().getResource("bomb1.png"));
 			irudia.setIcon(icon);
 		}
-		else if(((String[])arg)[0]=="KenduBonba") {
-			irudia.setIcon(null);
-		}
 		else if(((String[])arg)[0]=="SuaJarri") {
 			ImageIcon icon = new ImageIcon(getClass().getResource("kaBomb3.png"));
 			irudia.setIcon(icon);
-		}
-		else if(((String[])arg)[0]=="SuaKendu") {
-			irudia.setIcon(null);
 		}
 		else if(((String[])arg)[0]=="Galduta") {
 			sutan();

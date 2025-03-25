@@ -33,7 +33,7 @@ public class GelaxkaKudeatzailea extends Observable{
 	public void kenduBonba() {
 		this.bonb = null;
 		setChanged();
-		notifyObservers(new String[] {"KenduBonba"});
+		notifyObservers(new String[] {"KenduIrudia"});
 	}
 	public boolean bonbaDago() {
 		if (bonb != null) {
@@ -49,7 +49,7 @@ public class GelaxkaKudeatzailea extends Observable{
 		this.bz = null;
 		if(!bonbaDago()) {
 			setChanged();
-			notifyObservers(new String[] {"KenduBomber"});
+			notifyObservers(new String[] {"KenduIrudia"});
 		}
 		else {
 			setChanged();
@@ -88,7 +88,7 @@ public class GelaxkaKudeatzailea extends Observable{
 	public void kenduSua() {
 		this.sua = null;
 		setChanged();
-		notifyObservers(new String[] {"SuaKendu"});
+		notifyObservers(new String[] {"KenduIrudia"});
 	}
 
 	public void bomberHeldu(BomberZuria bZ) {
@@ -114,6 +114,11 @@ public class GelaxkaKudeatzailea extends Observable{
 		e = pE;
 		setChanged();
 		notifyObservers(new String[] {"EtsaiaJarri"});
+	}
+	
+	public void etsaiaKendu() {
+		setChanged();
+		notifyObservers(new String[] {"KenduIrudia"});
 	}
 	
 	public boolean etsaiaDago() {
