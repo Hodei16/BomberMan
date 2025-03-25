@@ -11,6 +11,7 @@ public class EszenarioKudeatzailea extends Observable{
 	private static EszenarioKudeatzailea nireEszenarioKudeatzailea;
 	private GelaxkaKudeatzailea[][] gelaxkaMatrizea= new GelaxkaKudeatzailea[11][17];
 	private ArrayList<Blokea> blokeLista= new ArrayList<Blokea>();
+	private int etsaiKop = 0;
 	
 	private EszenarioKudeatzailea() {}
 	
@@ -170,9 +171,14 @@ public class EszenarioKudeatzailea extends Observable{
 				}
 				else {
 					Random r= new Random();
-					int ausazkoZenb= r.nextInt(101);
-					if(ausazkoZenb<40) {
-						
+					int ausazkoZenb1= r.nextInt(101);
+					if(ausazkoZenb1<40) {
+						int ausazkoZenb2= r.nextInt(101);
+						if(ausazkoZenb2>90 && etsaiKop<6) {
+							Etsaia e= new Etsaia(x,y);
+							gK.setEtsaia(e);
+							etsaiKop++;
+						}
 					}
 					else {
 						Biguna big= new Biguna();

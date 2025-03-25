@@ -128,37 +128,42 @@ public class Eszenarioa extends JFrame implements Observer {
 		GelaxkaKudeatzailea[][] mat= eK.getGelaxkaMatrizea();
 		for(int x=0; x<11; x++) {
 			for(int y=0;y<17;y++) {
-				JLabel Bomber, Zuria, Bloke;
+				JLabel bomber, zuria, bloke, etsaia;
 				GelaxkaKudeatzailea g= mat[x][y];
 				Gelaxka gel = new Gelaxka(g);
 				gelaxkaMatrix[x][y]=gel;
 				if(g.bomberDago()) {
 					ImageIcon icon = new ImageIcon(getClass().getResource("whitefront1.png"));
-					Bomber = new JLabel(icon);
-					esz.add(Bomber);
+					bomber = new JLabel(icon);
+					esz.add(bomber);
 					bZ= g.getBomberZuria();
-					jLMatrix[x][y]=Bomber;
-					gel.setIrudia(Bomber);
+					jLMatrix[x][y]=bomber;
+					gel.setIrudia(bomber);
 				}else if(g.blokeaDago()) {
 					if(g.getBlokea() instanceof Gogorra) {
 						ImageIcon icon = new ImageIcon(getClass().getResource("hardClassic.png"));
-						Bloke = new JLabel(icon); 
-						esz.add(Bloke);
+						bloke = new JLabel(icon); 
+						esz.add(bloke);
 					}
 					else {
 						ImageIcon icon = new ImageIcon(getClass().getResource("softClassic1.png"));
-						Bloke = new JLabel(icon); 
-						esz.add(Bloke);
-						jLMatrix[x][y]=Bloke;
+						bloke = new JLabel(icon); 
+						esz.add(bloke);
+						jLMatrix[x][y]=bloke;
 					}
-					gel.setIrudia(Bloke);
+					gel.setIrudia(bloke);
 				}
-				
+				else if(g.etsaiaDago()) {
+					ImageIcon icon = new ImageIcon(getClass().getResource("baloon1.png"));
+					etsaia = new JLabel(icon);
+					esz.add(etsaia);
+					jLMatrix[x][y]=etsaia;
+				}
 				else {
-					Zuria = new JLabel("");
-					esz.add(Zuria);
-					jLMatrix[x][y]=Zuria;
-					gel.setIrudia(Zuria);
+					zuria = new JLabel("");
+					esz.add(zuria);
+					jLMatrix[x][y]=zuria;
+					gel.setIrudia(zuria);
 				}
 				
 				

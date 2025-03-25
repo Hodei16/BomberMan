@@ -8,6 +8,7 @@ public class GelaxkaKudeatzailea extends Observable{
 	private Blokea b=null;
 	private Bonba bonb=null;
 	private Sua sua=null;
+	private Etsaia e=null;
 	
 	public GelaxkaKudeatzailea() {}
 	
@@ -107,5 +108,15 @@ public class GelaxkaKudeatzailea extends Observable{
 	public void irabazi() {
 		setChanged();
 		notifyObservers(new String[] {"Irabazi"});
+	}
+	
+	public void setEtsaia(Etsaia pE) {
+		e = pE;
+		setChanged();
+		notifyObservers(new String[] {"EtsaiaJarri"});
+	}
+	
+	public boolean etsaiaDago() {
+		return (this.e!=null);
 	}
 }
