@@ -115,7 +115,8 @@ public class GelaxkaKudeatzailea extends Observable{
 		notifyObservers(new String[] {"EtsaiaJarri"});
 	}
 	
-	public void etsaiaKendu() {
+	public void etsaiaKendu(int x, int y) {
+		e.koordenatuakAldatu(x, y);
 		e = null;
 		setChanged();
 		notifyObservers(new String[] {"KenduIrudia"});

@@ -77,31 +77,41 @@ public class EszenarioKudeatzailea extends Observable{
 		int ausazkoZenb= r.nextInt(101);
 		GelaxkaKudeatzailea g = gelaxkaMatrizea[x][y];
 		if(ausazkoZenb<25) {
-			if(!gelaxkaMatrizea[x][y+1].blokeaDago() && !gelaxkaMatrizea[x][y+1].bonbaDago() && y<17 && !gelaxkaMatrizea[x][y+1].etsaiaDago()) {
+			if(x<10 && !gelaxkaMatrizea[x+1][y].blokeaDago() && !gelaxkaMatrizea[x+1][y].bonbaDago() && !gelaxkaMatrizea[x+1][y].etsaiaDago()) {
 				Etsaia e = g.getEtsaia();
-				g.etsaiaKendu();
+				g.etsaiaKendu(x,y);
+				x++;
+				GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
+				gBerria.setEtsaia(e);
+			}
+		}
+		else if(25<ausazkoZenb && ausazkoZenb<50) {
+			if(y<16 && !gelaxkaMatrizea[x][y+1].blokeaDago() && !gelaxkaMatrizea[x][y+1].bonbaDago() && !gelaxkaMatrizea[x][y+1].etsaiaDago()) {
+				Etsaia e = g.getEtsaia();
+				g.etsaiaKendu(x,y);
 				y++;
 				GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
 				gBerria.setEtsaia(e);
 			}
 		}
-		else if(ausazkoZenb<50) {
-			
+		else if(50<ausazkoZenb && ausazkoZenb<75) {
+			if(x>0 && !gelaxkaMatrizea[x-1][y].blokeaDago() && !gelaxkaMatrizea[x-1][y].bonbaDago() && !gelaxkaMatrizea[x-1][y].etsaiaDago()) {
+				Etsaia e = g.getEtsaia();
+				g.etsaiaKendu(x,y);
+				x--;
+				GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
+				gBerria.setEtsaia(e);
+			}
 		}
-		else if(ausazkoZenb<75) {
-			
+		else{
+			if(y>0 && !gelaxkaMatrizea[x][y-1].blokeaDago() && !gelaxkaMatrizea[x][y-1].bonbaDago() && !gelaxkaMatrizea[x][y-1].etsaiaDago()) {
+				Etsaia e = g.getEtsaia();
+				g.etsaiaKendu(x,y);
+				y--;
+				GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
+				gBerria.setEtsaia(e);
+			}
 		}
-		else if(ausazkoZenb<101) {
-			
-		}
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 	
 	public void bonbaKendu(int bonbX, int bonbY){

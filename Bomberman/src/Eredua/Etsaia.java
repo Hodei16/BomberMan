@@ -5,7 +5,7 @@ import java.util.TimerTask;
 
 public class Etsaia {
 	EszenarioKudeatzailea eK = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
-	private static final int PERIODO = 2;
+	private static final int PERIODO = 1;
 	private Timer timer = null;
 	private int kont;
 	private int posX;
@@ -29,9 +29,12 @@ public class Etsaia {
 		kont--;
 		if(kont == 0) {
 			kont = PERIODO;
-			eK.etsaiaMugitu(posX,posY);
+			eK.etsaiaMugitu(posX ,posY);
 		}
 	}
 	
-	
+	public void koordenatuakAldatu(int pX, int pY) {
+		this.posX = pX;
+		this.posY = pY;
+	}
 }
