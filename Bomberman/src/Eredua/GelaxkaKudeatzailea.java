@@ -116,11 +116,16 @@ public class GelaxkaKudeatzailea extends Observable{
 	}
 	
 	public void etsaiaKendu() {
+		e = null;
 		setChanged();
 		notifyObservers(new String[] {"KenduIrudia"});
 	}
 	
 	public boolean etsaiaDago() {
 		return (this.e!=null);
+	}
+	
+	public Etsaia getEtsaia() {
+		return this.e;
 	}
 }

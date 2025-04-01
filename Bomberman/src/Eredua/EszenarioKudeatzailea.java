@@ -72,6 +72,38 @@ public class EszenarioKudeatzailea extends Observable{
 		b.setPosY(y);	           
 	}
 	
+	public void etsaiaMugitu(int x, int y) {
+		Random r= new Random();
+		int ausazkoZenb= r.nextInt(101);
+		GelaxkaKudeatzailea g = gelaxkaMatrizea[x][y];
+		if(ausazkoZenb<25) {
+			if(!gelaxkaMatrizea[x][y+1].blokeaDago() && !gelaxkaMatrizea[x][y+1].bonbaDago() && y<17 && !gelaxkaMatrizea[x][y+1].etsaiaDago()) {
+				Etsaia e = g.getEtsaia();
+				g.etsaiaKendu();
+				y++;
+				GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
+				gBerria.setEtsaia(e);
+			}
+		}
+		else if(ausazkoZenb<50) {
+			
+		}
+		else if(ausazkoZenb<75) {
+			
+		}
+		else if(ausazkoZenb<101) {
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
 	public void bonbaKendu(int bonbX, int bonbY){
 		gelaxkaMatrizea[bonbX][bonbY].kenduBonba();
 		Sua s = new Sua(bonbX, bonbY);

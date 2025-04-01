@@ -41,8 +41,7 @@ public class Eszenarioa extends JFrame implements Observer {
 	    initialize();
 
 	    //Berria
-	    Controler controler = Controler.getControler();
-	    this.addKeyListener(controler);
+	    this.addKeyListener(getControler());
 	    this.setFocusable(true);
 	    this.requestFocusInWindow();
 
@@ -158,6 +157,7 @@ public class Eszenarioa extends JFrame implements Observer {
 					etsaia = new JLabel(icon);
 					esz.add(etsaia);
 					jLMatrix[x][y]=etsaia;
+					gel.setIrudia(etsaia);
 				}
 				else {
 					zuria = new JLabel("");
@@ -174,18 +174,19 @@ public class Eszenarioa extends JFrame implements Observer {
 	    this.revalidate();
 	    this.repaint();
 	}
+	
+	private static Controler nireControler = null;
+	
+	public static Controler getControler() {
+		if(nireControler == null) {
+			nireControler = new Controler();
+		}
+		return nireControler;
+	}
 
 	private static class Controler implements KeyListener {	
-		private static Controler nireControler = null;
-		
+	
 		private Controler() {}
-		
-		public static Controler getControler() {
-			if(nireControler == null) {
-				nireControler = new Controler();
-			}
-			return nireControler;
-		}
 		
 		@Override
 		public void keyPressed(KeyEvent e) {
