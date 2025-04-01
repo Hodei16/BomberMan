@@ -24,16 +24,16 @@ import Eredua.Gogorra;
 
 public class Eszenarioa extends JFrame implements Observer {
 	
-	private static final EszenarioKudeatzailea EszenarioKudeatzeaile = null;
 	private JPanel contentPane;
 	private JPanel esz;
-	private static Observable o;
+	//private static Observable o;
 	private Gelaxka[][] gelaxkaMatrix;
 	private static Eszenarioa nEszenarioa = null;
-	private static Observable nireObservable = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
+	//private static Observable nireObservable = EszenarioKudeatzailea.getNireEszenarioKudeatzailea()    CAMBIAR ESTO
 	private JLabel atzekoa;
 	private JLabel[][] jLMatrix= new JLabel[11][17];
 	private BomberZuria bZ=null;
+	private static Controler nireControler = null;
 	
 	private Eszenarioa(Observable pEK) {
 	    this.gelaxkaMatrix = new Gelaxka[11][17];
@@ -175,9 +175,7 @@ public class Eszenarioa extends JFrame implements Observer {
 	    this.repaint();
 	}
 	
-	private static Controler nireControler = null;
-	
-	public static Controler getControler() {
+	private static Controler getControler() {
 		if(nireControler == null) {
 			nireControler = new Controler();
 		}
