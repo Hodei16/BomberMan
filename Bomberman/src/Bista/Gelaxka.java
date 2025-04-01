@@ -38,13 +38,6 @@ public class Gelaxka implements Observer {
 		}
 		else if(((String[])arg)[0]=="Galduta") {
 			sutan();
-			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().partidaAmaitu("Galduta");
-		}
-		else if(((String[])arg)[0]=="Galdu") {
-			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().partidaAmaitu("Galduta");
-		}
-		else if(((String[])arg)[0]=="Irabazi") {
-			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().partidaAmaitu("Irabazi");
 		}
 		else if(((String[])arg)[0]=="EtsaiaJarri") {
 			ImageIcon icon = new ImageIcon(getClass().getResource("baloon1.png"));

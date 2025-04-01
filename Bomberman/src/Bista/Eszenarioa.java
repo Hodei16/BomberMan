@@ -41,7 +41,7 @@ public class Eszenarioa extends JFrame implements Observer {
 	    initialize();
 
 	    //Berria
-	    Controler controler = new Controler();
+	    Controler controler = Controler.getControler();
 	    this.addKeyListener(controler);
 	    this.setFocusable(true);
 	    this.requestFocusInWindow();
@@ -175,13 +175,21 @@ public class Eszenarioa extends JFrame implements Observer {
 	    this.repaint();
 	}
 
-	private class Controler implements KeyListener {		
+	private static class Controler implements KeyListener {	
+		private static Controler nireControler = null;
+		
 		private Controler() {}
+		
+		public static Controler getControler() {
+			if(nireControler == null) {
+				nireControler = new Controler();
+			}
+			return nireControler;
+		}
 		
 		@Override
 		public void keyPressed(KeyEvent e) {
 		    EszenarioKudeatzailea eK = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
-		    Eszenarioa es = Eszenarioa.getEszenarioa();
 		    
 		    if (eK == null) return; 
 		    
@@ -194,7 +202,6 @@ public class Eszenarioa extends JFrame implements Observer {
 		    else if (keyCode == KeyEvent.VK_D) c = 'd';
 		    else if (keyCode == KeyEvent.VK_X) c = 'x';
 		    
-		    es.erdianJarri();
 		    eK.bomberManMugitu(c);
 		}
 		
