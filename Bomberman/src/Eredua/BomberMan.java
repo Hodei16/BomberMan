@@ -4,13 +4,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public abstract class BomberMan {
-	private int bonbaKop=10;
+	private int bonbaKop;
 	private int posX;
 	private int posY;
 	
-	public BomberMan (int pPosX, int pPosY) {
+	public BomberMan (int pPosX, int pPosY, int pBonbaKop) {
 		this.posX = pPosX;
 		this.posY = pPosY;
+		this.bonbaKop = pBonbaKop;
 	}
 	
 	public void setPosX(int pPosX) {
