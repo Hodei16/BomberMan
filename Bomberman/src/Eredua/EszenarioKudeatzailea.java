@@ -10,7 +10,6 @@ public class EszenarioKudeatzailea extends Observable{
 
 	private static EszenarioKudeatzailea nireEszenarioKudeatzailea;
 	private GelaxkaKudeatzailea[][] gelaxkaMatrizea= new GelaxkaKudeatzailea[11][17];
-	private ArrayList<Blokea> blokeLista= new ArrayList<Blokea>();
 	private int etsaiKop = 0;
 	
 	private EszenarioKudeatzailea() {}
@@ -76,9 +75,9 @@ public class EszenarioKudeatzailea extends Observable{
 		Random r= new Random();
 		int ausazkoZenb= r.nextInt(101);
 		GelaxkaKudeatzailea g = gelaxkaMatrizea[x][y];
+		Etsaia e = g.getEtsaia();
 		if(ausazkoZenb<25) {
 			if(x<10 && !gelaxkaMatrizea[x+1][y].blokeaDago() && !gelaxkaMatrizea[x+1][y].bonbaDago() && !gelaxkaMatrizea[x+1][y].etsaiaDago()) {
-				Etsaia e = g.getEtsaia();
 				g.etsaiaKendu(x,y);
 				x++;
 				GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
@@ -87,7 +86,6 @@ public class EszenarioKudeatzailea extends Observable{
 		}
 		else if(25<ausazkoZenb && ausazkoZenb<50) {
 			if(y<16 && !gelaxkaMatrizea[x][y+1].blokeaDago() && !gelaxkaMatrizea[x][y+1].bonbaDago() && !gelaxkaMatrizea[x][y+1].etsaiaDago()) {
-				Etsaia e = g.getEtsaia();
 				g.etsaiaKendu(x,y);
 				y++;
 				GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
@@ -96,7 +94,6 @@ public class EszenarioKudeatzailea extends Observable{
 		}
 		else if(50<ausazkoZenb && ausazkoZenb<75) {
 			if(x>0 && !gelaxkaMatrizea[x-1][y].blokeaDago() && !gelaxkaMatrizea[x-1][y].bonbaDago() && !gelaxkaMatrizea[x-1][y].etsaiaDago()) {
-				Etsaia e = g.getEtsaia();
 				g.etsaiaKendu(x,y);
 				x--;
 				GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
@@ -105,12 +102,20 @@ public class EszenarioKudeatzailea extends Observable{
 		}
 		else{
 			if(y>0 && !gelaxkaMatrizea[x][y-1].blokeaDago() && !gelaxkaMatrizea[x][y-1].bonbaDago() && !gelaxkaMatrizea[x][y-1].etsaiaDago()) {
-				Etsaia e = g.getEtsaia();
 				g.etsaiaKendu(x,y);
 				y--;
 				GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
 				gBerria.setEtsaia(e);
 			}
+		}
+		e.koordenatuakAldatu(x, y);
+	}
+	
+	public void etsaiaKendu(Etsaia e) {
+		etsaiKop--;
+		if(etsaiKop==0) {
+			setChanged();
+			notifyObservers(new String[] {"Irabazi"});
 		}
 	}
 	
@@ -122,7 +127,6 @@ public class EszenarioKudeatzailea extends Observable{
 			if (gelaxkaMatrizea[bonbX+1][bonbY].blokeaDago()) {
 				Blokea b = gelaxkaMatrizea[bonbX+1][bonbY].getBlokea();
 				if(b instanceof Biguna) {
-					blokeLista.remove(b);
 					gelaxkaMatrizea[bonbX+1][bonbY].kenduBlokea();
 					Sua sBehera = new Sua(bonbX+1, bonbY);
 					gelaxkaMatrizea[bonbX+1][bonbY].setSua(sBehera);
@@ -138,7 +142,6 @@ public class EszenarioKudeatzailea extends Observable{
 			if (gelaxkaMatrizea[bonbX-1][bonbY].blokeaDago()) {
 				Blokea b = gelaxkaMatrizea[bonbX-1][bonbY].getBlokea();
 				if(b instanceof Biguna) {
-					blokeLista.remove(b);
 					gelaxkaMatrizea[bonbX-1][bonbY].kenduBlokea();
 					Sua sGora = new Sua(bonbX-1, bonbY);
 					gelaxkaMatrizea[bonbX-1][bonbY].setSua(sGora);
@@ -154,7 +157,6 @@ public class EszenarioKudeatzailea extends Observable{
 			if (gelaxkaMatrizea[bonbX][bonbY+1].blokeaDago()) {
 				Blokea b = gelaxkaMatrizea[bonbX][bonbY+1].getBlokea();
 				if(b instanceof Biguna) {
-					blokeLista.remove(b);
 					gelaxkaMatrizea[bonbX][bonbY+1].kenduBlokea();
 					Sua sEsk = new Sua(bonbX, bonbY+1);
 					gelaxkaMatrizea[bonbX][bonbY+1].setSua(sEsk);
@@ -170,7 +172,6 @@ public class EszenarioKudeatzailea extends Observable{
 			if (gelaxkaMatrizea[bonbX][bonbY-1].blokeaDago()) {
 				Blokea b = gelaxkaMatrizea[bonbX][bonbY-1].getBlokea();
 				if(b instanceof Biguna) {
-					blokeLista.remove(b);
 					gelaxkaMatrizea[bonbX][bonbY-1].kenduBlokea();
 					Sua sEzk = new Sua(bonbX, bonbY-1);
 					gelaxkaMatrizea[bonbX][bonbY-1].setSua(sEzk);
@@ -180,9 +181,6 @@ public class EszenarioKudeatzailea extends Observable{
 				Sua sEzk = new Sua(bonbX, bonbY-1);
 				gelaxkaMatrizea[bonbX][bonbY-1].setSua(sEzk);
 			}
-		}
-		if(blokeLista.isEmpty()) {
-			gelaxkaMatrizea[bonbX][bonbY].irabazi();
 		}
 	}
 	
@@ -225,7 +223,6 @@ public class EszenarioKudeatzailea extends Observable{
 					else {
 						Biguna big= new Biguna();
 						gK.setBlokea(big);
-						blokeLista.add(big);
 					}
 				}
 				gelaxkaMatrizea[x][y] = gK;

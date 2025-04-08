@@ -29,7 +29,6 @@ public class Eszenarioa extends JFrame implements Observer {
 	//private static Observable o;
 	private Gelaxka[][] gelaxkaMatrix;
 	private static Eszenarioa nEszenarioa = null;
-	//private static Observable nireObservable = EszenarioKudeatzailea.getNireEszenarioKudeatzailea()    CAMBIAR ESTO
 	private JLabel atzekoa;
 	private JLabel[][] jLMatrix= new JLabel[11][17];
 	private BomberZuria bZ=null;
@@ -49,6 +48,7 @@ public class Eszenarioa extends JFrame implements Observer {
 
 	public static Eszenarioa getEszenarioa() {
 		if (nEszenarioa==null) {
+			Observable nireObservable = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
 			nEszenarioa= new Eszenarioa(nireObservable);
 		}
 		return nEszenarioa;

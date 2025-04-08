@@ -80,6 +80,11 @@ public class GelaxkaKudeatzailea extends Observable{
 		if(bomberDago()) {
 			amaitu();
 		}
+		else if(etsaiaDago()) {
+			e.timerGelditu();
+			e=null;
+			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().etsaiaKendu(e);
+		} 
 	}
 	public boolean suaDago() {
 		if (this.sua != null) return true;
@@ -95,7 +100,7 @@ public class GelaxkaKudeatzailea extends Observable{
 		setBomberZuria(bZ);
 		setChanged();
 		notifyObservers(new String[] {"BomberHeldu"});
-		if(suaDago()) {
+		if(suaDago() || etsaiaDago()) {
 			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().partidaAmaitu("Galduta");
 		}
 	}
@@ -111,12 +116,24 @@ public class GelaxkaKudeatzailea extends Observable{
 	
 	public void setEtsaia(Etsaia pE) {
 		e = pE;
-		setChanged();
-		notifyObservers(new String[] {"EtsaiaJarri"});
+		if(suaDago()) {
+			setChanged();
+			notifyObservers(new String[] {"SuaJarri"});
+			e.timerGelditu();
+			e=null;
+			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().etsaiaKendu(e);
+		}
+		else if(bomberDago()) {
+			b=null;
+			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().partidaAmaitu("Galduta");
+		}
+		else {
+			setChanged();
+			notifyObservers(new String[] {"EtsaiaJarri"});
+		}
 	}
 	
 	public void etsaiaKendu(int x, int y) {
-		e.koordenatuakAldatu(x, y);
 		e = null;
 		setChanged();
 		notifyObservers(new String[] {"KenduIrudia"});
