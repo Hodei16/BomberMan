@@ -3,15 +3,15 @@ package Eredua;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Bonba {
+public abstract class Bonba {
 	EszenarioKudeatzailea eK = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
-	private static final int PERIODO = 3;
-	private Timer timer = null;
-	private int kont;
-	private int posX;
-	private int posY; 
+	protected static final int PERIODO = 3;
+	protected Timer timer = null;
+	protected int kont;
+	protected int posX;
+	protected int posY; 
 	
-	public Bonba(int pPosX, int pPosY) {
+	protected Bonba(int pPosX, int pPosY) {
 		this.posX = pPosX;
 		this.posY = pPosY;
 		kont = PERIODO;
@@ -25,12 +25,7 @@ public class Bonba {
 		timer.scheduleAtFixedRate(timerTask, 0, 1000);
 	}
 	
-	private void updateKont() {
-		kont--;
-		if(kont == 0) {
-			kont = PERIODO;
-			timer.cancel();
-			eK.bonbaKendu(posX, posY);
-		}
-	}
+	public abstract void updateKont();
+		
+	
 }

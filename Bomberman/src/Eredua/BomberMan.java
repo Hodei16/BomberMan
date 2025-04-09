@@ -7,6 +7,7 @@ public abstract class BomberMan {
 	private int bonbaKop;
 	private int posX;
 	private int posY;
+
 	
 	public BomberMan (int pPosX, int pPosY, int pBonbaKop) {
 		this.posX = pPosX;
