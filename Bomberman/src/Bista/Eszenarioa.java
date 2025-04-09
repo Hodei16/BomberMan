@@ -37,7 +37,6 @@ public class Eszenarioa extends JFrame implements Observer {
 	private Eszenarioa(Observable pEK) {
 	    this.gelaxkaMatrix = new Gelaxka[11][17];
 	    pEK.addObserver(this);
-	    initialize();
 
 	    //Berria
 	    this.addKeyListener(getControler());
@@ -54,7 +53,7 @@ public class Eszenarioa extends JFrame implements Observer {
 		return nEszenarioa;
 	}
 	
-	public void initialize() {
+	public void initialize(String mota) {
 	    setSize(678, 440);
 	    setTitle("BOMBERMAN");
 	    setLocationRelativeTo(null);
@@ -68,7 +67,7 @@ public class Eszenarioa extends JFrame implements Observer {
 	    contentPane.setBackground(Color.BLACK);
 	    setContentPane(contentPane);
 
-	    ImageIcon backgroundIcon = new ImageIcon(getClass().getResource("stageBack1.png"));
+	    ImageIcon backgroundIcon = new ImageIcon(getClass().getResource(mota));
 	    Image backgroundImage = backgroundIcon.getImage().getScaledInstance(666, 404, Image.SCALE_SMOOTH);
 	    atzekoa = new JLabel(new ImageIcon(backgroundImage));
 	    contentPane.add(atzekoa, BorderLayout.CENTER);
@@ -103,7 +102,18 @@ public class Eszenarioa extends JFrame implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {	
 		if(((String[])arg)[0]=="EszenarioClassic") {
+		    initialize("stageBack1.png");
 			eszenarioClassicSortu();
+			erdianJarri();
+		}
+		else if(((String[])arg)[0]=="EszenarioSoft") { 
+			initialize("stageBack2.png");
+			eszenarioSoftSortu();
+			erdianJarri();
+		}
+		else if(((String[])arg)[0]=="EszenarioEmpty") { 
+			initialize("stageBack3.png");
+			eszenarioEmptySortu();
 			erdianJarri();
 		}
 		else if(((String[])arg)[0]=="Galduta") { 
@@ -165,8 +175,88 @@ public class Eszenarioa extends JFrame implements Observer {
 					jLMatrix[x][y]=zuria;
 					gel.setIrudia(zuria);
 				}
-				
-				
+			}
+		}
+		esz.revalidate();
+	    esz.repaint();
+	    this.revalidate();
+	    this.repaint();
+	}
+	
+	private void eszenarioSoftSortu() {
+		EszenarioKudeatzailea eK= EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
+		GelaxkaKudeatzailea[][] mat= eK.getGelaxkaMatrizea();
+		for(int x=0; x<11; x++) {
+			for(int y=0;y<17;y++) {
+				JLabel bomber, zuria, bloke, etsaia;
+				GelaxkaKudeatzailea g= mat[x][y];
+				Gelaxka gel = new Gelaxka(g);
+				gelaxkaMatrix[x][y]=gel;
+				if(g.bomberDago()) {
+					ImageIcon icon = new ImageIcon(getClass().getResource("whitefront1.png"));
+					bomber = new JLabel(icon);
+					esz.add(bomber);
+					bZ= g.getBomberZuria();
+					jLMatrix[x][y]=bomber;
+					gel.setIrudia(bomber);
+				}else if(g.blokeaDago()) {
+					ImageIcon icon = new ImageIcon(getClass().getResource("softClassic1.png"));
+					bloke = new JLabel(icon); 
+					esz.add(bloke);
+					jLMatrix[x][y]=bloke;
+					gel.setIrudia(bloke);
+				}
+				else if(g.etsaiaDago()) {
+					ImageIcon icon = new ImageIcon(getClass().getResource("baloon1.png"));
+					etsaia = new JLabel(icon);
+					esz.add(etsaia);
+					jLMatrix[x][y]=etsaia;
+					gel.setIrudia(etsaia);
+				}
+				else {
+					zuria = new JLabel("");
+					esz.add(zuria);
+					jLMatrix[x][y]=zuria;
+					gel.setIrudia(zuria);
+				}
+			}
+		}
+		esz.revalidate();
+	    esz.repaint();
+	    this.revalidate();
+	    this.repaint();
+	}
+	
+	private void eszenarioEmptySortu() {
+		EszenarioKudeatzailea eK= EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
+		GelaxkaKudeatzailea[][] mat= eK.getGelaxkaMatrizea();
+		for(int x=0; x<11; x++) {
+			for(int y=0;y<17;y++) {
+				JLabel bomber, zuria, etsaia;
+				GelaxkaKudeatzailea g= mat[x][y];
+				Gelaxka gel = new Gelaxka(g);
+				gelaxkaMatrix[x][y]=gel;
+				if(g.bomberDago()) {
+					ImageIcon icon = new ImageIcon(getClass().getResource("whitefront1.png"));
+					bomber = new JLabel(icon);
+					esz.add(bomber);
+					bZ= g.getBomberZuria();
+					jLMatrix[x][y]=bomber;
+					gel.setIrudia(bomber);
+				}
+				else if(g.etsaiaDago()) {
+					ImageIcon icon = new ImageIcon(getClass().getResource("baloon1.png"));
+					etsaia = new JLabel(icon);
+					esz.add(etsaia);
+					jLMatrix[x][y]=etsaia;
+					gel.setIrudia(etsaia);
+				}
+				else {
+					zuria = new JLabel("");
+					esz.add(zuria);
+					jLMatrix[x][y]=zuria;
+					gel.setIrudia(zuria);
+				}
 			}
 		}
 		esz.revalidate();
