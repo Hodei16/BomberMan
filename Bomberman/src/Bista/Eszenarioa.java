@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Eredua.BomberMan;
 import Eredua.BomberZuria;
 import Eredua.EszenarioKudeatzailea;
 import Eredua.GelaxkaKudeatzailea;
@@ -31,7 +32,7 @@ public class Eszenarioa extends JFrame implements Observer {
 	private static Eszenarioa nEszenarioa = null;
 	private JLabel atzekoa;
 	private JLabel[][] jLMatrix= new JLabel[11][17];
-	private BomberZuria bZ=null;
+	private BomberMan bZ;
 	private static Controler nireControler = null;
 	
 	private Eszenarioa(Observable pEK) {

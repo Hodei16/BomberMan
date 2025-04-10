@@ -11,7 +11,7 @@ public class EszenarioKudeatzailea extends Observable{
 	private static EszenarioKudeatzailea nireEszenarioKudeatzailea;
 	private GelaxkaKudeatzailea[][] gelaxkaMatrizea= new GelaxkaKudeatzailea[11][17];
 	private int etsaiKop = 0;
-	BomberMan b;
+	BomberMan b= new BomberZuria(0,0);
 	
 	private EszenarioKudeatzailea() {}
 	
@@ -324,6 +324,7 @@ public class EszenarioKudeatzailea extends Observable{
 	}
 	
 	public void sortuEszenarioClassic() {
+		BlokeFactory bk = BlokeFactory.getNirenireBlokeFactory();
 		for(int x=0 ;x<11;x++) {
 			for(int y=0; y<17; y++) {
 				GelaxkaKudeatzailea gK = new GelaxkaKudeatzailea();
@@ -339,8 +340,8 @@ public class EszenarioKudeatzailea extends Observable{
 					
 					}
 				else if(x%2==1 && y%2==1) {
-					Gogorra g= new Gogorra();
-					gK.setBlokea(g);
+					Blokea b= bk.create(2);
+					gK.setBlokea(b);
 				}
 				else {
 					Random r= new Random();
@@ -354,8 +355,8 @@ public class EszenarioKudeatzailea extends Observable{
 						}
 					}
 					else {
-						Biguna big= new Biguna();
-						gK.setBlokea(big);
+						Blokea b= bk.create(1);
+						gK.setBlokea(b);
 					}
 				}
 				gelaxkaMatrizea[x][y] = gK;
@@ -366,6 +367,7 @@ public class EszenarioKudeatzailea extends Observable{
 	}
 	
 	public void sortuEszenarioSoft() {
+		BlokeFactory bk = BlokeFactory.getNirenireBlokeFactory();
 		for(int x=0 ;x<11;x++) {
 			for(int y=0; y<17; y++) {
 				GelaxkaKudeatzailea gK = new GelaxkaKudeatzailea();
@@ -392,8 +394,8 @@ public class EszenarioKudeatzailea extends Observable{
 						}
 					}
 					else {
-						Biguna big= new Biguna();
-						gK.setBlokea(big);
+						Blokea b= bk.create(1);
+						gK.setBlokea(b);
 					}
 				}
 				gelaxkaMatrizea[x][y] = gK;
