@@ -5,17 +5,17 @@ public class BlokeFactory {
 	
 	private BlokeFactory() {}
 	
-	public static synchronized BlokeFactory getNirenireBlokeFactory() {
+	public static BlokeFactory getNireBlokeFactory() {
 		if(nireBlokeFactory == null) {
 			nireBlokeFactory = new BlokeFactory();
 		}
 		return nireBlokeFactory;
 	}
 	
-	public Blokea create(int pMota) {
-		Blokea nireBlokea;
+	public Blokea createBlokea(int pMota) {
+		Blokea nireBlokea = null;
 		if (pMota == 1) {nireBlokea = new Biguna();}
-		else {nireBlokea = new Gogorra();}
+		else if (pMota == 2) {nireBlokea = new Gogorra();}
 		return nireBlokea;
 	}
 }

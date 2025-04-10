@@ -79,6 +79,7 @@ public class GelaxkaKudeatzailea extends Observable{
 		notifyObservers(new String[] {"SuaJarri"});
 		if(bomberDago()) {
 			amaitu();
+			bz = null;
 		}
 		else if(etsaiaDago()) {
 			e.timerGelditu();
@@ -102,6 +103,7 @@ public class GelaxkaKudeatzailea extends Observable{
 		notifyObservers(new String[] {"BomberHeldu"});
 		if(suaDago() || etsaiaDago()) {
 			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().partidaAmaitu("Galduta");
+			bz=null;
 		}
 	}
 	public void amaitu() {
