@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Queue;
 import java.util.ArrayList;
 import java.util.LinkedList;
-//saa
+//saaa
 public class EszenarioKudeatzailea extends Observable{
 
 	private static EszenarioKudeatzailea nireEszenarioKudeatzailea;
