@@ -26,6 +26,18 @@ public class EszenarioKudeatzailea extends Observable{
 		return gelaxkaMatrizea;
 	}
 	
+	public void setEszenarioMota(String mota) {
+	    if (mota.equals("EszenarioClassic")) {
+	        sortuEszenarioClassic();
+	    }
+	    else if (mota.equals("EszenarioSoft")){
+	    	sortuEszenarioSoft();
+	        }
+	    else if (mota.equals("EszenarioEmpty")){
+	        sortuEszenarioEmpty();  
+	    }
+	}
+	
 	public void bomberManMugitu(char tekla) {
 		int x = b.getPosX();
 		int y = b.getPosY();
