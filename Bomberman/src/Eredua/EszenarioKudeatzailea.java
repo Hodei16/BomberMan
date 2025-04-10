@@ -11,7 +11,7 @@ public class EszenarioKudeatzailea extends Observable{
 	private static EszenarioKudeatzailea nireEszenarioKudeatzailea;
 	private GelaxkaKudeatzailea[][] gelaxkaMatrizea= new GelaxkaKudeatzailea[11][17];
 	private int etsaiKop = 0;
-	BomberZuria b= new BomberZuria(0,0);
+	BomberMan b;
 	
 	private EszenarioKudeatzailea() {}
 	
@@ -25,7 +25,9 @@ public class EszenarioKudeatzailea extends Observable{
 	public GelaxkaKudeatzailea[][] getGelaxkaMatrizea(){
 		return gelaxkaMatrizea;
 	}
-	
+	public void setBomberMota() {
+		
+	}
 	public void setEszenarioMota(String mota) {
 	    if (mota.equals("EszenarioClassic")) {
 	        sortuEszenarioClassic();

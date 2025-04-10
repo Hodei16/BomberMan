@@ -4,7 +4,7 @@ import java.util.Observable;
 
 public class GelaxkaKudeatzailea extends Observable{
 	private static final String Time = null;
-	private BomberZuria bz=null;
+	private BomberMan bz=null;
 	private Blokea b=null;
 	private Bonba bonb=null;
 	private Sua sua=null;
@@ -12,7 +12,7 @@ public class GelaxkaKudeatzailea extends Observable{
 	
 	public GelaxkaKudeatzailea() {}
 	
-	public BomberZuria getBomberZuria() {
+	public BomberMan getBomberZuria() {
 		return this.bz;
 	}
 	
@@ -41,7 +41,7 @@ public class GelaxkaKudeatzailea extends Observable{
 		}else return false;
 	}
 	
-	public void setBomberZuria(BomberZuria pBz) {
+	public void setBomberZuria(BomberMan pBz) {
 		this.bz = pBz;
 	}
 	
@@ -96,7 +96,7 @@ public class GelaxkaKudeatzailea extends Observable{
 		notifyObservers(new String[] {"KenduIrudia"});
 	}
 
-	public void bomberHeldu(BomberZuria bZ) {
+	public void bomberHeldu(BomberMan bZ) {
 		setBomberZuria(bZ);
 		setChanged();
 		notifyObservers(new String[] {"BomberHeldu"});
