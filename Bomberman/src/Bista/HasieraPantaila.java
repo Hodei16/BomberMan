@@ -1,5 +1,5 @@
 package Bista;
-//saa
+
 import Eredua.EszenarioKudeatzailea;
 import javax.swing.*;
 import java.awt.*;
