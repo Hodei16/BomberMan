@@ -21,7 +21,7 @@ import Eredua.BomberZuria;
 import Eredua.EszenarioKudeatzailea;
 import Eredua.GelaxkaKudeatzailea;
 import Eredua.Gogorra;
-//sa
+//saa
 public class Eszenarioa extends JFrame implements Observer {
 	
 	private JPanel contentPane;
