@@ -11,7 +11,8 @@ public class EszenarioKudeatzailea extends Observable{
 	private static EszenarioKudeatzailea nireEszenarioKudeatzailea;
 	private GelaxkaKudeatzailea[][] gelaxkaMatrizea= new GelaxkaKudeatzailea[11][17];
 	private int etsaiKop = 0;
-	BomberMan b = BomberManFactory.getNireBomberManFactory().createBomberMan(1);
+	
+	BomberMan b = BomberManFactory.getNireBomberManFactory().createBomberMan(2); //KENDU
 	
 	private EszenarioKudeatzailea() {}
 	
@@ -25,8 +26,8 @@ public class EszenarioKudeatzailea extends Observable{
 	public GelaxkaKudeatzailea[][] getGelaxkaMatrizea(){
 		return gelaxkaMatrizea;
 	}
-	public void setBomberMota() {
-		
+	public void setBomberMota(int pMota) { // 1 = zuri ; 2 = beltza
+		b = BomberManFactory.getNireBomberManFactory().createBomberMan(pMota);
 	}
 	public void setEszenarioMota(String mota) {
 	    if (mota.equals("EszenarioClassic")) {
@@ -414,6 +415,12 @@ public class EszenarioKudeatzailea extends Observable{
 					b.setPosX(x);
 					b.setPosY(y);
 				}
+				else if(x==0 && y==1) {
+					
+				}
+				else if(x==1 && y==0) {
+					
+					}
 				else{
 					Random r= new Random();
 					int ausazkoZenb= r.nextInt(101);

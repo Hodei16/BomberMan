@@ -32,7 +32,7 @@ public class Eszenarioa extends JFrame implements Observer {
 	private static Eszenarioa nEszenarioa = null;
 	private JLabel atzekoa;
 	private JLabel[][] jLMatrix= new JLabel[11][17];
-	private BomberMan bZ;
+	private BomberMan b;
 	private static Controler nireControler = null;
 	
 	private Eszenarioa(Observable pEK) {
@@ -143,10 +143,15 @@ public class Eszenarioa extends JFrame implements Observer {
 				Gelaxka gel = new Gelaxka(g);
 				gelaxkaMatrix[x][y]=gel;
 				if(g.bomberDago()) {
-					ImageIcon icon = new ImageIcon(getClass().getResource("whitefront1.png"));
+					b= g.getBomberMan();
+					ImageIcon icon;
+					if (b instanceof BomberZuria) {
+						icon = new ImageIcon(getClass().getResource("whitefront1.png"));
+					}else {
+						icon = new ImageIcon(getClass().getResource("blackfront1.png"));
+					}
 					bomber = new JLabel(icon);
 					esz.add(bomber);
-					bZ= g.getBomberZuria();
 					jLMatrix[x][y]=bomber;
 					gel.setIrudia(bomber);
 				}else if(g.blokeaDago()) {
@@ -194,10 +199,15 @@ public class Eszenarioa extends JFrame implements Observer {
 				Gelaxka gel = new Gelaxka(g);
 				gelaxkaMatrix[x][y]=gel;
 				if(g.bomberDago()) {
-					ImageIcon icon = new ImageIcon(getClass().getResource("whitefront1.png"));
+					b= g.getBomberMan();
+					ImageIcon icon;
+					if (b instanceof BomberZuria) {
+						icon = new ImageIcon(getClass().getResource("whitefront1.png"));
+					}else {
+						icon = new ImageIcon(getClass().getResource("blackfront1.png"));
+					}
 					bomber = new JLabel(icon);
 					esz.add(bomber);
-					bZ= g.getBomberZuria();
 					jLMatrix[x][y]=bomber;
 					gel.setIrudia(bomber);
 				}else if(g.blokeaDago()) {
@@ -238,10 +248,15 @@ public class Eszenarioa extends JFrame implements Observer {
 				Gelaxka gel = new Gelaxka(g);
 				gelaxkaMatrix[x][y]=gel;
 				if(g.bomberDago()) {
-					ImageIcon icon = new ImageIcon(getClass().getResource("whitefront1.png"));
+					b= g.getBomberMan();
+					ImageIcon icon;
+					if (b instanceof BomberZuria) {
+						icon = new ImageIcon(getClass().getResource("whitefront1.png"));
+					}else {
+						icon = new ImageIcon(getClass().getResource("blackfront1.png"));
+					}
 					bomber = new JLabel(icon);
 					esz.add(bomber);
-					bZ= g.getBomberZuria();
 					jLMatrix[x][y]=bomber;
 					gel.setIrudia(bomber);
 				}

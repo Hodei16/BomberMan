@@ -4,31 +4,36 @@ import java.util.Observable;
 
 public class GelaxkaKudeatzailea extends Observable{
 	private static final String Time = null;
-	private BomberMan bz=null;
-	private Blokea b=null;
+	private BomberMan b=null;
+	private Blokea blok=null;
 	private Bonba bonb=null;
 	private Sua sua=null;
 	private Etsaia e=null;
 	
 	public GelaxkaKudeatzailea() {}
 	
-	public BomberMan getBomberZuria() {
-		return this.bz;
+	public BomberMan getBomberMan() {
+		return this.b;
 	}
 	
 	public Blokea getBlokea() {
-		return this.b;
+		return this.blok;
 	}
 	public boolean blokeaDago() {
-		if (b != null) {
+		if (blok != null) {
 			return true;
 		}
 		else return false;
 	}
 	public void setBonba(Bonba pBonb) {
 		this.bonb = pBonb;
-		setChanged();
-		notifyObservers(new String[] {"BonbaJarriBomber"});
+		if (b instanceof BomberZuria) {
+			setChanged();
+			notifyObservers(new String[] {"BonbaJarriBomberZuria"});
+		}else {
+			setChanged();
+			notifyObservers(new String[] {"BonbaJarriBomberBeltza"});
+		}
 	}
 	public void kenduBonba() {
 		this.bonb = null;
@@ -42,11 +47,11 @@ public class GelaxkaKudeatzailea extends Observable{
 	}
 	
 	public void setBomberZuria(BomberMan pBz) {
-		this.bz = pBz;
+		this.b = pBz;
 	}
 	
 	public void kenduBomberZuria() {
-		this.bz = null;
+		this.b = null;
 		if(!bonbaDago()) {
 			setChanged();
 			notifyObservers(new String[] {"KenduIrudia"});
@@ -58,13 +63,13 @@ public class GelaxkaKudeatzailea extends Observable{
 	}
 	
 	public void setBlokea(Blokea pB) {
-		this.b=pB;
+		this.blok=pB;
 	}
 	public void kenduBlokea() {
-		this.b = null;
+		this.blok = null;
 	}
 	public boolean bomberDago() {
-		if(this.bz == null) {
+		if(this.b == null) {
 			return false;
 		}else {
 			return true;
@@ -79,7 +84,7 @@ public class GelaxkaKudeatzailea extends Observable{
 		notifyObservers(new String[] {"SuaJarri"});
 		if(bomberDago()) {
 			amaitu();
-			bz = null;
+			b = null;
 		}
 		else if(etsaiaDago()) {
 			e.timerGelditu();
@@ -97,13 +102,18 @@ public class GelaxkaKudeatzailea extends Observable{
 		notifyObservers(new String[] {"KenduIrudia"});
 	}
 
-	public void bomberHeldu(BomberMan bZ) {
-		setBomberZuria(bZ);
-		setChanged();
-		notifyObservers(new String[] {"BomberHeldu"});
+	public void bomberHeldu(BomberMan b) {
+		setBomberZuria(b);
+		if(b instanceof BomberZuria) {
+			setChanged();
+			notifyObservers(new String[] {"BomberZuriaHeldu"});
+		}else {
+			setChanged();
+			notifyObservers(new String[] {"BomberBeltzaHeldu"});
+		}
 		if(suaDago() || etsaiaDago()) {
 			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().partidaAmaitu("Galduta");
-			bz=null;
+			b=null;
 		}
 	}
 	public void amaitu() {
