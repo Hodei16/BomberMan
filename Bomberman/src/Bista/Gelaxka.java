@@ -36,8 +36,12 @@ public class Gelaxka implements Observer {
 			ImageIcon icon = new ImageIcon(getClass().getResource("blackwithbomb2.png"));
 			irudia.setIcon(icon);
 		}
-		else if(((String[])arg)[0]=="BonbaJarri") {
+		else if(((String[])arg)[0]=="BonbaZuria") {
 			ImageIcon icon = new ImageIcon(getClass().getResource("bomb1.png"));
+			irudia.setIcon(icon);
+		}
+		else if(((String[])arg)[0]=="BonbaBeltza") {
+			ImageIcon icon = new ImageIcon(getClass().getResource("bomb2.png"));
 			irudia.setIcon(icon);
 		}
 		else if(((String[])arg)[0]=="SuaJarri") {

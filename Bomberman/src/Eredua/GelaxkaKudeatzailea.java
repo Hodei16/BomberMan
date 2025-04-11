@@ -51,14 +51,20 @@ public class GelaxkaKudeatzailea extends Observable{
 	}
 	
 	public void kenduBomberZuria() {
+		int intBomberMan = 1;
+		if (this.b instanceof BomberBeltza) { intBomberMan = 2;}
 		this.b = null;
 		if(!bonbaDago()) {
 			setChanged();
 			notifyObservers(new String[] {"KenduIrudia"});
-		}
-		else {
-			setChanged();
-			notifyObservers(new String[] {"BonbaJarri"});
+		}else {
+			if (intBomberMan == 1) {
+				setChanged();
+				notifyObservers(new String[] {"BonbaZuria"});
+			}else if (intBomberMan == 2) {
+				setChanged();
+				notifyObservers(new String[] {"BonbaBeltza"});
+			}
 		}
 	}
 	

@@ -167,7 +167,7 @@ public class EszenarioKudeatzailea extends Observable{
 		}
 	}
 	
-	public void bonbaKendu(int bonbX, int bonbY, String pMota){
+public void bonbaKendu(int bonbX, int bonbY, String pMota){
 		
 		if(pMota == "BonbaTxikia") {
 			
@@ -236,90 +236,103 @@ public class EszenarioKudeatzailea extends Observable{
 		}else if (pMota == "BonbaHandia") {
 			
 			
-			boolean aurkitutaGora = false;
-			boolean aurkitutaBehera = false;
 			boolean aurkitutaEsk = false;
 			boolean aurkitutaEzk = false;
-			int suaGora = bonbY;
-			int suaBehera = bonbY;
-			int suaEsk = bonbX;
-			int suaEzk = bonbX;
-			
+			boolean aurkitutaBehera = false;
+			boolean aurkitutaGora = false;
+			int suaEsk = bonbY;
+			int suaEzk = bonbY;
+			int suaBehera = bonbX;
+			int suaGora = bonbX;
 			gelaxkaMatrizea[bonbX][bonbY].kenduBonba();
 			Sua s = new Sua(bonbX, bonbY);
 			gelaxkaMatrizea[bonbX][bonbY].setSua(s);				
-			while(!aurkitutaGora && !aurkitutaBehera && !aurkitutaEsk && !aurkitutaEzk) {
-				if (suaGora < 16) {
-					suaGora++;
-				}
-				if (suaBehera > 0) {
-					suaBehera--;
-				}
-				if (suaEzk > 0) {
-					suaEzk--;
-				}
-				if (suaEsk < 11) {
-					suaEsk++;
-				}
-				
-				if(!aurkitutaGora) {
-					if(gelaxkaMatrizea[bonbX][suaGora].blokeaDago()){
-						aurkitutaGora = true;
-						if(gelaxkaMatrizea[bonbX][suaGora].getBlokea() instanceof Biguna) {
-							gelaxkaMatrizea[bonbX][suaGora].kenduBlokea();
-							Sua sGora = new Sua(bonbX, suaGora);
-							gelaxkaMatrizea[bonbX][suaGora].setSua(sGora);
-						}
-					}else {
-						gelaxkaMatrizea[bonbX][suaGora].setSua(s);
-					}
-				}
-				
-				if(!aurkitutaBehera) {
-					if(gelaxkaMatrizea[bonbX][suaBehera].blokeaDago()){
-						aurkitutaBehera = true;
-						if(gelaxkaMatrizea[bonbX][suaBehera].getBlokea() instanceof Biguna) {
-							gelaxkaMatrizea[bonbX][suaBehera].kenduBlokea();
-							Sua sBehera = new Sua(bonbX, suaBehera);
-							gelaxkaMatrizea[bonbX][suaBehera].setSua(sBehera);
-						}
-					}else {
-						gelaxkaMatrizea[bonbX][suaBehera].setSua(s);
-					}
-				}
-				if(!aurkitutaEsk) {
-					if(gelaxkaMatrizea[suaEsk][bonbY].blokeaDago()){
-						aurkitutaEsk = true;
-						if(gelaxkaMatrizea[suaEsk][bonbY].getBlokea() instanceof Biguna) {
-							gelaxkaMatrizea[suaEsk][bonbY].kenduBlokea();
-							Sua sEsk = new Sua(suaEsk, bonbY);
-							gelaxkaMatrizea[suaEsk][bonbY].setSua(sEsk);
-						}
-					}else {
-						gelaxkaMatrizea[suaEsk][bonbY].setSua(s);
-						
-					}
-				}
-				if(!aurkitutaEzk) {
-					if(gelaxkaMatrizea[suaEzk][bonbY].blokeaDago()){
-						aurkitutaEzk = true;
-						if(gelaxkaMatrizea[suaEzk][bonbY].getBlokea() instanceof Biguna) {
-							gelaxkaMatrizea[suaEzk][bonbY].kenduBlokea();
-							Sua sEzk = new Sua(suaEzk, bonbY);
-							gelaxkaMatrizea[suaEzk][bonbY].setSua(sEzk);
-						}
-					}else {
-						gelaxkaMatrizea[suaEzk][bonbY].setSua(s);
 
-					}
-				}
-				
+			while(!aurkitutaEsk || !aurkitutaEzk || !aurkitutaBehera || !aurkitutaGora) {
+			    
+			    if (!aurkitutaEsk) {
+			        if (suaEsk < 15) {  
+			            suaEsk++;
+			            Sua sEsk = new Sua(bonbX, suaEsk);
+			            if(gelaxkaMatrizea[bonbX][suaEsk].blokeaDago()){
+			                if(gelaxkaMatrizea[bonbX][suaEsk].getBlokea() instanceof Biguna) {
+			                    gelaxkaMatrizea[bonbX][suaEsk].kenduBlokea();
+			                    gelaxkaMatrizea[bonbX][suaEsk].setSua(sEsk);
+			                } else {
+			                    aurkitutaEsk = true;
+			                }
+			            } else {
+			                gelaxkaMatrizea[bonbX][suaEsk].setSua(sEsk);
+			            }
+			        } else {
+			            aurkitutaEsk = true;
+			        }
+			    }
+			    
+			    
+			    if (!aurkitutaEzk) {
+			        if (suaEzk > 0) {
+			            suaEzk--;
+			            Sua sEzk = new Sua(bonbX, suaEzk);
+			            if(gelaxkaMatrizea[bonbX][suaEzk].blokeaDago()){
+			                if(gelaxkaMatrizea[bonbX][suaEzk].getBlokea() instanceof Biguna) {
+			                    gelaxkaMatrizea[bonbX][suaEzk].kenduBlokea();
+			                    gelaxkaMatrizea[bonbX][suaEzk].setSua(sEzk);
+			                } else {
+			                    aurkitutaEzk = true;
+			                }
+			            } else {
+			                gelaxkaMatrizea[bonbX][suaEzk].setSua(sEzk);
+			            }
+			        } else {
+			            aurkitutaEzk = true;
+			        }
+			    }
+			    
+			   
+			    if (!aurkitutaBehera) {
+			        if (suaBehera < 10) {  
+			            suaBehera++;
+			            Sua sBehera = new Sua(suaBehera, bonbY);
+			            if(gelaxkaMatrizea[suaBehera][bonbY].blokeaDago()){
+			                if(gelaxkaMatrizea[suaBehera][bonbY].getBlokea() instanceof Biguna) {
+			                    gelaxkaMatrizea[suaBehera][bonbY].kenduBlokea();
+			                    gelaxkaMatrizea[suaBehera][bonbY].setSua(sBehera);
+			                } else {
+			                    aurkitutaBehera = true;
+			                }
+			            } else {
+			                gelaxkaMatrizea[suaBehera][bonbY].setSua(sBehera);
+			            }
+			        } else {
+			            aurkitutaBehera = true;
+			        }
+			    }
+			    
+			    
+			    if (!aurkitutaGora) {
+			        if (suaGora > 0) {
+			            suaGora--;
+			            Sua sGora = new Sua(suaGora, bonbY);
+			            if(gelaxkaMatrizea[suaGora][bonbY].blokeaDago()){
+			                if(gelaxkaMatrizea[suaGora][bonbY].getBlokea() instanceof Biguna) {
+			                    gelaxkaMatrizea[suaGora][bonbY].kenduBlokea();
+			                    gelaxkaMatrizea[suaGora][bonbY].setSua(sGora);
+			                } else {
+			                    aurkitutaGora = true;
+			                }
+			            } else {
+			                gelaxkaMatrizea[suaGora][bonbY].setSua(sGora);
+			            }
+			        } else {
+			            aurkitutaGora = true;
+			        }
+			    }
 			}
-			setChanged();
-			notifyObservers();
-			
+
 		}
 	}
+	
 	
 	public void kenduSua(int pPosX, int pPosY) {
 		gelaxkaMatrizea[pPosX][pPosY].kenduSua();
