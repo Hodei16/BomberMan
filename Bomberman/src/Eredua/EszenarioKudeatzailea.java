@@ -29,6 +29,7 @@ public class EszenarioKudeatzailea extends Observable{
 	public void setBomberMota(int pMota) { // 1 = zuri ; 2 = beltza
 		b = BomberManFactory.getNireBomberManFactory().createBomberMan(pMota);
 	}
+	
 	public void setEszenarioMota(String mota) {
 	    if (mota.equals("EszenarioClassic")) {
 	        sortuEszenarioClassic();

@@ -54,14 +54,24 @@ public class Eszenarioa extends JFrame implements Observer {
 		return nEszenarioa;
 	}
 	
-	public void initialize(String mota) {
+	public void sortuLehioa() {
 	    setSize(678, 440);
 	    setTitle("BOMBERMAN");
 	    setLocationRelativeTo(null);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setResizable(true);
 	    setVisible(true);
-
+	    
+	    contentPane = new JPanel(new BorderLayout());
+	    contentPane.setPreferredSize(new Dimension(666, 404)); 
+	    contentPane.setSize(666, 404);
+	    contentPane.setBackground(Color.BLACK);
+	    setContentPane(contentPane);
+	    
+	    contentPane.add(HasieraPantaila.getNireHasieraPantaila().getContentPane());
+	}
+	
+	public void initialize(String mota) {
 	    contentPane = new JPanel(new BorderLayout());
 	    contentPane.setPreferredSize(new Dimension(666, 404)); 
 	    contentPane.setSize(666, 404);
