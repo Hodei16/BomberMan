@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Observable;
@@ -25,7 +25,7 @@ import Eredua.Gogorra;
 
 public class Eszenarioa extends JFrame implements Observer {
 	
-	private JPanel contentPane;
+	private JPanel contentPane = new JPanel(new BorderLayout());;
 	private JPanel esz;
 	//private static Observable o;
 	private Gelaxka[][] gelaxkaMatrix;
@@ -61,8 +61,7 @@ public class Eszenarioa extends JFrame implements Observer {
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setResizable(true);
 	    setVisible(true);
-	    
-	    contentPane = new JPanel(new BorderLayout());
+	   
 	    contentPane.setPreferredSize(new Dimension(666, 404)); 
 	    contentPane.setSize(666, 404);
 	    contentPane.setBackground(Color.BLACK);
@@ -72,7 +71,6 @@ public class Eszenarioa extends JFrame implements Observer {
 	}
 	
 	public void initialize(String mota) {
-	    contentPane = new JPanel(new BorderLayout());
 	    contentPane.setPreferredSize(new Dimension(666, 404)); 
 	    contentPane.setSize(666, 404);
 	    contentPane.setBackground(Color.BLACK);
@@ -298,32 +296,32 @@ public class Eszenarioa extends JFrame implements Observer {
 		return nireControler;
 	}
 
-	private static class Controler implements KeyListener {	
-	
-		private Controler() {}
-		
-		@Override
-		public void keyPressed(KeyEvent e) {
-		    EszenarioKudeatzailea eK = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
-		    
-		    if (eK == null) return; 
-		    
-		    int keyCode = e.getKeyCode();
-		    char c = ' ';
-		    
-		    if (keyCode == KeyEvent.VK_W) c = 'w';
-		    else if (keyCode == KeyEvent.VK_A) c = 'a';
-		    else if (keyCode == KeyEvent.VK_S) c = 's';
-		    else if (keyCode == KeyEvent.VK_D) c = 'd';
-		    else if (keyCode == KeyEvent.VK_X) c = 'x';
-		    
-		    eK.bomberManMugitu(c);
-		}
-		
-		@Override
-		public void keyReleased(KeyEvent e) {}
+	private static class Controler implements KeyListener {
+	    
+	    private Controler() {}
 
-		@Override
-		public void keyTyped(KeyEvent e) {}
+	    @Override
+	    public void keyPressed(KeyEvent e) {
+	        EszenarioKudeatzailea eK = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
+	        
+	        if (eK == null) return; 
+
+	        int keyCode = e.getKeyCode();
+	        char c = ' ';
+	        
+	        if (keyCode == KeyEvent.VK_W) c = 'w';
+	        else if (keyCode == KeyEvent.VK_A) c = 'a';
+	        else if (keyCode == KeyEvent.VK_S) c = 's';
+	        else if (keyCode == KeyEvent.VK_D) c = 'd';
+	        else if (keyCode == KeyEvent.VK_X) c = 'x';
+
+	        eK.bomberManMugitu(c);
+	    }
+
+	    @Override
+	    public void keyReleased(KeyEvent e) {}
+
+	    @Override
+	    public void keyTyped(KeyEvent e) {}
 	}
 }
