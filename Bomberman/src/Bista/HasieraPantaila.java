@@ -62,7 +62,7 @@ public class HasieraPantaila extends JFrame {
 
         buttonPanel.add(botoiaBomberMan("Bomber Zuria", 1), gbc);
         gbc.gridy = 1;
-        buttonPanel.add(botoiaBomberMan("Bomber Beltzarana", 2), gbc);
+        buttonPanel.add(botoiaBomberMan("Bomber Beltza", 2), gbc);
         gbc.gridy = 2;
         buttonPanel.add(botoiaEszenarioa("CLASSIC", "EszenarioClassic"), gbc);
         gbc.gridy = 3;

@@ -77,20 +77,17 @@ public class EszenarioKudeatzailea extends Observable{
 			
 			
 		}else if (tekla == 'x') {
-			
-			if (b instanceof BomberZuria) {
-			
-				if(b.bonbaDauka()) {
-					Bonba bonb = new BonbaTxikia(x, y);
-					gelaxkaMatrizea[x][y].setBonba(bonb);
-					b.bonbaKendu();
-				}
-				
-			}else {
-				if(b.bonbaDauka()) {
-					Bonba bonb = new BonbaHandia(x, y);
-					gelaxkaMatrizea[x][y].setBonba(bonb);
-					b.bonbaKendu();
+			Bonba bonb;
+			if(b.bonbaDauka()) {
+				if (b instanceof BomberZuria) {
+						bonb = BonbaFactory.getNireBonbaFactory().createBonba(1, x, y);
+						gelaxkaMatrizea[x][y].setBonba(bonb);
+						b.bonbaKendu();
+						
+				}else if (b instanceof BomberBeltza){
+						bonb = BonbaFactory.getNireBonbaFactory().createBonba(2, x, y);
+						gelaxkaMatrizea[x][y].setBonba(bonb);
+						b.bonbaKendu();
 				}
 			}
 		}
