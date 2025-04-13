@@ -73,6 +73,7 @@ public class Eszenarioa extends JFrame implements Observer {
 	}
 	
 	public void initialize(String mota) {
+		HasieraPantaila.getNireHasieraPantaila().getContentPane().setVisible(false);
 	    contentPane.setPreferredSize(new Dimension(666, 404)); 
 	    contentPane.setSize(666, 404);
 	    contentPane.setBackground(Color.BLACK);

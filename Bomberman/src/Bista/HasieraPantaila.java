@@ -6,6 +6,10 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -16,24 +20,29 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import Eredua.EszenarioKudeatzailea;
+
 public class HasieraPantaila extends JFrame {
     private static HasieraPantaila nireHasieraPantaila = null;
     private JPanel contentPane;
     private static Integer bomber = null;
     private static String eszenario = null;
-    //private static Controler nireControler = null;
+    private static Controler nireControler = null;
 
     private JButton bomber1Button;
     private JButton bomber2Button;
+    private JButton classicBtn;
+    private JButton softBtn;
+    private JButton emptyBtn;
     private final ImageIcon bomber1Color = new ImageIcon(getClass().getResource("bomber1.png"));
     private final ImageIcon bomber1BW = new ImageIcon(getClass().getResource("bomber1BlackAndWhite.png"));
     private final ImageIcon bomber2Color = new ImageIcon(getClass().getResource("bomber2.png"));
     private final ImageIcon bomber2BW = new ImageIcon(getClass().getResource("bomber2BlackAndWhite.png"));
 
     private HasieraPantaila() {
-	    /*this.addKeyListener(getControler());
+	    this.addKeyListener(getControler());
         this.setFocusable(true);
-        this.requestFocusInWindow();*/
+        this.requestFocusInWindow();
     }
     
     public static synchronized HasieraPantaila getNireHasieraPantaila() {
@@ -92,11 +101,11 @@ public class HasieraPantaila extends JFrame {
         scenarioPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
         
         Dimension buttonSize = new Dimension(135, 30);
-        JButton classicBtn = botoiaEszenarioa("CLASSIC", "EszenarioClassic");
+        classicBtn = botoiaEszenarioa("CLASSIC", "EszenarioClassic");
         classicBtn.setBackground(Color.orange);
-        JButton softBtn = botoiaEszenarioa("SOFT", "EszenarioSoft");
+        softBtn = botoiaEszenarioa("SOFT", "EszenarioSoft");
         softBtn.setBackground(Color.orange);
-        JButton emptyBtn = botoiaEszenarioa("EMPTY", "EszenarioEmpty");
+        emptyBtn = botoiaEszenarioa("EMPTY", "EszenarioEmpty");
         emptyBtn.setBackground(Color.orange);
         
         classicBtn.setPreferredSize(buttonSize);
@@ -164,15 +173,25 @@ public class HasieraPantaila extends JFrame {
 
     private JButton botoiaEszenarioa(String mota, String eszenarioMota) {
         JButton btn = new JButton(mota);
-        btn.addActionListener(e -> {
-            eszenario = eszenarioMota;
-            btn.setBackground(Color.BLUE);
-            if (bomber != null && eszenario != null) {
-                System.out.println(bomber + " " + eszenario);
-            } else {
-                System.out.println("LEHENENGO BOMBERMAN MOTA AUKERATU!");
+        btn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                eszenario = eszenarioMota;
+                classicBtn.setBackground(Color.orange);
+                softBtn.setBackground(Color.orange);
+                emptyBtn.setBackground(Color.orange);
+                btn.setBackground(Color.BLUE);
+                if (bomber != null && eszenario != null) {
+                    System.out.println(bomber + " " + eszenario);
+                } else {
+                    System.out.println("LEHENENGO BOMBERMAN MOTA AUKERATU!");
+                }
+                classicBtn.setFocusable(false);
+                softBtn.setFocusable(false);
+                emptyBtn.setFocusable(false);
+                bomber1Button.setFocusable(false);
+                bomber2Button.setFocusable(false);
             }
-            this.requestFocusInWindow();
         });
         return btn;
     }
@@ -184,7 +203,7 @@ public class HasieraPantaila extends JFrame {
 	public static String getEszenario() {
 		return eszenario;
 	}
-    /*
+    
 	public static Controler getControler() {
 		if(nireControler == null) {
 			nireControler = new Controler();
@@ -195,8 +214,7 @@ public class HasieraPantaila extends JFrame {
 	private static class Controler implements KeyListener {
 	    
 	    private Controler() {}
-
-	    @Override
+		@Override
 	    public void keyPressed(KeyEvent e) {
 	        int keyCode = e.getKeyCode();
 	        
@@ -218,5 +236,5 @@ public class HasieraPantaila extends JFrame {
 
 	    @Override
 	    public void keyTyped(KeyEvent e) {}
-	}*/
+	}
 }

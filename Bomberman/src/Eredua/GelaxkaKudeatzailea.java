@@ -3,7 +3,6 @@ package Eredua;
 import java.util.Observable;
 
 public class GelaxkaKudeatzailea extends Observable{
-	private static final String Time = null;
 	private BomberMan b=null;
 	private Blokea blok=null;
 	private Bonba bonb=null;
@@ -47,7 +46,7 @@ public class GelaxkaKudeatzailea extends Observable{
 	}
 	
 	public void setBomberZuria(BomberMan pBz) {
-		this.b = pBz;
+			this.b = pBz;
 	}
 	
 	public void kenduBomberZuria() {
@@ -90,7 +89,6 @@ public class GelaxkaKudeatzailea extends Observable{
 		notifyObservers(new String[] {"SuaJarri"});
 		if(bomberDago()) {
 			amaitu();
-			b = null;
 		}
 		else if(etsaiaDago()) {
 			e.timerGelditu();
