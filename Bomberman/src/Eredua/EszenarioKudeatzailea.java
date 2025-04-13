@@ -248,7 +248,7 @@ public void bonbaKendu(int bonbX, int bonbY, String pMota){
 			while(!aurkitutaEsk || !aurkitutaEzk || !aurkitutaBehera || !aurkitutaGora) {
 			    
 			    if (!aurkitutaEsk) {
-			        if (suaEsk < 15) {  
+			        if (suaEsk < 16) {  
 			            suaEsk++;
 			            Sua sEsk = new Sua(bonbX, suaEsk);
 			            if(gelaxkaMatrizea[bonbX][suaEsk].blokeaDago()){
