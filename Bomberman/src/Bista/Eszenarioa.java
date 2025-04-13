@@ -42,8 +42,6 @@ public class Eszenarioa extends JFrame implements Observer {
 	    //Berria
 	    this.addKeyListener(getControler());
 	    this.setFocusable(true);
-	    this.requestFocusInWindow();
-
 	}
 
 	public static Eszenarioa getEszenarioa() {
@@ -68,6 +66,10 @@ public class Eszenarioa extends JFrame implements Observer {
 	    setContentPane(contentPane);
 	    
 	    contentPane.add(HasieraPantaila.getNireHasieraPantaila().getContentPane());
+	    
+        HasieraPantaila.getNireHasieraPantaila().setFocusable(true);
+
+        this.requestFocusInWindow();
 	}
 	
 	public void initialize(String mota) {
@@ -297,25 +299,40 @@ public class Eszenarioa extends JFrame implements Observer {
 	}
 
 	private static class Controler implements KeyListener {
-	    
+
+	    private boolean hasiDaPartida = false;
+
 	    private Controler() {}
 
 	    @Override
 	    public void keyPressed(KeyEvent e) {
 	        EszenarioKudeatzailea eK = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
+	        HasieraPantaila hp = HasieraPantaila.getNireHasieraPantaila();
 	        
 	        if (eK == null) return; 
 
 	        int keyCode = e.getKeyCode();
 	        char c = ' ';
 	        
-	        if (keyCode == KeyEvent.VK_W) c = 'w';
-	        else if (keyCode == KeyEvent.VK_A) c = 'a';
-	        else if (keyCode == KeyEvent.VK_S) c = 's';
-	        else if (keyCode == KeyEvent.VK_D) c = 'd';
-	        else if (keyCode == KeyEvent.VK_X) c = 'x';
-
-	        eK.bomberManMugitu(c);
+	        if (!hasiDaPartida) {
+	            if (keyCode == KeyEvent.VK_SPACE) {
+	                if (hp.getBomber() == null || hp.getEszenario() == null) {
+	                    System.out.println("¡Falta seleccionar Bomberman o Escenario!");
+	                } else {
+	                    hasiDaPartida = true;
+	                    EszenarioKudeatzailea.getNireEszenarioKudeatzailea().setBomberMota(hp.getBomber());
+	                    EszenarioKudeatzailea.getNireEszenarioKudeatzailea().setEszenarioMota(hp.getEszenario());
+	                    System.out.println("INICIANDO PARTIDA...");
+	                }
+	            }
+	        } else {
+	            if (keyCode == KeyEvent.VK_W) c = 'w';
+	            else if (keyCode == KeyEvent.VK_A) c = 'a';
+	            else if (keyCode == KeyEvent.VK_S) c = 's';
+	            else if (keyCode == KeyEvent.VK_D) c = 'd';
+	            else if (keyCode == KeyEvent.VK_X) c = 'x';
+	            eK.bomberManMugitu(c);
+	        }
 	    }
 
 	    @Override
@@ -324,4 +341,5 @@ public class Eszenarioa extends JFrame implements Observer {
 	    @Override
 	    public void keyTyped(KeyEvent e) {}
 	}
+
 }
