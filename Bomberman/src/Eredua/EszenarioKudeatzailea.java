@@ -43,57 +43,59 @@ public class EszenarioKudeatzailea extends Observable{
 	}
 	
 	public void bomberManMugitu(char tekla) {
-		int x = b.getPosX();
-		int y = b.getPosY();
-		GelaxkaKudeatzailea g = gelaxkaMatrizea[x][y];
-		if (tekla == 'w' && x > 0) {
-			if(!gelaxkaMatrizea[x-1][y].blokeaDago() && !gelaxkaMatrizea[x-1][y].bonbaDago()) {
-				g.kenduBomberZuria();
-				x--;
-				GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
-				gBerria.bomberHeldu(b);
-			}
-		}else if (tekla == 'a' && y > 0) {
-			if(!gelaxkaMatrizea[x][y-1].blokeaDago() && !gelaxkaMatrizea[x][y-1].bonbaDago()) {
-				g.kenduBomberZuria();
-				y--;
-				GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
-				gBerria.bomberHeldu(b);
-			}
-		}else if (tekla == 's' && x < 10) {
-			if(!gelaxkaMatrizea[x+1][y].blokeaDago() && !gelaxkaMatrizea[x+1][y].bonbaDago()) {
-				g.kenduBomberZuria();
-				x++;
-				GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
-				gBerria.bomberHeldu(b);
-			}
-		}else if (tekla == 'd' && y < 16) {
-			if(!gelaxkaMatrizea[x][y+1].blokeaDago() && !gelaxkaMatrizea[x][y+1].bonbaDago()) {
-				g.kenduBomberZuria();
-				y++;
-				GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
-				gBerria.bomberHeldu(b);
-			}
-			
-			
-		}else if (tekla == 'x') {
-			Bonba bonb;
-			if(b.bonbaDauka()) {
-				if (b instanceof BomberZuria) {
-						bonb = BonbaFactory.getNireBonbaFactory().createBonba(1, x, y);
-						gelaxkaMatrizea[x][y].setBonba(bonb);
-						b.bonbaKendu();
-						
-				}else if (b instanceof BomberBeltza){
-						bonb = BonbaFactory.getNireBonbaFactory().createBonba(2, x, y);
-						gelaxkaMatrizea[x][y].setBonba(bonb);
-						b.bonbaKendu();
+		if (!b.getSutanDago()) {
+			int x = b.getPosX();
+			int y = b.getPosY();
+			GelaxkaKudeatzailea g = gelaxkaMatrizea[x][y];
+			if (tekla == 'w' && x > 0) {
+				if(!gelaxkaMatrizea[x-1][y].blokeaDago() && !gelaxkaMatrizea[x-1][y].bonbaDago()) {
+					g.kenduBomberZuria();
+					x--;
+					GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
+					gBerria.bomberHeldu(b);
+				}
+			}else if (tekla == 'a' && y > 0) {
+				if(!gelaxkaMatrizea[x][y-1].blokeaDago() && !gelaxkaMatrizea[x][y-1].bonbaDago()) {
+					g.kenduBomberZuria();
+					y--;
+					GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
+					gBerria.bomberHeldu(b);
+				}
+			}else if (tekla == 's' && x < 10) {
+				if(!gelaxkaMatrizea[x+1][y].blokeaDago() && !gelaxkaMatrizea[x+1][y].bonbaDago()) {
+					g.kenduBomberZuria();
+					x++;
+					GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
+					gBerria.bomberHeldu(b);
+				}
+			}else if (tekla == 'd' && y < 16) {
+				if(!gelaxkaMatrizea[x][y+1].blokeaDago() && !gelaxkaMatrizea[x][y+1].bonbaDago()) {
+					g.kenduBomberZuria();
+					y++;
+					GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
+					gBerria.bomberHeldu(b);
+				}
+				
+				
+			}else if (tekla == 'x') {
+				Bonba bonb;
+				if(b.bonbaDauka()) {
+					if (b instanceof BomberZuria) {
+							bonb = BonbaFactory.getNireBonbaFactory().createBonba(1, x, y);
+							gelaxkaMatrizea[x][y].setBonba(bonb);
+							b.bonbaKendu();
+							
+					}else if (b instanceof BomberBeltza){
+							bonb = BonbaFactory.getNireBonbaFactory().createBonba(2, x, y);
+							gelaxkaMatrizea[x][y].setBonba(bonb);
+							b.bonbaKendu();
+					}
 				}
 			}
+			gelaxkaMatrizea[x][y].setBomberZuria(b);
+			b.setPosX(x);
+			b.setPosY(y);	
 		}
-		gelaxkaMatrizea[x][y].setBomberZuria(b);
-		b.setPosX(x);
-		b.setPosY(y);	           
 	}
 	
 	public void etsaiaMugitu(int x, int y) {

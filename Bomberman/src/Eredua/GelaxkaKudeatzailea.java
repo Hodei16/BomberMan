@@ -116,11 +116,12 @@ public class GelaxkaKudeatzailea extends Observable{
 			notifyObservers(new String[] {"BomberBeltzaHeldu"});
 		}
 		if(suaDago() || etsaiaDago()) {
-			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().partidaAmaitu("Galduta");
+			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().partidaAmaitu("Galduta");		
 			b=null;
 		}
 	}
 	public void amaitu() {
+		b.setSutanDago();
 		setChanged();
 		notifyObservers(new String[] {"Galduta"});
 		EszenarioKudeatzailea.getNireEszenarioKudeatzailea().partidaAmaitu("Galduta");

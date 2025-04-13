@@ -6,6 +6,7 @@ public abstract class BomberMan {
 	private int bonbaKop;
 	private int posX;
 	private int posY;
+	private boolean sutanDago = false;
 
 	
 	public BomberMan (int pPosX, int pPosY, int pBonbaKop) {
@@ -29,7 +30,12 @@ public abstract class BomberMan {
 	public boolean bonbaDauka() {
 		return bonbaKop!=0;
 	}
-	
+	public void setSutanDago() {
+		sutanDago = true;
+	}
+	public boolean getSutanDago() {
+		return sutanDago;
+	}
 	private static final int PERIODO = 4;
 	private Timer timer = null;
 	private int kont;
