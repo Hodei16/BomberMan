@@ -6,8 +6,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagLayout;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -20,14 +18,11 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import Eredua.EszenarioKudeatzailea;
-
 public class HasieraPantaila extends JFrame {
     private static HasieraPantaila nireHasieraPantaila = null;
     private JPanel contentPane;
     private static Integer bomber = null;
     private static String eszenario = null;
-    private static Controler nireControler = null;
 
     private JButton bomber1Button;
     private JButton bomber2Button;
@@ -39,11 +34,7 @@ public class HasieraPantaila extends JFrame {
     private final ImageIcon bomber2Color = new ImageIcon(getClass().getResource("bomber2.png"));
     private final ImageIcon bomber2BW = new ImageIcon(getClass().getResource("bomber2BlackAndWhite.png"));
 
-    private HasieraPantaila() {
-	    this.addKeyListener(getControler());
-        this.setFocusable(true);
-        this.requestFocusInWindow();
-    }
+    private HasieraPantaila() {}
     
     public static synchronized HasieraPantaila getNireHasieraPantaila() {
         if (nireHasieraPantaila == null) {
@@ -156,20 +147,28 @@ public class HasieraPantaila extends JFrame {
         btn.setContentAreaFilled(false);
         btn.setBorderPainted(false);
         btn.setBounds(x, y, iconoInicial.getIconWidth(), iconoInicial.getIconHeight());
-        
-        btn.addActionListener(e -> {
-            bomber = bomberMota;
-            if (bomberMota == 1) {
-                bomber1Button.setIcon(bomber1Color);
-                bomber2Button.setIcon(bomber2BW);
-            } else {
-                bomber1Button.setIcon(bomber1BW);
-                bomber2Button.setIcon(bomber2Color);
+
+        btn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                bomber = bomberMota;
+                if (bomberMota == 1) {
+                    bomber1Button.setIcon(bomber1Color);
+                    bomber2Button.setIcon(bomber2BW);
+                } else if (bomberMota == 2) {
+                    bomber1Button.setIcon(bomber1BW);
+                    bomber2Button.setIcon(bomber2Color);
+                }
+                bomber1Button.setFocusable(false);
+                bomber2Button.setFocusable(false);
+                classicBtn.setFocusable(false);
+                softBtn.setFocusable(false);
+                emptyBtn.setFocusable(false);
             }
-            this.requestFocusInWindow();
         });
         return btn;
     }
+
 
     private JButton botoiaEszenarioa(String mota, String eszenarioMota) {
         JButton btn = new JButton(mota);
@@ -181,11 +180,6 @@ public class HasieraPantaila extends JFrame {
                 softBtn.setBackground(Color.orange);
                 emptyBtn.setBackground(Color.orange);
                 btn.setBackground(Color.BLUE);
-                if (bomber != null && eszenario != null) {
-                    System.out.println(bomber + " " + eszenario);
-                } else {
-                    System.out.println("LEHENENGO BOMBERMAN MOTA AUKERATU!");
-                }
                 classicBtn.setFocusable(false);
                 softBtn.setFocusable(false);
                 emptyBtn.setFocusable(false);
@@ -196,45 +190,7 @@ public class HasieraPantaila extends JFrame {
         return btn;
     }
 
-	public static Integer getBomber() {
-		return bomber;
-	}
+	public static Integer getBomber() {return bomber;}
 
-	public static String getEszenario() {
-		return eszenario;
-	}
-    
-	public static Controler getControler() {
-		if(nireControler == null) {
-			nireControler = new Controler();
-		}
-		return nireControler;
-	}
-    
-	private static class Controler implements KeyListener {
-	    
-	    private Controler() {}
-		@Override
-	    public void keyPressed(KeyEvent e) {
-	        int keyCode = e.getKeyCode();
-	        
-	        if (keyCode == KeyEvent.VK_ENTER) {
-	        	if (bomber == null || eszenario == null) {
-	        		System.out.println("¡Falta seleccionar Bomberman o Escenario!");
-	        	} else {
-	        		EszenarioKudeatzailea kudeatzailea = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
-	        		kudeatzailea.setEszenarioMota(eszenario);
-	        		kudeatzailea.setBomberMota(bomber);
-	        		System.out.println("INICIANDO PARTIDA...");
-	        	}
-	        }
-	    }
-
-
-	    @Override
-	    public void keyReleased(KeyEvent e) {}
-
-	    @Override
-	    public void keyTyped(KeyEvent e) {}
-	}
+	public static String getEszenario() {return eszenario;}
 }

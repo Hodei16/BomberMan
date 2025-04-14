@@ -5,7 +5,6 @@ public class BonbaHandia extends Bonba{
 		super(pPosX, pPosY);
 	}
 		
-	
 	public void updateKont() {
 		kont--;
 		if(kont == 0) {

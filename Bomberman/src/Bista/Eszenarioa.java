@@ -27,7 +27,6 @@ public class Eszenarioa extends JFrame implements Observer {
 	
 	private JPanel contentPane = new JPanel(new BorderLayout());;
 	private JPanel esz;
-	//private static Observable o;
 	private Gelaxka[][] gelaxkaMatrix;
 	private static Eszenarioa nEszenarioa = null;
 	private JLabel atzekoa;
@@ -38,8 +37,6 @@ public class Eszenarioa extends JFrame implements Observer {
 	private Eszenarioa(Observable pEK) {
 	    this.gelaxkaMatrix = new Gelaxka[11][17];
 	    pEK.addObserver(this);
-
-	    //Berria
 	    this.addKeyListener(getControler());
 	    this.setFocusable(true);
 	}
@@ -150,7 +147,7 @@ public class Eszenarioa extends JFrame implements Observer {
 		for(int x=0; x<11; x++) {
 			for(int y=0;y<17;y++) {
 				JLabel bomber, zuria, bloke, etsaia;
-				GelaxkaKudeatzailea g= mat[x][y];
+				GelaxkaKudeatzailea g = mat[x][y];
 				Gelaxka gel = new Gelaxka(g);
 				gelaxkaMatrix[x][y]=gel;
 				if(g.bomberDago()) {
@@ -317,13 +314,17 @@ public class Eszenarioa extends JFrame implements Observer {
 	        
 	        if (!hasiDaPartida) {
 	            if (keyCode == KeyEvent.VK_SPACE) {
-	                if (hp.getBomber() == null || hp.getEszenario() == null) {
-	                    System.out.println("¡Falta seleccionar Bomberman o Escenario!");
+	            	if (hp.getBomber() == null && hp.getEszenario() == null) {
+	                    System.out.println("Bomberman eta Eszenario mota aukeratu behar da!");
+	            	} else if (hp.getBomber() == null) {
+	                    System.out.println("Bomberman mota aukeratu behar da!");
+	                } else if (hp.getEszenario() == null) {
+	                    System.out.println("Eszenario mota aukeratu behar da!!");
 	                } else {
 	                    hasiDaPartida = true;
 	                    EszenarioKudeatzailea.getNireEszenarioKudeatzailea().setBomberMota(hp.getBomber());
 	                    EszenarioKudeatzailea.getNireEszenarioKudeatzailea().setEszenarioMota(hp.getEszenario());
-	                    System.out.println("INICIANDO PARTIDA...");
+	                    System.out.println("PARTIDA HASTEN...");
 	                }
 	            }
 	        } else {

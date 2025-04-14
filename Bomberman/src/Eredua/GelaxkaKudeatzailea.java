@@ -3,11 +3,11 @@ package Eredua;
 import java.util.Observable;
 
 public class GelaxkaKudeatzailea extends Observable{
-	private BomberMan b=null;
-	private Blokea blok=null;
-	private Bonba bonb=null;
-	private Sua sua=null;
-	private Etsaia e=null;
+	private BomberMan b = null;
+	private Blokea blok = null;
+	private Bonba bonb = null;
+	private Sua sua = null;
+	private Etsaia e = null;
 	
 	public GelaxkaKudeatzailea() {}
 	
@@ -29,7 +29,7 @@ public class GelaxkaKudeatzailea extends Observable{
 		if (b instanceof BomberZuria) {
 			setChanged();
 			notifyObservers(new String[] {"BonbaJarriBomberZuria"});
-		}else {
+		}else if ((b instanceof BomberBeltza)) {
 			setChanged();
 			notifyObservers(new String[] {"BonbaJarriBomberBeltza"});
 		}
@@ -70,9 +70,11 @@ public class GelaxkaKudeatzailea extends Observable{
 	public void setBlokea(Blokea pB) {
 		this.blok=pB;
 	}
+	
 	public void kenduBlokea() {
 		this.blok = null;
 	}
+	
 	public boolean bomberDago() {
 		if(this.b == null) {
 			return false;
@@ -80,9 +82,11 @@ public class GelaxkaKudeatzailea extends Observable{
 			return true;
 		}
 	}
+	
 	public Sua getSua() {
 		return this.sua;
 	}
+	
 	public void setSua(Sua pSua) {
 		this.sua = pSua;
 		setChanged();
@@ -96,15 +100,20 @@ public class GelaxkaKudeatzailea extends Observable{
 			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().etsaiaKendu(e);
 		} 
 	}
+	
 	public boolean suaDago() {
 		if (this.sua != null) return true;
 		else return false;
 	}
+	
 	public void kenduSua() {
-		this.sua = null;
-		setChanged();
-		notifyObservers(new String[] {"KenduIrudia"});
+		this.sua = null;		
+		if (!(blokeaDago() && blok instanceof Gogorra) && !bomberDago() && !etsaiaDago() && !bonbaDago()) {
+			setChanged();
+			notifyObservers(new String[] {"KenduIrudia"});
+		}
 	}
+
 
 	public void bomberHeldu(BomberMan b) {
 		setBomberZuria(b);
@@ -120,6 +129,7 @@ public class GelaxkaKudeatzailea extends Observable{
 			b=null;
 		}
 	}
+	
 	public void amaitu() {
 		b.setSutanDago();
 		setChanged();
