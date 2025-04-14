@@ -12,7 +12,7 @@ public class EszenarioKudeatzailea extends Observable{
 	private GelaxkaKudeatzailea[][] gelaxkaMatrizea= new GelaxkaKudeatzailea[11][17];
 	private int etsaiKop = 0;
 	
-	BomberMan b = BomberManFactory.getNireBomberManFactory().createBomberMan(2); //KENDU
+	BomberMan b ; 
 	
 	private EszenarioKudeatzailea() {}
 	
@@ -78,19 +78,9 @@ public class EszenarioKudeatzailea extends Observable{
 				
 				
 			}else if (tekla == 'x') {
-				Bonba bonb;
-				if(b.bonbaDauka()) {
-					if (b instanceof BomberZuria) {
-							bonb = BonbaFactory.getNireBonbaFactory().createBonba(1, x, y);
-							gelaxkaMatrizea[x][y].setBonba(bonb);
-							b.bonbaKendu();
-							
-					}else if (b instanceof BomberBeltza){
-							bonb = BonbaFactory.getNireBonbaFactory().createBonba(2, x, y);
-							gelaxkaMatrizea[x][y].setBonba(bonb);
-							b.bonbaKendu();
-					}
-				}
+				
+				b.bonbaJarri();
+				
 			}
 			gelaxkaMatrizea[x][y].setBomberZuria(b);
 			b.setPosX(x);
@@ -165,8 +155,21 @@ public class EszenarioKudeatzailea extends Observable{
 			notifyObservers(new String[] {"Irabazi"});
 		}
 	}
-	
-public void bonbaKendu(int bonbX, int bonbY, String pMota){
+	public void bonbaJarri(int bonbX, int bonbY) {
+		if(b.bonbaDauka()) {
+			if (b instanceof BomberZuria) {
+					gelaxkaMatrizea[bonbX][bonbY].setBonba(b.getBonba());
+					b.bonbaKendu();
+					
+			}else if (b instanceof BomberBeltza){
+					gelaxkaMatrizea[bonbX][bonbY].setBonba(b.getBonba());
+					b.bonbaKendu();
+			}
+			b.getBonba().kontaketaHasi();
+		}
+		
+	}
+	public void bonbaKendu(int bonbX, int bonbY, String pMota){
 		
 		if(pMota == "BonbaTxikia") {
 			

@@ -7,12 +7,21 @@ public abstract class BomberMan {
 	private int posX;
 	private int posY;
 	private boolean sutanDago = false;
-
+	private Bonba bonba;       
 	
 	public BomberMan (int pPosX, int pPosY, int pBonbaKop) {
 		this.posX = pPosX;
 		this.posY = pPosY;
 		this.bonbaKop = pBonbaKop;
+	}
+
+	
+	public void bonbaJarri() {EszenarioKudeatzailea.getNireEszenarioKudeatzailea().bonbaJarri(posX, posY);}
+	
+	protected abstract Bonba bonbaSortu();
+	
+	public Bonba getBonba() {
+		return bonbaSortu();
 	}
 	
 	public void setPosX(int pPosX) {

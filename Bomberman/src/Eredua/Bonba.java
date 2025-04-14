@@ -10,21 +10,29 @@ public abstract class Bonba {
 	protected int kont;
 	protected int posX;
 	protected int posY; 
+	private boolean kontHasieratu = false;
 	
 	protected Bonba(int pPosX, int pPosY) {
 		this.posX = pPosX;
 		this.posY = pPosY;
 		kont = PERIODO;
-		TimerTask timerTask = new TimerTask() {
-			@Override
-			public void run() {
-				updateKont();
-			}
-		};
-		timer = new Timer();
-		timer.scheduleAtFixedRate(timerTask, 0, 1000);
+		
 	}
-	
+	public void kontaketaHasi() {
+		if(!kontHasieratu) {
+			TimerTask timerTask = new TimerTask() {
+				@Override
+				public void run() {
+					updateKont();
+				}
+			};
+			timer = new Timer();
+			timer.scheduleAtFixedRate(timerTask, 0, 1000);
+			kontHasieratu = true;
+		}
+		
+		
+	}
 	public abstract void updateKont();
 		
 	
