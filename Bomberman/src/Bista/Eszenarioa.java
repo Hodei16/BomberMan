@@ -103,6 +103,7 @@ public class Eszenarioa extends JFrame implements Observer {
 
         atzekoa.setLocation(x, y);
         esz.setLocation(x-7, y-19);
+        //esz.setLocation(x, y);
         esz.revalidate();
         atzekoa.revalidate();
     }
