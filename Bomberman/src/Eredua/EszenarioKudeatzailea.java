@@ -88,87 +88,13 @@ public class EszenarioKudeatzailea extends Observable{
 		}
 	}
 	
-	public void etsaiaMugitu(int x, int y) {
-		Random r= new Random();
-		int ausazkoZenb= r.nextInt(101);
-		GelaxkaKudeatzailea g = gelaxkaMatrizea[x][y];
-		Etsaia e = g.getEtsaia();
-		if(ausazkoZenb<25) {
-			if(x<10 && !gelaxkaMatrizea[x+1][y].blokeaDago() && !gelaxkaMatrizea[x+1][y].bonbaDago() && !gelaxkaMatrizea[x+1][y].etsaiaDago()) {
-				if(x<9 && gelaxkaMatrizea[x+2][y].etsaiaDago()) {}
-				else if(x<10 && y<16 && gelaxkaMatrizea[x+1][y+1].etsaiaDago()) {}
-				else if(x<10 && y>1 && gelaxkaMatrizea[x+1][y-1].etsaiaDago()) {}
-				else {
-					g.etsaiaKendu(x,y);
-					x++;
-					GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
-					gBerria.setEtsaia(e);
-				}
-			}
-		}
-		else if(25<ausazkoZenb && ausazkoZenb<50) {
-			if(y<16 && !gelaxkaMatrizea[x][y+1].blokeaDago() && !gelaxkaMatrizea[x][y+1].bonbaDago() && !gelaxkaMatrizea[x][y+1].etsaiaDago()) {
-				if(y<15 && gelaxkaMatrizea[x][y+2].etsaiaDago()) {}
-				else if(x<10 && y<16 && gelaxkaMatrizea[x+1][y+1].etsaiaDago()) {}
-				else if(x>1 && y<16 && gelaxkaMatrizea[x-1][y+1].etsaiaDago()) {}
-				else {
-					g.etsaiaKendu(x,y);
-					y++;
-					GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
-					gBerria.setEtsaia(e);
-				}
-			}
-		}
-		else if(50<ausazkoZenb && ausazkoZenb<75) {
-			if(x>0 && !gelaxkaMatrizea[x-1][y].blokeaDago() && !gelaxkaMatrizea[x-1][y].bonbaDago() && !gelaxkaMatrizea[x-1][y].etsaiaDago()) {
-				if(x>1 && gelaxkaMatrizea[x-2][y].etsaiaDago()) {}
-				else if(x>1 && y<16 && gelaxkaMatrizea[x-1][y+1].etsaiaDago()) {}
-				else if(x>1 && y>1 && gelaxkaMatrizea[x-1][y-1].etsaiaDago()) {}
-				else {
-					g.etsaiaKendu(x,y);
-					x--;
-					GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
-					gBerria.setEtsaia(e);
-				}
-			}
-		}
-		else{
-			if(y>0 && !gelaxkaMatrizea[x][y-1].blokeaDago() && !gelaxkaMatrizea[x][y-1].bonbaDago() && !gelaxkaMatrizea[x][y-1].etsaiaDago()) {
-				if(y>1 && gelaxkaMatrizea[x][y-2].etsaiaDago()) {}
-				else if(x<10 && y>1 && gelaxkaMatrizea[x+1][y-1].etsaiaDago()) {}
-				else if(x>1 && y>1 && gelaxkaMatrizea[x-1][y-1].etsaiaDago()) {}
-				else {
-					g.etsaiaKendu(x,y);
-					y--;
-					GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
-					gBerria.setEtsaia(e);
-				}
-			}
-		}
-		e.koordenatuakAldatu(x, y);
+	public void bonbaJarri(int bonbX, int bonbY, Bonba jarritakoBonba) {
+		
+		gelaxkaMatrizea[bonbX][bonbY].setBonba(jarritakoBonba);
+		b.bonbaJarri();
+		jarritakoBonba.kontaketaHasi();
 	}
 	
-	public void etsaiaKendu(Etsaia e) {
-		etsaiKop--;
-		if(etsaiKop==0) {
-			setChanged();
-			notifyObservers(new String[] {"Irabazi"});
-		}
-	}
-	public void bonbaJarri(int bonbX, int bonbY) {
-		if(b.bonbaDauka()) {
-			if (b instanceof BomberZuria) {
-					gelaxkaMatrizea[bonbX][bonbY].setBonba(b.getBonba());
-					b.bonbaKendu();
-					
-			}else if (b instanceof BomberBeltza){
-					gelaxkaMatrizea[bonbX][bonbY].setBonba(b.getBonba());
-					b.bonbaKendu();
-			}
-			b.getBonba().kontaketaHasi();
-		}
-		
-	}
 	public void bonbaKendu(int bonbX, int bonbY, String pMota){
 		
 		if(pMota == "BonbaTxikia") {
@@ -339,6 +265,78 @@ public class EszenarioKudeatzailea extends Observable{
 	public void kenduSua(int pPosX, int pPosY) {
 		gelaxkaMatrizea[pPosX][pPosY].kenduSua();
 	}
+	
+	
+	public void etsaiaMugitu(int x, int y) {
+		Random r= new Random();
+		int ausazkoZenb= r.nextInt(101);
+		GelaxkaKudeatzailea g = gelaxkaMatrizea[x][y];
+		Etsaia e = g.getEtsaia();
+		if(ausazkoZenb<25) {
+			if(x<10 && !gelaxkaMatrizea[x+1][y].blokeaDago() && !gelaxkaMatrizea[x+1][y].bonbaDago() && !gelaxkaMatrizea[x+1][y].etsaiaDago()) {
+				if(x<9 && gelaxkaMatrizea[x+2][y].etsaiaDago()) {}
+				else if(x<10 && y<16 && gelaxkaMatrizea[x+1][y+1].etsaiaDago()) {}
+				else if(x<10 && y>1 && gelaxkaMatrizea[x+1][y-1].etsaiaDago()) {}
+				else {
+					g.etsaiaKendu(x,y);
+					x++;
+					GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
+					gBerria.setEtsaia(e);
+				}
+			}
+		}
+		else if(25<ausazkoZenb && ausazkoZenb<50) {
+			if(y<16 && !gelaxkaMatrizea[x][y+1].blokeaDago() && !gelaxkaMatrizea[x][y+1].bonbaDago() && !gelaxkaMatrizea[x][y+1].etsaiaDago()) {
+				if(y<15 && gelaxkaMatrizea[x][y+2].etsaiaDago()) {}
+				else if(x<10 && y<16 && gelaxkaMatrizea[x+1][y+1].etsaiaDago()) {}
+				else if(x>1 && y<16 && gelaxkaMatrizea[x-1][y+1].etsaiaDago()) {}
+				else {
+					g.etsaiaKendu(x,y);
+					y++;
+					GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
+					gBerria.setEtsaia(e);
+				}
+			}
+		}
+		else if(50<ausazkoZenb && ausazkoZenb<75) {
+			if(x>0 && !gelaxkaMatrizea[x-1][y].blokeaDago() && !gelaxkaMatrizea[x-1][y].bonbaDago() && !gelaxkaMatrizea[x-1][y].etsaiaDago()) {
+				if(x>1 && gelaxkaMatrizea[x-2][y].etsaiaDago()) {}
+				else if(x>1 && y<16 && gelaxkaMatrizea[x-1][y+1].etsaiaDago()) {}
+				else if(x>1 && y>1 && gelaxkaMatrizea[x-1][y-1].etsaiaDago()) {}
+				else {
+					g.etsaiaKendu(x,y);
+					x--;
+					GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
+					gBerria.setEtsaia(e);
+				}
+			}
+		}
+		else{
+			if(y>0 && !gelaxkaMatrizea[x][y-1].blokeaDago() && !gelaxkaMatrizea[x][y-1].bonbaDago() && !gelaxkaMatrizea[x][y-1].etsaiaDago()) {
+				if(y>1 && gelaxkaMatrizea[x][y-2].etsaiaDago()) {}
+				else if(x<10 && y>1 && gelaxkaMatrizea[x+1][y-1].etsaiaDago()) {}
+				else if(x>1 && y>1 && gelaxkaMatrizea[x-1][y-1].etsaiaDago()) {}
+				else {
+					g.etsaiaKendu(x,y);
+					y--;
+					GelaxkaKudeatzailea gBerria = gelaxkaMatrizea[x][y];
+					gBerria.setEtsaia(e);
+				}
+			}
+		}
+		e.koordenatuakAldatu(x, y);
+	}
+	
+	public void etsaiaKendu(Etsaia e) {
+		etsaiKop--;
+		if(etsaiKop==0) {
+			setChanged();
+			notifyObservers(new String[] {"Irabazi"});
+		}
+	}
+	
+		
+	
 	
 	public void sortuEszenarioClassic() {
 		BlokeFactory bk = BlokeFactory.getNireBlokeFactory();

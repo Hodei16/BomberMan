@@ -18,6 +18,10 @@ public abstract class Bonba {
 		kont = PERIODO;
 		
 	}
+	public void setBonbaPos(int pPosX, int pPosY) {
+		posX = pPosX;
+		posY = pPosY;
+	}
 	public void kontaketaHasi() {
 		if(!kontHasieratu) {
 			TimerTask timerTask = new TimerTask() {

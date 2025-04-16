@@ -3,27 +3,34 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public abstract class BomberMan {
-	private int bonbaKop;
-	private int posX;
-	private int posY;
+	//private int bonbaKop;
+	protected int posX;
+	protected int posY;
 	private boolean sutanDago = false;
-	private Bonba bonba;       
+    
+	protected static final int PERIODO = 4;
+	protected Timer timer = null;
+	protected int kont;
 	
-	public BomberMan (int pPosX, int pPosY, int pBonbaKop) {
+	protected BomberMan (int pPosX, int pPosY/*, int pBonbaKop*/) {
 		this.posX = pPosX;
 		this.posY = pPosY;
-		this.bonbaKop = pBonbaKop;
+		//this.bonbaKop = pBonbaKop;
 	}
 
 	
-	public void bonbaJarri() {EszenarioKudeatzailea.getNireEszenarioKudeatzailea().bonbaJarri(posX, posY);}
+	public abstract void bonbaJarri();
+	protected abstract void updateKont();
 	
-	protected abstract Bonba bonbaSortu();
-	
+			
+			
+			
+	//protected abstract Bonba bonbaSortu();
+	/*
 	public Bonba getBonba() {
 		return bonbaSortu();
 	}
-	
+	*/
 	public void setPosX(int pPosX) {
 		this.posX = pPosX;
 	}
@@ -36,15 +43,16 @@ public abstract class BomberMan {
 	public int getPosY() {
 		return this.posY;
 	}
-	public boolean bonbaDauka() {
-		return bonbaKop!=0;
-	}
+	
+	public abstract boolean bonbaDauka();
+	
 	public void setSutanDago() {
 		sutanDago = true;
 	}
 	public boolean getSutanDago() {
 		return sutanDago;
 	}
+	/*
 	private static final int PERIODO = 4;
 	private Timer timer = null;
 	private int kont;
@@ -70,7 +78,7 @@ public abstract class BomberMan {
 				bonbaKop++;
 			}
 		}
-		
+		*/
 }
 
 
