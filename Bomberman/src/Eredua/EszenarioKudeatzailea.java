@@ -91,7 +91,6 @@ public class EszenarioKudeatzailea extends Observable{
 	public void bonbaJarri(int bonbX, int bonbY, Bonba jarritakoBonba) {
 		
 		gelaxkaMatrizea[bonbX][bonbY].setBonba(jarritakoBonba);
-		b.bonbaJarri();
 		jarritakoBonba.kontaketaHasi();
 	}
 	

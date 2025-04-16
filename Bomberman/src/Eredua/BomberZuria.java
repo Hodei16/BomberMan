@@ -13,36 +13,37 @@ public class BomberZuria extends BomberMan{
 	public BomberZuria(int pPosX, int pPosY) {
 		super (pPosX, pPosY/*, 10*/);
 		
-		for (int i = 0; i<10 ; i++) {
+		for (int i = 0; i < 10 ; i++) {
 			bonbaKola.add(BonbaFactory.getNireBonbaFactory().createBonba(1,-1,-1));
 		}
 	}
 	
-	//public Bonba bonbaSortu() {
-	//	return BonbaFactory.getNireBonbaFactory().createBonba(1/*, getPosX(), getPosY()*/);
-	// }
-	
-	public boolean bonbaDauka() {
-		return !bonbaKola.isEmpty();
-	}
 	
 	@Override
 	public void bonbaJarri() {
 		if(!bonbaKola.isEmpty()) {
 			Bonba jarritakoBonb = bonbaKola.remove();
+			jarritakoBonb.setBonbaPos(posX, posY);
+			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().bonbaJarri(posX, posY, jarritakoBonb);
+			
 			if(bonbaKola.isEmpty()) {
-				kont = PERIODO;
+				
+			 	kont = PERIODO;
 				TimerTask timerTask = new TimerTask() {
 					@Override
 					public void run() {
 						updateKont();
 					}
 				};
+				
 				timer = new Timer();
-				timer.scheduleAtFixedRate(timerTask, 0, 1000);}
+				timer.scheduleAtFixedRate(timerTask, 0, 1000);
+				
+			}
+				
 			
-			jarritakoBonb.setBonbaPos(posX, posY);
-			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().bonbaJarri(posX, posY, jarritakoBonb);
+			
+			
 		}
 	}
 	
