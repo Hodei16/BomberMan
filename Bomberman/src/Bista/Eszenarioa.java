@@ -22,6 +22,7 @@ import Eredua.BomberZuria;
 import Eredua.EszenarioKudeatzailea;
 import Eredua.GelaxkaKudeatzailea;
 import Eredua.Gogorra;
+import Eredua.JokoKudeatzailea;
 
 public class Eszenarioa extends JFrame implements Observer {
 	
@@ -43,7 +44,7 @@ public class Eszenarioa extends JFrame implements Observer {
 
 	public static Eszenarioa getEszenarioa() {
 		if (nEszenarioa==null) {
-			Observable nireObservable = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
+			Observable nireObservable = JokoKudeatzailea.getNireJokoKudeatzailea();
 			nEszenarioa= new Eszenarioa(nireObservable);
 		}
 		return nEszenarioa;
@@ -143,8 +144,8 @@ public class Eszenarioa extends JFrame implements Observer {
 	}
 	
 	private void eszenarioClassicSortu() {
-		EszenarioKudeatzailea eK= EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
-		GelaxkaKudeatzailea[][] mat= eK.getGelaxkaMatrizea();
+		JokoKudeatzailea jK= JokoKudeatzailea.getNireJokoKudeatzailea();
+		GelaxkaKudeatzailea[][] mat= jK.getGelaxkaMatrizea();
 		for(int x=0; x<11; x++) {
 			for(int y=0;y<17;y++) {
 				JLabel bomber, zuria, bloke, etsaia;
@@ -199,8 +200,8 @@ public class Eszenarioa extends JFrame implements Observer {
 	}
 	
 	private void eszenarioSoftSortu() {
-		EszenarioKudeatzailea eK= EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
-		GelaxkaKudeatzailea[][] mat= eK.getGelaxkaMatrizea();
+		JokoKudeatzailea jK= JokoKudeatzailea.getNireJokoKudeatzailea();
+		GelaxkaKudeatzailea[][] mat= jK.getGelaxkaMatrizea();
 		for(int x=0; x<11; x++) {
 			for(int y=0;y<17;y++) {
 				JLabel bomber, zuria, bloke, etsaia;
@@ -248,8 +249,8 @@ public class Eszenarioa extends JFrame implements Observer {
 	}
 	
 	private void eszenarioEmptySortu() {
-		EszenarioKudeatzailea eK= EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
-		GelaxkaKudeatzailea[][] mat= eK.getGelaxkaMatrizea();
+		JokoKudeatzailea jK= JokoKudeatzailea.getNireJokoKudeatzailea();
+		GelaxkaKudeatzailea[][] mat= jK.getGelaxkaMatrizea();
 		for(int x=0; x<11; x++) {
 			for(int y=0;y<17;y++) {
 				JLabel bomber, zuria, etsaia;
@@ -305,10 +306,10 @@ public class Eszenarioa extends JFrame implements Observer {
 
 	    @Override
 	    public void keyPressed(KeyEvent e) {
-	        EszenarioKudeatzailea eK = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
+	        JokoKudeatzailea jK = JokoKudeatzailea.getNireJokoKudeatzailea();
 	        HasieraPantaila hp = HasieraPantaila.getNireHasieraPantaila();
 	        
-	        if (eK == null) return; 
+	        if (jK == null) return; 
 
 	        int keyCode = e.getKeyCode();
 	        char c = ' ';
@@ -323,8 +324,8 @@ public class Eszenarioa extends JFrame implements Observer {
 	                    System.out.println("Eszenario mota aukeratu behar da!!");
 	                } else {
 	                    hasiDaPartida = true;
-	                    EszenarioKudeatzailea.getNireEszenarioKudeatzailea().setBomberMota(hp.getBomber());
-	                    EszenarioKudeatzailea.getNireEszenarioKudeatzailea().setEszenarioMota(hp.getEszenario());
+	                    jK.setBomberMota(hp.getBomber());
+	                    jK.setEszenarioMota(hp.getEszenario());
 	                    System.out.println("PARTIDA HASTEN...");
 	                }
 	            }
@@ -334,7 +335,7 @@ public class Eszenarioa extends JFrame implements Observer {
 	            else if (keyCode == KeyEvent.VK_S) c = 's';
 	            else if (keyCode == KeyEvent.VK_D) c = 'd';
 	            else if (keyCode == KeyEvent.VK_X) c = 'x';
-	            eK.bomberManMugitu(c);
+	            jK.bomberManMugitu(c);
 	        }
 	    }
 

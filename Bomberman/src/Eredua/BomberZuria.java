@@ -24,7 +24,7 @@ public class BomberZuria extends BomberMan{
 		if(!bonbaKola.isEmpty()) {
 			Bonba jarritakoBonb = bonbaKola.remove();
 			jarritakoBonb.setBonbaPos(posX, posY);
-			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().bonbaJarri(posX, posY, jarritakoBonb);
+			JokoKudeatzailea.getNireJokoKudeatzailea().bonbaJarri(posX, posY, jarritakoBonb);
 			
 			if(bonbaKola.isEmpty()) {
 				

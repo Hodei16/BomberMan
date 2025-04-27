@@ -4,7 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Etsaia {
-	EszenarioKudeatzailea eK = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
+	JokoKudeatzailea jK = JokoKudeatzailea.getNireJokoKudeatzailea();
 	private static final int PERIODO = 2;
 	private Timer timer = null;
 	private int kont;
@@ -29,7 +29,7 @@ public class Etsaia {
 		kont--;
 		if(kont == 0) {
 			kont = PERIODO;
-			eK.etsaiaMugitu(posX ,posY);
+			jK.etsaiaMugitu(posX ,posY);
 		}
 	}
 	

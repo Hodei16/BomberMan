@@ -4,7 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public abstract class Bonba {
-	EszenarioKudeatzailea eK = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
+	JokoKudeatzailea jK = JokoKudeatzailea.getNireJokoKudeatzailea();
 	protected static final int PERIODO = 3;
 	protected Timer timer = null;
 	protected int kont;

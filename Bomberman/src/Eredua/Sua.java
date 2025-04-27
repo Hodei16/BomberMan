@@ -4,7 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Sua {
-	EszenarioKudeatzailea eK = EszenarioKudeatzailea.getNireEszenarioKudeatzailea();
+	JokoKudeatzailea jK = JokoKudeatzailea.getNireJokoKudeatzailea();
 	private static final int PERIODO = 4;
 	private Timer timer = null;
 	private int kont;
@@ -29,7 +29,7 @@ public class Sua {
 		kont--;
 		if(kont == 0) {
 			timer.cancel();
-			eK.kenduSua(posX, posY);
+			jK.kenduSua(posX, posY);
 		}
 	}
 }

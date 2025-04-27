@@ -97,7 +97,7 @@ public class GelaxkaKudeatzailea extends Observable{
 		else if(etsaiaDago()) {
 			e.timerGelditu();
 			e=null;
-			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().etsaiaKendu(e);
+			JokoKudeatzailea.getNireJokoKudeatzailea().etsaiaKendu(e);
 		} 
 	}
 	
@@ -125,7 +125,7 @@ public class GelaxkaKudeatzailea extends Observable{
 			notifyObservers(new String[] {"BomberBeltzaHeldu"});
 		}
 		if(suaDago() || etsaiaDago()) {
-			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().partidaAmaitu("Galduta");		
+			JokoKudeatzailea.getNireJokoKudeatzailea().partidaAmaitu("Galduta");		
 			b=null;
 		}
 	}
@@ -134,11 +134,11 @@ public class GelaxkaKudeatzailea extends Observable{
 		b.setSutanDago();
 		setChanged();
 		notifyObservers(new String[] {"Galduta"});
-		EszenarioKudeatzailea.getNireEszenarioKudeatzailea().partidaAmaitu("Galduta");
+		JokoKudeatzailea.getNireJokoKudeatzailea().partidaAmaitu("Galduta");
 	}
 	
 	public void irabazi() {
-		EszenarioKudeatzailea.getNireEszenarioKudeatzailea().partidaAmaitu("Irabazi");
+		JokoKudeatzailea.getNireJokoKudeatzailea().partidaAmaitu("Irabazi");
 	}
 	
 	public void setEtsaia(Etsaia pE) {
@@ -148,11 +148,11 @@ public class GelaxkaKudeatzailea extends Observable{
 			notifyObservers(new String[] {"SuaJarri"});
 			e.timerGelditu();
 			e=null;
-			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().etsaiaKendu(e);
+			JokoKudeatzailea.getNireJokoKudeatzailea().etsaiaKendu(e);
 		}
 		else if(bomberDago()) {
 			b=null;
-			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().partidaAmaitu("Galduta");
+			JokoKudeatzailea.getNireJokoKudeatzailea().partidaAmaitu("Galduta");
 		}
 		else {
 			setChanged();

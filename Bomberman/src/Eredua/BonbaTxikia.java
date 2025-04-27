@@ -10,7 +10,7 @@ public class BonbaTxikia extends Bonba{
 		if(kont == 0) {
 			kont = PERIODO;
 			timer.cancel();
-			eK.bonbaKendu(posX, posY, "BonbaTxikia");
+			jK.bonbaKendu(posX, posY, "BonbaTxikia");
 		}
 	}
 }

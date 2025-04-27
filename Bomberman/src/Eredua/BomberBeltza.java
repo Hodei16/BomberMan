@@ -17,7 +17,7 @@ public class BomberBeltza extends BomberMan{
 	public void bonbaJarri() {
 		if (this.bonba != null) {
 			this.bonba.setBonbaPos(posX, posY);
-			EszenarioKudeatzailea.getNireEszenarioKudeatzailea().bonbaJarri(posX, posY, bonba);
+			JokoKudeatzailea.getNireJokoKudeatzailea().bonbaJarri(posX, posY, bonba);
 			this.bonba = null;
 			
 			kont = PERIODO;
